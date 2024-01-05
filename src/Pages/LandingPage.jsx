@@ -2,6 +2,9 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
+import tick from '../TineyDonkeyAssets/icon-quality.svg'
+import delivery from '../TineyDonkeyAssets/icon-delivery.svg'
+import warranty from '../TineyDonkeyAssets/icon-warranty.svg'
 import '../index.css'
 
 function LandingPage() {
@@ -26,13 +29,13 @@ function LandingPage() {
   }, []);
 
   return (
-    <div style={{ height: '140vh' }}>
+    <div style={{  }}>
       <div className='landing-page'>
         <nav className={`navbar ${scrolling ? 'scrolled' : ''}`} style={{ border: 'none' }}>
           <section className="flex-justify-content-space-between">
             <p>TineyDonkey</p>
             <ul className={`${scrolling ? 'ul-scrolled' : ''}`}>
-              <li style={{borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white'}}>Home</li>
+              <li style={{ borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white' }}>Home</li>
               <li>Products</li>
               <li>Contact</li>
               <li>About</li>
@@ -53,9 +56,17 @@ function LandingPage() {
         </div>
         <div className="overlay"></div>
       </div>
-      <banner>
-        
-      </banner>
+      <div className='banner'>
+        <div style={{border: '1px solid black'}}>
+          <img src={tick} alt='tick' className="banner-icons"/>
+        </div>
+        <div>
+          <img src={delivery} alt='delivery' className="banner-icons"/>
+        </div>
+        <div>
+          <img src={warranty} alt='warranty' className="banner-icons"/>
+        </div>
+      </div>
     </div>
   )
 }

@@ -92,6 +92,11 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
 }
+.flex-justify-content-space-around{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 
 body {
   margin: 0;
@@ -212,5 +217,15 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   cursor: pointer;
+}
+.banner{
+  border: 1px solid black;
+  width: 90%;
+  height: max-content;
+  background-color: black;
+  margin-bottom: 100px;
+}
+.banner-icons{
+  max-width: 60px;
 }
 
