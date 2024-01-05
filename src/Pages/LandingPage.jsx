@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { FaRegUserCircle } from "react-icons/fa";
 import '../index.css'
 
 function LandingPage() {
@@ -23,20 +24,23 @@ function LandingPage() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return (
-    <div style={{height: '140vh'}}>
-      <div className={`landing-page ${scrolling ? 'scrolled' : ''}`}>
-        <nav className="navbar" style={{border: 'none'}}>
-          <section className="flex-justify-content-space-between" style={{border: '1px solid white'}}>
-          <ul style={{border: '1px solid yellow'}}>
-            <li>Home</li>
-            <li>Products</li>
-            <li>Contact</li>
-            <li>About</li>
-          </ul>
-          <div>
-            <MdOutlineShoppingBag style={{color: 'white', fontSize: '20px'}}/>
-          </div>
+    <div style={{ height: '140vh' }}>
+      <div className='landing-page'>
+        <nav className={`navbar ${scrolling ? 'scrolled' : ''}`} style={{ border: 'none' }}>
+          <section className="flex-justify-content-space-between">
+            <p>TineyDonkey</p>
+            <ul className={`${scrolling ? 'ul-scrolled' : ''}`}>
+              <li style={{borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white'}}>Home</li>
+              <li>Products</li>
+              <li>Contact</li>
+              <li>About</li>
+            </ul>
+            <div className='flex-justify-flex-end' style={{ width: '15%', paddingRight: '30px' }}>
+              <MdOutlineShoppingBag style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+              <FaRegUserCircle style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer' }} />
+            </div>
           </section>
         </nav>
 
@@ -50,7 +54,7 @@ function LandingPage() {
         <div className="overlay"></div>
       </div>
       <banner>
-
+        
       </banner>
     </div>
   )
