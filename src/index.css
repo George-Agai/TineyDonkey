@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +65,80 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+} */
+
+:root {
+  font-family: 'Poppins', sans-serif;
+  color: rgba(34, 31, 31, 0.87);
+  background-color: #b3a8a8;
+  width: 100vw;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.landing-page {
+  position: relative;
+  height: 150vh;
+  width: 100vw;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar.scrolled {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.navbar ul li {
+  cursor: pointer;
+  color: lightgrey;
+}
+
+.main-container {
+  width: 100%;
+  height: 110vh;
+  background-image: url('./TineyDonkeyAssets/20231231_184108.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
