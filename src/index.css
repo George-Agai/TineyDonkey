@@ -70,7 +70,7 @@ button:focus-visible {
 :root {
   font-family: 'Merriweather', serif;
   color: rgba(34, 31, 31, 0.87);
-  background-color: #ffffff;
+  background-color: #fdfbfb;
   width: 100vw;
   margin: 0;
   display: flex;
@@ -80,11 +80,15 @@ button:focus-visible {
 .font-merriweather{
   font-family: 'Merriweather', serif;
 }
+.flex-column-align-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .flex-column-justify-flex-start{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* justify-content: ; */
 }
 
 .flex-justify-content-space-between{
@@ -96,6 +100,9 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+.box-shadow {
+  box-shadow: 0 10px 15px 0 rgb(230, 224, 224);
 }
 
 body {
@@ -219,13 +226,33 @@ body {
   cursor: pointer;
 }
 .banner{
-  border: 1px solid black;
+  box-shadow: 0 20px 50px 0 rgb(230, 227, 227);
   width: 90%;
   height: max-content;
-  background-color: black;
   margin-bottom: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-top: -50px;
+  z-index: 20;
+  background-color: white;
 }
+/* .banner-div{
+  border: 1px solid black;
+} */
 .banner-icons{
-  max-width: 60px;
+  width: 50px;
 }
-
+.banner h5{
+  font-family: 'Merriweather', serif;
+  font-size: 20px;
+  color: #111518;
+  font-weight: 700;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+.banner p{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #687279;
+  font-weight: 400;
+}
