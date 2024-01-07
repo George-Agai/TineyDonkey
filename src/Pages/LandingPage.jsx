@@ -5,7 +5,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import tick from '../TineyDonkeyAssets/icon-quality.svg'
 import delivery from '../TineyDonkeyAssets/icon-delivery.svg'
 import warranty from '../TineyDonkeyAssets/icon-warranty.svg'
-import '../index.css'
+import Grid from './Grid.jsx'
 
 function LandingPage() {
   const navigate = useNavigate()
@@ -73,6 +73,7 @@ function LandingPage() {
           <p>Our figurines are the real deal, you’ll see</p>
         </div>
       </div>
+      <Grid/>
     </div>
   )
 }
