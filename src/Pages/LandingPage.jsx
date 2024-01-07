@@ -58,22 +58,22 @@ function LandingPage() {
       </div>
       <div className='banner flex-justify-content-space-around'>
         <div className="banner-div flex-column-align-center">
-          <img src={tick} alt='tick' className="banner-icons"/>
+          <img src={tick} alt='tick' className="banner-icons" />
           <h5>Best Prices</h5>
           <p>Our prices are quite literally the best out here</p>
         </div>
         <div className="banner-div flex-column-align-center">
-          <img src={delivery} alt='delivery' className="banner-icons"/>
+          <img src={delivery} alt='delivery' className="banner-icons" />
           <h5>Free Delivery</h5>
           <p>Free delivery within Nairobi CBD</p>
         </div>
         <div className="banner-div flex-column-align-center">
-          <img src={warranty} alt='warranty' className="banner-icons"/>
+          <img src={warranty} alt='warranty' className="banner-icons" />
           <h5>Best Quality</h5>
           <p>Our figurines are the real deal, you’ll see</p>
         </div>
       </div>
-      <Grid/>
+      <Grid />
     </div>
   )
 }

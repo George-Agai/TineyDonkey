@@ -293,6 +293,7 @@ body {
   display: grid;
   gap: 0.125rem;
   grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+  border: 3px solid red;
 }
 
 .card {
@@ -343,12 +344,4 @@ body {
   margin-bottom: 1em;
 
   width: fit-content;
-}
-
-p.max-content {
-  width: max-content;
-}
-
-p.min-content {
-  width: min-content;
 }
