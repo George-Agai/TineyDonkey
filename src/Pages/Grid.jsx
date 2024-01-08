@@ -11,12 +11,16 @@ function Grid() {
         <div>
             <main>
                 <div className="container">
-                    <h1 className="main-title">Our Products</h1>
-                    <p className="min-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores corporis ipsa tempora,
-                        blanditiis</p>
+                    <div className='flex-column-align-center' style={{ width: '100%' }}>
+                        <h1 className="main-title">Featured Products</h1>
+                        <p className="min-content">Check out latest updates</p>
+                    </div>
                     <div className="product-grid">
                         <div className="card stacked ">
-                            <img src={Attum} alt="Attum" className="card__img" />
+                            <div className="image-container">
+                                <img src={Attum} alt="Attum" className="card__img" />
+                                <div className='photo-overlay'></div>
+                            </div>
                             <div className="card__content">
                                 <h2 className="card__title">Lorem, ipsum dolor.</h2>
                                 <p className="card__price">$325</p>
