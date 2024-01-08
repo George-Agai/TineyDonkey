@@ -16,64 +16,61 @@ function Grid() {
                         <p className="min-content">Check out latest updates</p>
                     </div>
                     <div className="product-grid">
-                        <div className="card stacked ">
-                            <div className="image-container">
-                                <img src={Attum} alt="Attum" className="card__img" />
-                                <div className='photo-overlay'></div>
-                            </div>
-                            <div className="card__content">
+                        <div className="card">
+                            <img src={Attum} alt="Attum" className="card__img" />
+                            <div className="card__content flex-column-align-center">
                                 <h2 className="card__title">Lorem, ipsum dolor.</h2>
-                                <p className="card__price">$325</p>
-                                <p className="card__description">Lorem, ipsum dolor.</p>
+                                <p className="card__price">KSh350.00</p>
+                                <button  className='cta-button' style={{padding: '15px 20px'}}>Add to cart</button>
                             </div>
                         </div>
 
                         <div className="card stacked">
                             <img src={Teeny} alt="Teeny" className="card__img" />
-                            <div className="card__content">
+                            <div className="card__content flex-column-align-center">
                                 <h2 className="card__title">Ullam, cum ut.</h2>
-                                <p className="card__price">$315</p>
-                                <p className="card__description">Iure, voluptate corrupti.</p>
+                                <p className="card__price">KSh315.00</p>
+                                <button  className='cta-button' style={{padding: '15px 20px'}}>Add to cart</button>
                             </div>
                         </div>
                         <div className="card stacked">
                             <img src={WinterSoldier} alt="WinterSoldier" className="card__img" />
-                            <div className="card__content">
+                            <div className="card__content flex-column-align-center">
                                 <h2 className="card__title">Libero, ab dolorem?</h2>
-                                <p className="card__price">$225</p>
-                                <p className="card__description">Eveniet, necessitatibus id.</p>
+                                <p className="card__price">KSh225.00</p>
+                                <button  className='cta-button' style={{padding: '15px 20px'}}>Add to cart</button>
                             </div>
                         </div>
                         <div className="card stacked">
                             <img src={Velma} alt="Velma" className="card__img" />
-                            <div className="card__content">
+                            <div className="card__content flex-column-align-center">
                                 <h2 className="card__title">Minima, earum ipsam.</h2>
-                                <p className="card__price">$500</p>
-                                <p className="card__description">Illo, dolorem magnam?</p>
+                                <p className="card__price">KSh500.00</p>
+                                <button  className='cta-button' style={{padding: '15px 20px'}}>Add to cart</button>
                             </div>
                         </div>
                         <div className="card stacked">
                             <img src={Biggie} alt="Biggie" className="card__img" />
-                            <div className="card__content">
-                                <h2 className="card__title">Odio, nam consequatur.</h2>
-                                <p className="card__price">$255</p>
-                                <p className="card__description">Quos, facere alias.</p>
+                            <div className="card__content flex-column-align-center">
+                                <h2 className="card__title">Odio, nam conse.</h2>
+                                <p className="card__price">KSh255.00</p>
+                                <button  className='cta-button' style={{padding: '15px 20px'}}>Add to cart</button>
                             </div>
                         </div>
                         <div className="card stacked">
                             <img src={StarLord} alt="StarLord" className="card__img" />
-                            <div className="card__content">
-                                <h2 className="card__title">Quidem, aut numquam!</h2>
-                                <p className="card__price">$345</p>
-                                <p className="card__description">Aliquid, enim ea.</p>
+                            <div className="card__content flex-column-align-center">
+                                <h2 className="card__title">Quidem, aut!</h2>
+                                <p className="card__price">KSh345.00</p>
+                                <button  className='cta-button' style={{padding: '15px 20px'}}>Add to cart</button>                           
                             </div>
                         </div>
                         <div className="card stacked">
                             <img src={Groot} alt="Groot" className="card__img" />
-                            <div className="card__content">
-                                <h2 className="card__title">Accusantium, placeat dolores?</h2>
-                                <p className="card__price">$105</p>
-                                <p className="card__description">Corporis, commodi facilis!</p>
+                            <div className="card__content flex-column-align-center">
+                                <h2 className="card__title">Accusantium, placeat?</h2>
+                                <p className="card__price">KSh105.00</p>
+                                <button  className='cta-button' style={{padding: '15px 20px'}}>Add to cart</button>
                             </div>
                         </div>
 

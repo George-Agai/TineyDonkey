@@ -5,6 +5,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import tick from '../TineyDonkeyAssets/icon-quality.svg'
 import delivery from '../TineyDonkeyAssets/icon-delivery.svg'
 import warranty from '../TineyDonkeyAssets/icon-warranty.svg'
+import Footer from '../Components/Footer.jsx'
 import Grid from './Grid.jsx'
 
 function LandingPage() {
@@ -74,6 +75,10 @@ function LandingPage() {
         </div>
       </div>
       <Grid />
+      <div className="flex-align-center-justify-center" style={{width: '100%', marginTop: '30px', marginBottom: '50px'}}>
+        <button className="cta-button">Scroll To The Top</button>
+      </div>
+      <Footer/>
     </div>
   )
 }
