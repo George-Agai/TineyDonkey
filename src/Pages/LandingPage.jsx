@@ -32,7 +32,7 @@ function LandingPage() {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       <div className='landing-page'>
         <nav className={`navbar ${scrolling ? 'scrolled' : ''}`} style={{ border: 'none' }}>
-          <section className="flex-justify-content-space-between">
+          <section className="flex-justify-content-space-between" style={{border: scrolling && 'none'}}>
             <p>TineyDonkey</p>
             <ul className={`${scrolling ? 'ul-scrolled' : ''}`}>
               <li style={{ borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white' }}>Home</li>
