@@ -96,6 +96,10 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
 }
+.flex-justify-space-between{
+  display: flex;
+  justify-content: space-between;
+}
 .flex-align-center-justify-center{
   display: flex;
   align-items: center;
@@ -175,6 +179,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   font-size: 15px;
+  border-bottom: 2px solid transparent;
 }
 
 .navbar section{
@@ -189,6 +194,7 @@ body {
 .navbar ul li:hover {
   color: white;
   border-bottom: 2px solid white;
+  transition: 0.2s ease;
 }
 .navbar.scrolled ul li:hover {
   color: #FF6310;
@@ -321,7 +327,7 @@ body {
   align-self: end;
   margin: 0rem 0rem 2rem;
   padding: 0.5rem;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .card__title {
@@ -391,11 +397,66 @@ body {
 .image-container {
   position: relative;
   width: 100%;
-  max-width: 400px; /* Adjust the max-width as needed */
+  max-width: 400px;
   overflow: hidden;
 }
 .footer-container{
   background-color: rgba(17, 16, 16, 0.959);
   width: 100%;
-  height: 100px;
+  height: max-content;
+  padding-top: 20px;
+}
+.footer-container ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: transparent;
+  margin-top: -10px;
+  transition: background-color 0.3s ease;
+}
+
+.footer-container h1{
+  font-family: 'Merriweather', serif;
+  color: rgb(197, 194, 194);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.footer-container ul li {
+  cursor: pointer;
+  color: grey;
+  padding-bottom: 7px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.footer-container ul li:hover{
+  color: #FF6310;
+}
+.newsletter-div{
+  margin-top: 40px;
+}
+.newsletter-div p{
+  margin-top: 10px;
+  color: grey;
+  font-size: 15px;
+}
+.newsletter-div input{
+  margin-top: 10px;
+  font-size: 15px;
+  padding: 12px 10px;
+  border: none;
+  width: 84%;
+  font-family: 'Open Sans', sans-serif;
+}
+.newsletter-div input:focus{
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+.newsletter-div button{
+  margin-top: 20px;
 }

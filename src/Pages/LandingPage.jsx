@@ -28,10 +28,15 @@ function LandingPage() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  
+  function HandleScrollToTop() {
+    var targetDiv = document.getElementById('landing');
+    targetDiv.scrollIntoView({ behavior: 'smooth' });
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-      <div className='landing-page'>
+      <div className='landing-page' id="landing">
         <nav className={`navbar ${scrolling ? 'scrolled' : ''}`} style={{ border: 'none' }}>
           <section className="flex-justify-content-space-between" style={{border: scrolling && 'none'}}>
             <p>TineyDonkey</p>
@@ -76,7 +81,7 @@ function LandingPage() {
       </div>
       <Grid />
       <div className="flex-align-center-justify-center" style={{width: '100%', marginTop: '30px', marginBottom: '50px'}}>
-        <button className="cta-button">Scroll To The Top</button>
+        <button className="cta-button" onClick={HandleScrollToTop}>Scroll To The Top</button>
       </div>
       <Footer/>
     </div>
