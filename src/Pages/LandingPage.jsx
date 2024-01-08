@@ -28,7 +28,7 @@ function LandingPage() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
+
   function HandleScrollToTop() {
     var targetDiv = document.getElementById('landing');
     targetDiv.scrollIntoView({ behavior: 'smooth' });
@@ -54,7 +54,7 @@ function LandingPage() {
         </nav>
 
         <div className="main-container">
-          <div className="flex-column-justify-flex-start">
+          <div className="flex-column-justify-flex-start main-container-content">
             <h1 className="font-merriweather">We sell cool, tiny stuff</h1>
             <p>Unleash your creativity with developer-inspired figurines</p>
             <button className="cta-button" style={{ marginTop: '40px' }}>Explore Now</button>
