@@ -366,17 +366,6 @@ body {
   transition: 0.3s ease;
 }
 
-
-@media (min-width: 60em) {
-  /* .card__img {
-    aspect-ratio: 3 / 4;
-  } */
-
-  /* .main-container h1{
-    font-size: 10px;
-  } */
-}
-
 .main-title {
   font-size: 35px;
   font-family: 'Merriweather', serif;
@@ -459,4 +448,27 @@ body {
 }
 .newsletter-div button{
   margin-top: 20px;
+}
+
+@media screen and (max-width: 790px) {
+  .main-container-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* .main-container h1{
+    font-size: 10px;
+  } */
+}
+@media (min-width: 60em) {
+  /* .card__img {
+    aspect-ratio: 3 / 4;
+  } */
+
+  /* .main-container h1{
+    font-size: 10px;
+  } */
 }
