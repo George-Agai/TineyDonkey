@@ -5,7 +5,7 @@ function Footer() {
     const [Email, setEmail] = useState()
     return (
         <div className="footer-container flex-column-align-center">
-            <div className="flex-justify-space-between" style={{width: '94%', borderBottom: '0.3px solid grey'}}>
+            <div className="footer-container-main-div flex-justify-space-between" style={{width: '94%', borderBottom: '0.3px solid grey'}}>
                 <h2>TineyDonkey</h2>
                 <ul>
                     <h1>Useful links</h1>
