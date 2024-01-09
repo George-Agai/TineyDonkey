@@ -46,7 +46,7 @@ function LandingPage() {
               <li>Contact</li>
               <li>About</li>
             </ul>
-            <div className='flex-justify-flex-end' style={{ width: '15%', paddingRight: '30px' }}>
+            <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
               <MdOutlineShoppingBag style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
               <FaRegUserCircle style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer' }} />
             </div>
@@ -83,7 +83,7 @@ function LandingPage() {
       <div className="flex-align-center-justify-center" style={{width: '100%', marginTop: '30px', marginBottom: '50px'}}>
         <button className="cta-button" onClick={HandleScrollToTop}>Scroll To The Top</button>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   )
 }
