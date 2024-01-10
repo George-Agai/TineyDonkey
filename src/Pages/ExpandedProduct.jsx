@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { MdOutlineShoppingBag } from "react-icons/md";
+import Attum from '../TineyDonkeyAssets/20231220_114516.jpg'
+import Footer from '../Components/Footer';
 
 function ExpandedProduct() {
     const [scrolling, setScrolling] = useState(false);
@@ -35,6 +37,17 @@ function ExpandedProduct() {
                     </div>
                 </section>
             </nav>
+
+            <main>
+                <div>
+                    <p><span>HOME / FIGURINES / </span>ATTUMA</p>
+                    <img src={Attum} alt='Attuma' style={{maxWidth: '100px'}}/>
+                </div>
+                <div>
+
+                </div>
+            </main>
+            <Footer/>
         </div>
     )
 }

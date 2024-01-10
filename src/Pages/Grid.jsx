@@ -13,10 +13,10 @@ function Grid() {
         <div>
             <main>
                 <div className="container">
-                    <div className='flex-column-align-center' style={{ width: '100%' }}>
+                    {/* <div className='flex-column-align-center' style={{ width: '100%' }}>
                         <h1 className="main-title">Featured Products</h1>
                         <p className="min-content">Check out latest updates</p>
-                    </div>
+                    </div> */}
                     <div className="product-grid">
                         <div className="card"  onClick={() => navigate('/ExpandedProduct')}>
                             <img src={Attum} alt="Attum" className="card__img" />

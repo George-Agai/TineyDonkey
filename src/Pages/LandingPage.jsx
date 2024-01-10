@@ -38,11 +38,11 @@ function LandingPage() {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       <div className='landing-page' id="landing">
         <nav className={`navbar ${scrolling ? 'scrolled' : ''}`} style={{ border: 'none' }}>
-          <section className="flex-justify-content-space-between" style={{border: scrolling && 'none'}}>
+          <section className="flex-justify-content-space-between" style={{ border: scrolling && 'none' }}>
             <p>TineyDonkey</p>
             <ul className={`${scrolling ? 'ul-scrolled' : ''}`}>
               <li style={{ borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white' }}>Home</li>
-              <li>Products</li>
+              <li onClick={() => navigate('/Products')}>Products</li>
               <li>Contact</li>
               <li>About</li>
             </ul>
@@ -79,11 +79,15 @@ function LandingPage() {
           <p>Our figurines are the real deal, you’ll see</p>
         </div>
       </div>
+      <div className='flex-column-align-center' style={{ width: '100%' }}>
+        <h1 className="main-title">Featured Products</h1>
+        <p className="min-content">Check out latest updates</p>
+      </div>
       <Grid />
-      <div className="flex-align-center-justify-center" style={{width: '100%', marginTop: '30px', marginBottom: '50px'}}>
+      <div className="flex-align-center-justify-center" style={{ width: '100%', marginTop: '30px', marginBottom: '50px' }}>
         <button className="cta-button" onClick={HandleScrollToTop}>Scroll To The Top</button>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
