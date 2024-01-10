@@ -30,7 +30,7 @@ function Products() {
                     <p>TineyDonkey</p>
                     <ul>
                         <li style={{ color: 'grey' }} onClick={()=>navigate('/')}>Home</li>
-                        <li style={{ color: 'grey' }} onClick={()=>navigate('/Products')}>Products</li>
+                        <li style={{ color: '#FF6310', borderBottom: '2px solid #FF6310' }} onClick={()=>navigate('/Products')}>Products</li>
                         <li style={{ color: 'grey' }}  onClick={()=>navigate('/Contact')}>Contact</li>
                         <li style={{ color: 'grey' }} onClick={()=>navigate('/About')}>About</li>
                     </ul>
