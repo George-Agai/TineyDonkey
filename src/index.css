@@ -217,7 +217,7 @@ body {
 .navbar.scrolled ul li {
   padding-bottom: 30px;
   margin-bottom: -3.5px;
-  color: grey;
+  color: grey; 
 }
 
 .main-container {

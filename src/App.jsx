@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './Pages/LandingPage'
+import ExpandedProduct from './Pages/ExpandedProduct';
 import './App.css'
 
 function App() {
@@ -9,8 +10,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LandingPage />} />
-          {/* <Route path='/LoginPage' element={<LoginPage />} />
-          <Route path='/SignUpPage' element={<SignUpPage />} />
+           <Route path='/ExpandedProduct' element={<ExpandedProduct />} />
+          {/*<Route path='/SignUpPage' element={<SignUpPage />} />
           <Route path='/HomePage' element={<HomePage />} />
           <Route path='/CustomerProfilePage' element={<CustomerProfilePage />} />
           <Route path='/AvailableSellersPage' element={<AvailableSellersPage />} />

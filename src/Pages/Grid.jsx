@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import Attum from '../TineyDonkeyAssets/20231220_114516.jpg'
 import WinterSoldier from '../TineyDonkeyAssets/20231220_113933.jpg'
 import Teeny from '../TineyDonkeyAssets/20231220_114903.jpg'
@@ -7,6 +8,7 @@ import Velma from '../TineyDonkeyAssets/20231220_113418.jpg'
 import Groot from '../TineyDonkeyAssets/20231220_112850.jpg'
 
 function Grid() {
+    const navigate = useNavigate()
     return (
         <div>
             <main>
@@ -16,7 +18,7 @@ function Grid() {
                         <p className="min-content">Check out latest updates</p>
                     </div>
                     <div className="product-grid">
-                        <div className="card">
+                        <div className="card"  onClick={() => navigate('/ExpandedProduct')}>
                             <img src={Attum} alt="Attum" className="card__img" />
                             <div className="card__content flex-column-align-center">
                                 <h2 className="card__title">Lorem, ipsum dolor.</h2>
