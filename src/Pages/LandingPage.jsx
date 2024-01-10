@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { MdOutlineShoppingBag } from "react-icons/md";
-import { FaRegUserCircle } from "react-icons/fa";
+// import { FaRegUserCircle } from "react-icons/fa";
 import tick from '../TineyDonkeyAssets/icon-quality.svg'
 import delivery from '../TineyDonkeyAssets/icon-delivery.svg'
 import warranty from '../TineyDonkeyAssets/icon-warranty.svg'
@@ -48,7 +48,7 @@ function LandingPage() {
             </ul>
             <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
               <MdOutlineShoppingBag style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
-              <FaRegUserCircle style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer' }} />
+              {/* <FaRegUserCircle style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer' }} /> */}
             </div>
           </section>
         </nav>
@@ -66,7 +66,7 @@ function LandingPage() {
         <div className="banner-div flex-column-align-center">
           <img src={tick} alt='tick' className="banner-icons" />
           <h5>Best Prices</h5>
-          <p>Our prices are quite literally the best out here</p>
+          <p>Our prices are literally the best out here</p>
         </div>
         <div className="banner-div flex-column-align-center">
           <img src={delivery} alt='delivery' className="banner-icons" />
@@ -83,7 +83,7 @@ function LandingPage() {
       <div className="flex-align-center-justify-center" style={{width: '100%', marginTop: '30px', marginBottom: '50px'}}>
         <button className="cta-button" onClick={HandleScrollToTop}>Scroll To The Top</button>
       </div>
-      {/* <Footer/> */}
+      <Footer/>
     </div>
   )
 }
