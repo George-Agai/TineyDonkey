@@ -48,31 +48,31 @@ function Contact() {
                 <h1 className='font-merriweather' style={{ fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px' }}>Contact Us</h1>
             </div>
 
-            <div className='flex-justify-content-space-around' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
+            <div className='flex-justify-content-space-around contact-us-flex-container' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
                 <div className='flex-column-align-center contact-details-div' style={{ width: '40%' }}>
                     <div className='flex-align-center-justify-center'>
-                        <FaLocationDot style={{ color: '#FF6310', fontSize: '50px' }} />
+                        <FaLocationDot style={{ color: '#FF6310' }} className='contact-us-icons'/>
                         <section className='flex-column-justify-flex-start' style={{ marginLeft: '30px', width: '250px' }}>
                             <h2>Physical Address</h2>
                             <p>Gate C, Juja</p>
                         </section>
                     </div>
                     <div className='flex-align-center-justify-center'>
-                        <MdEmail style={{ color: '#FF6310', fontSize: '50px' }} />
+                        <MdEmail style={{ color: '#FF6310' }} className='contact-us-icons'/>
                         <section className='flex-column-justify-flex-start' style={{ marginLeft: '30px', width: '250px' }}>
                             <h2>Email Address</h2>
                             <p>georgeeagai@gmail.com</p>
                         </section>
                     </div>
                     <div className='flex-align-center-justify-center'>
-                        <FaPhoneAlt style={{ color: '#FF6310', fontSize: '50px' }} />
+                        <FaPhoneAlt style={{ color: '#FF6310' }} className='contact-us-icons'/>
                         <section className='flex-column-justify-flex-start' style={{ marginLeft: '30px', width: '250px' }}>
                             <h2>Phone Number</h2>
                             <p>+2547 922 71915</p>
                         </section>
                     </div>
                 </div>
-                <div style={{ width: '45%', marginRight: '20px' }} className='flex-align-center-justify-center email-container'>
+                <div className='flex-align-center-justify-center email-container'>
                     <div className='flex-column-align-center contact-us-email-div' style={{ padding: '50px 10px', width: '80%' }}>
                         <h1 className='font-merriweather' style={{ color: 'RGB(17, 21, 24)' }}>Send us a message</h1>
                         <input type='text' placeholder='Name'></input>

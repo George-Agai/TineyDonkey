@@ -517,6 +517,8 @@ body {
   font-size: 15px;
 }
 .email-container{
+  width: 45%;
+  margin-right: 20px;
   box-shadow: 0 20px 50px 0 rgb(230, 227, 227);
 }
 
@@ -528,6 +530,9 @@ body {
 }
 .flex-column-container img{
   width: 40%;
+}
+.contact-us-icons{
+  font-size: 50px;
 }
 
 
@@ -662,7 +667,7 @@ body {
   .page-header{
     margin-top: 100px;
   }
-  .flex-column-container{
+  .flex-column-container, .contact-us-flex-container{
     display: flex;
     flex-direction: column;
   }
@@ -677,5 +682,22 @@ body {
     width: 90%;
     margin-bottom: 30px;
     margin-top: -50px;
+  }
+  .contact-us-icons{
+    font-size: 35px;
+  }
+  .contact-details-div div{
+    border: 1px solid transparent;
+    padding-left: 30px;
+    margin-bottom: 0px;
+  }
+  .email-container{
+    width: 94%;
+    margin-right: 0px;
+    margin-top: 50px;
+  }
+  .email-container h1{
+    width: 110%;
+    text-align: center;
   }
 }
