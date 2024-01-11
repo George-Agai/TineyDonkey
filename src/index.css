@@ -217,7 +217,7 @@ body {
 .navbar.scrolled ul li {
   padding-bottom: 30px;
   margin-bottom: -3.5px;
-  color: grey; 
+  color: grey;
 }
 
 .main-container {
@@ -478,6 +478,55 @@ body {
   margin-top: 20px;
 }
 
+/* .flex-align-center-justify-center,
+.flex-column-justify-flex-start,
+.flex-justify-content-space-around * {
+  border: 1px solid black;
+} */
+
+.contact-details-div h2 {
+  font-family: 'Merriweather', serif;
+  color: #111518;
+  font-size: 16px;
+}
+
+.contact-details-div p{
+  color: #687279;
+  font-size: 15px;
+  margin-top: 0px;
+  font-weight: 400;
+}
+
+.contact-details-div div{
+  margin-bottom: 20px;
+}
+
+.contact-us-email-div input{
+  width: 100%;
+  margin-bottom: 20px;
+  height: 35px;
+  padding: 2px 10px;
+  font-size: 15px;
+  color: #687279;
+  border: 0.5px solid #e0e3e6;
+}
+
+.contact-us-email-div input:focus {
+  /* border: none; */
+  outline: none;
+  font-size: 15px;
+}
+.email-container{
+  box-shadow: 0 20px 50px 0 rgb(230, 227, 227);
+}
+
+
+
+
+
+
+
+
 @media screen and (max-width: 790px) {
   .main-container-content {
     display: flex;
@@ -509,13 +558,15 @@ body {
     padding-right: 0px;
     width: 100%;
   }
-  .navbar.scrolled{
+
+  .navbar.scrolled {
     padding-top: 10px;
   }
 
-  .container{
+  .container {
     padding-inline: 0.9rem;
   }
+
   .navbar ul {
     display: none;
   }
@@ -523,7 +574,8 @@ body {
   .main-container h1 {
     font-size: 55px;
   }
-  .main-container div{
+
+  .main-container div {
     margin-top: -130px;
   }
 
@@ -572,21 +624,27 @@ body {
     margin-left: 0px;
     padding: 20px 5px;
   }
-  .banner-div{
+
+  .banner-div {
     width: 100%;
   }
-  .banner-div p, h5{
+
+  .banner-div p,
+  h5 {
     margin-top: 3px;
     width: 98%;
     text-align: center;
   }
-  .banner-div img{
+
+  .banner-div img {
     margin-top: 30px;
   }
-  .main-title{
+
+  .main-title {
     font-size: 32px;
   }
-  .main-title{
+
+  .main-title {
     display: flex;
     align-items: center;
     justify-content: center;
