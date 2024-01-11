@@ -16,6 +16,7 @@ function Products() {
                 setScrolling(false);
             }
         };
+        window.scrollTo(0,0)
 
         window.addEventListener('scroll', handleScroll);
 
@@ -39,7 +40,7 @@ function Products() {
                     </div>
                 </section>
             </nav>
-            <div className='flex-column-align-center' style={{marginTop: '150px'}}>
+            <div className='flex-column-align-center page-header'>
                 <p style={{ fontSize: '12px' }}><span style={{ color: '#FF6310', cursor: 'pointer' }} onClick={()=>navigate('/')}>HOME /</span><span style={{color: '#687279'}}> PRODUCTS</span></p>
                 <h1 className='font-merriweather' style={{fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px'}}>Products</h1>
             </div>

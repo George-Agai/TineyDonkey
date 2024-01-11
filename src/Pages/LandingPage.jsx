@@ -79,7 +79,7 @@ function LandingPage() {
           <p>Our figurines are the real deal, you’ll see</p>
         </div>
       </div>
-      <div className='flex-column-align-center' style={{ width: '100%' }}>
+      <div className='flex-column-align-center' style={{ width: '90%' }}>
         <h1 className="main-title">Featured Products</h1>
         <p className="min-content">Check out latest updates</p>
       </div>

@@ -1,7 +1,9 @@
 import { useState } from "react"
+import { useNavigate } from "react-router"
 
 function Footer() {
 
+    const navigate = useNavigate()
     const [Email, setEmail] = useState()
     return (
         <div className="footer-container flex-column-align-center">
@@ -9,11 +11,11 @@ function Footer() {
                 <h2>TineyDonkey</h2>
                 <ul>
                     <h1>Useful links</h1>
-                    <li><a>Products</a></li>
-                    <li><a>About</a></li>
-                    <li><a>Contact</a></li>
-                    <li><a>My Cart</a></li>
-                    <li><a>Checkout</a></li>
+                    <li onClick={()=>navigate('/Products')}><a>Products</a></li>
+                    <li onClick={()=>navigate('/About')}><a>About</a></li>
+                    <li onClick={()=>navigate('/Contact')}><a>Contact</a></li>
+                    <li onClick={()=>navigate('/')}><a>My Cart</a></li>
+                    <li onClick={()=>navigate('/')}><a>Checkout</a></li>
                 </ul>
                 <div className="newsletter-div flex-column-justify-flex-start">
                     <h1>Email Newsletter</h1>
