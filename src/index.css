@@ -520,6 +520,15 @@ body {
   box-shadow: 0 20px 50px 0 rgb(230, 227, 227);
 }
 
+.page-header{
+  margin-top: 150px;
+}
+.flex-column-container div{
+  width: 50%;
+}
+.flex-column-container img{
+  width: 40%;
+}
 
 
 
@@ -649,5 +658,24 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+  }
+  .page-header{
+    margin-top: 100px;
+  }
+  .flex-column-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .flex-column-container div{
+    width: 90%;
+    text-align: center;
+  }
+  .flex-column-container div h1{
+    width: 100%;
+  }
+  .flex-column-container img{
+    width: 90%;
+    margin-bottom: 30px;
+    margin-top: -50px;
   }
 }
