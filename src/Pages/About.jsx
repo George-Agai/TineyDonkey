@@ -4,7 +4,7 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 import TineyDonkey from '../TineyDonkeyAssets/20231220_133614.jpg'
 import Footer from '../Components/Footer';
 
-function Products() {
+function About() {
     const [scrolling, setScrolling] = useState(false);
     const navigate = useNavigate()
 
@@ -58,4 +58,4 @@ function Products() {
   )
 }
 
-export default Products
+export default About
