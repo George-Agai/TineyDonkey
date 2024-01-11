@@ -41,10 +41,10 @@ function LandingPage() {
           <section className="flex-justify-content-space-between" style={{ border: scrolling && 'none' }}>
             <p>TineyDonkey</p>
             <ul className={`${scrolling ? 'ul-scrolled' : ''}`}>
-              <li style={{ borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white' }}>Home</li>
+              <li  onClick={() => navigate('/')} style={{ borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white' }}>Home</li>
               <li onClick={() => navigate('/Products')}>Products</li>
-              <li>Contact</li>
-              <li>About</li>
+              <li onClick={() => navigate('/Contact')}>Contact</li>
+              <li onClick={() => navigate('/About')}>About</li>
             </ul>
             <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
               <MdOutlineShoppingBag style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
