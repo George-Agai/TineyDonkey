@@ -4,6 +4,7 @@ import ExpandedProduct from './Pages/ExpandedProduct';
 import Products from './Pages/Products';
 import About from './Pages/About';
 import Contact from './Pages/Contact';
+import Cart from './Pages/Cart';
 import './App.css'
 
 function App() {
@@ -17,8 +18,8 @@ function App() {
           <Route path='/Products' element={<Products />} />
           <Route path='/About' element={<About />} />
           <Route path='/Contact' element={<Contact />} />
-          {/*<Route path='/AvailableSellersPage' element={<AvailableSellersPage />} />
-          <Route path='/SellerOrdersPage' element={<SellerOrdersPage />} />
+          <Route path='/Cart' element={<Cart />} />
+          {/*<Route path='/SellerOrdersPage' element={<SellerOrdersPage />} />
           <Route path='/SellerShopPage' element={<SellerShopPage />} />
           <Route path='/SellerProfilePage' element={<SellerProfilePage />} /> */}
         </Routes>

@@ -18,7 +18,7 @@ function Grid() {
                         <p className="min-content">Check out latest updates</p>
                     </div> */}
                     <div className="product-grid">
-                        <div className="card"  onClick={() => navigate('/ExpandedProduct')}>
+                        <div className="card" onClick={() => navigate('/ExpandedProduct')}>
                             <img src={Attum} alt="Attum" className="card__img" />
                             <div className="card__content flex-column-align-center">
                                 <h2 className="card__title">Lorem, ipsum dolor.</h2>
@@ -32,7 +32,7 @@ function Grid() {
                             <div className="card__content flex-column-align-center">
                                 <h2 className="card__title">Ullam, cum ut.</h2>
                                 <p className="card__price">KSh315.00</p>
-                                <button  className='cta-button' style={{padding: '15px 20px'}}>Add to cart</button>
+                                <button  className='cta-button' style={{padding: '15px 20px'}} onClick={() => navigate('/Cart')}>Add to cart</button>
                             </div>
                         </div>
                         <div className="card stacked">
