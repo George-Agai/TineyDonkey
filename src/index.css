@@ -128,6 +128,15 @@ button:focus-visible {
   box-shadow: 0 10px 15px 0 rgb(230, 224, 224);
 }
 
+.text-align-center{
+  text-align: center;
+}
+.text-align-left{
+  text-align: left;
+}
+.text-align-right{
+  text-align: right;
+}
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -531,8 +540,38 @@ body {
 .flex-column-container img{
   width: 40%;
 }
+/* .flex-column-container,
+.flex-column-container *{
+  border: 1px solid black;
+} */
+.flex-column-container table{
+  width: 55%;
+  padding-bottom: 20px;
+  border-collapse: collapse;
+}
+.cart-totals-div{
+  max-width: 350px;
+  margin-left: -50px;
+  border: 2px solid rgb(231, 230, 230);
+  padding: 10px 30px;
+}
 .contact-us-icons{
   font-size: 50px;
+}
+.flex-column-container tbody tr{
+  border-bottom: 1px dotted #dbdbdb;
+}
+.flex-column-container thead tr{
+  border-bottom: 2px solid rgb(231, 230, 230);
+}
+.flex-column-container thead tr td{
+  color: rgb(17, 21, 24);
+  font-size: 15px;
+  font-weight: 600;
+}
+.flex-column-container thead tr td, .flex-column-container tbody tr td{
+  padding-bottom: 20px;
+  padding-top: 20px;
 }
 
 

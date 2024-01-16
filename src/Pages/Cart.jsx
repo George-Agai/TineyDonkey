@@ -25,6 +25,16 @@ function Cart() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    const hoverElement = document.getElementById('delete-icon');
+
+    hoverElement.addEventListener('mouseover', () => {
+      hoverElement.style.color = 'red';
+    });
+  
+    hoverElement.addEventListener('mouseout', () => {
+      hoverElement.style.color = 'grey';
+    });
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
@@ -47,42 +57,42 @@ function Cart() {
                 <h1 className='font-merriweatheader' style={{ fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px' }}>Cart</h1>
             </div>
 
-            <div className='flex-justify-content-space-around  flex-column-container' style={{ marginBottom: '80px', marginTop: '50px' }}>
+            <div className='flex-justify-content-space-around  flex-column-container' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
                 <table>
                     <thead>
                         <tr>
-                            <td>Product</td>
-                            <td>Quantity</td>
-                            <td>Subtotal</td>
+                            <td className='text-align-left'>Product</td>
+                            <td className='text-align-center'>Quantity</td>
+                            <td className='text-align-center'>Subtotal</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td className='flex-align-center-justify-center'>
+                            <td className='' style={{display: 'flex', alignItems: 'center'}}>
                                 <img src={TineyDonkey} alt='TineyDonkey' style={{ width: '100px' }} />
-                                <p>Attuma</p>
+                                <p style={{marginLeft: '15px'}}>Attuma</p>
                             </td>
-                            <td>1</td>
-                            <td>KSh300.00</td>
-                            <td><AiFillDelete/></td>
+                            <td className='text-align-center'>1</td>
+                            <td className='text-align-center'>KSh300.00</td>
+                            <td className='text-align-center'><AiFillDelete id='delete-icon'/></td>
                         </tr>
                     </tbody>
                 </table>
-                <div className='flex-column-align-center'>
-                    <h2>Cart totals</h2>
-                    <table>
+                <div className='flex-column-align-center cart-totals-div'>
+                    <h2 style={{width: '100%', fontSize: '15px', fontWeight: '700', color:'RGB(17, 21, 24)'}}>Cart totals</h2>
+                    <table style={{width: '100%', fontSize: '15px'}}>
                         <tbody>
                             <tr>
-                                <th>Subtotal</th>
-                                <td><span>KSh</span>300.00</td>
+                                <th className='text-align-left' style={{color: 'RGB(104, 114, 121)'}}>Subtotal</th>
+                                <td className='text-align-right' style={{color: 'RGB(104, 114, 121)'}}><span>KSh</span>300.00</td>
                             </tr>
                             <tr>
-                                <th>Total</th>
-                                <td><span>KSh</span>300.00</td>
+                                <th className='text-align-left' style={{color: 'RGB(104, 114, 121)'}}>Total</th>
+                                <td className='text-align-right' style={{color: 'RGB(104, 114, 121)', fontWeight: '700'}}><span>KSh</span>300.00</td>
                             </tr>
                         </tbody>
                     </table>
-                    <button className='cta-button'>Proceed to checkout</button>
+                    <button className='cta-button' style={{width: '100%', marginBottom: '20px'}}>Proceed to checkout</button>
                 </div>
             </div>
 
