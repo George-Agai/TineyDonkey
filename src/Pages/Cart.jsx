@@ -17,6 +17,16 @@ function Cart() {
                 setScrolling(false);
             }
         };
+
+        const hoverElement = document.getElementById('delete-icon');
+
+        hoverElement.addEventListener('mouseover', () => {
+          hoverElement.style.color = 'red';
+        });
+      
+        hoverElement.addEventListener('mouseout', () => {
+          hoverElement.style.color = 'grey';
+        });
         window.scrollTo(0, 0)
 
         window.addEventListener('scroll', handleScroll);
@@ -25,16 +35,7 @@ function Cart() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    const hoverElement = document.getElementById('delete-icon');
-
-    hoverElement.addEventListener('mouseover', () => {
-      hoverElement.style.color = 'red';
-    });
-  
-    hoverElement.addEventListener('mouseout', () => {
-      hoverElement.style.color = 'grey';
-    });
+   
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
@@ -70,11 +71,11 @@ function Cart() {
                         <tr>
                             <td className='' style={{display: 'flex', alignItems: 'center'}}>
                                 <img src={TineyDonkey} alt='TineyDonkey' style={{ width: '100px' }} />
-                                <p style={{marginLeft: '15px'}}>Attuma</p>
+                                <p style={{marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px'}} className='font-merriweather'>Attuma</p>
                             </td>
                             <td className='text-align-center'>1</td>
                             <td className='text-align-center'>KSh300.00</td>
-                            <td className='text-align-center'><AiFillDelete id='delete-icon'/></td>
+                            <td className='text-align-center'><AiFillDelete id='delete-icon' style={{color: 'grey'}}/></td>
                         </tr>
                     </tbody>
                 </table>
@@ -86,13 +87,13 @@ function Cart() {
                                 <th className='text-align-left' style={{color: 'RGB(104, 114, 121)'}}>Subtotal</th>
                                 <td className='text-align-right' style={{color: 'RGB(104, 114, 121)'}}><span>KSh</span>300.00</td>
                             </tr>
-                            <tr>
+                            <tr style={{borderBottom: 'none'}}>
                                 <th className='text-align-left' style={{color: 'RGB(104, 114, 121)'}}>Total</th>
                                 <td className='text-align-right' style={{color: 'RGB(104, 114, 121)', fontWeight: '700'}}><span>KSh</span>300.00</td>
                             </tr>
                         </tbody>
                     </table>
-                    <button className='cta-button' style={{width: '100%', marginBottom: '20px'}}>Proceed to checkout</button>
+                    <button className='cta-button' style={{width: '100%', marginBottom: '20px'}} onClick={()=>navigate('/Checkout')}>Proceed to checkout</button>
                 </div>
             </div>
 

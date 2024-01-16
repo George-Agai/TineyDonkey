@@ -78,7 +78,7 @@ function Contact() {
                         <input type='text' placeholder='Name'></input>
                         <input type='email' placeholder='Email Address'></input>
                         <input type='text' placeholder='Subject'></input>
-                        <input type='text' placeholder='Comment or Message' style={{height: '90px'}}></input>
+                        <input type='textarea' placeholder='Comment or Message' style={{height: '90px'}}></input>
                         <button className='cta-button' style={{ marginTop: '30px' }}>Send Message</button>
                     </div>
                 </div>
