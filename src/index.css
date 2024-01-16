@@ -1,72 +1,3 @@
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
-
 :root {
   font-family: 'Merriweather', serif;
   color: rgba(34, 31, 31, 0.87);
@@ -520,7 +451,7 @@ body {
   border: 0.5px solid #eef0f3;
 }
 
-.contact-us-email-div input:focus {
+.contact-us-email-div input, .payment-details-form input:focus {
   /* border: none; */
   outline: none;
   font-size: 15px;
@@ -555,6 +486,12 @@ body {
   border: 2px solid rgb(231, 230, 230);
   padding: 10px 30px;
 }
+.checkout-totals-div{
+  max-width: 500px;
+  border: 2px solid rgb(231, 230, 230);
+  padding: 10px 30px;
+  margin-left: 20px;
+}
 .contact-us-icons{
   font-size: 50px;
 }
@@ -573,16 +510,59 @@ body {
   padding-bottom: 20px;
   padding-top: 20px;
 }
-
-
 .cart-flex-column-container{
   width: 40%;
 }
 .cart-flex-column-container div{
   width: 50%;
 }
-
-
+.mpesa-notification-div{
+  background-color: rgb(240, 234, 234);
+  padding: 5px 20px;
+  border-radius: 7px;
+  margin-bottom: 15px;
+}
+.mpesa-notification-div p{
+  color: rgb(148, 157, 163);
+  font-size: 14.8px;
+}
+.payment-details-form .span{
+  padding: 20px 50px;
+}
+.payment-details-form input, textarea{
+  width: 100%;
+}
+.payment-details-form textarea::placeholder{
+  font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
+}
+.payment-details-form h3{
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  font-size: 17px;
+}
+.payment-details-form textarea{
+  font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
+  padding: 15px 10px;
+}
+.payment-details-form textarea:focus{
+  outline: none;
+}
+.payment-details-form input{
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 15px;
+  color: #687279;
+  border: 1px solid #dbdde0;
+  margin-bottom: 20px;
+}
+.payment-details-form label{
+  margin-bottom: 10px;
+  color: RGB(104, 114, 121);
+  font-weight: 700;
+  font-size: 15px;
+} 
 
 
 
