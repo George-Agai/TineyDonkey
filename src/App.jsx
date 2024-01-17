@@ -6,6 +6,7 @@ import About from './Pages/About';
 import Contact from './Pages/Contact';
 import Cart from './Pages/Cart';
 import Checkout from './Pages/Checkout';
+import ImageUploader from './Pages/ImageUpoader';
 import './App.css'
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
           <Route path='/Contact' element={<Contact />} />
           <Route path='/Cart' element={<Cart />} />
           <Route path='/Checkout' element={<Checkout />} />
-          {/*<Route path='/SellerShopPage' element={<SellerShopPage />} />
-          <Route path='/SellerProfilePage' element={<SellerProfilePage />} /> */}
+          <Route path='/ImageUploader' element={<ImageUploader />} />
+          {/*<Route path='/SellerProfilePage' element={<SellerProfilePage />} /> */}
         </Routes>
       </BrowserRouter>
     </div>
