@@ -445,7 +445,7 @@ body {
   border: 0.5px solid #eef0f3;
 }
 
-.contact-us-email-div input, .payment-details-form input:focus {
+.contact-us-email-div input, .add-product-form input, .payment-details-form input:focus {
   outline: none;
   font-size: 15px;
 }
@@ -464,7 +464,7 @@ body {
 .flex-column-container img{
   width: 40%;
 }
-.flex-column-container table{
+.flex-column-container, .available-product-div table{
   width: 55%;
   padding-bottom: 20px;
   border-collapse: collapse;
@@ -484,18 +484,18 @@ body {
 .contact-us-icons{
   font-size: 50px;
 }
-.flex-column-container tbody tr{
+.flex-column-container, .available-product-div tbody tr{
   border-bottom: 1px dotted #dbdbdb;
 }
-.flex-column-container thead tr{
+.flex-column-container, .available-product-div thead tr{
   border-bottom: 2px solid rgb(231, 230, 230);
 }
-.flex-column-container thead tr td{
+.flex-column-container, .available-product-div thead tr td{
   color: rgb(17, 21, 24);
   font-size: 15px;
   font-weight: 600;
 }
-.flex-column-container thead tr td, .flex-column-container tbody tr td{
+.flex-column-container thead tr td, .flex-column-container tbody tr td, .available-product-div tbody tr td{
   padding-bottom: 20px;
   padding-top: 20px;
 }
@@ -525,7 +525,7 @@ body {
   font-size: 15px;
   font-family: 'Open Sans', sans-serif;
 }
-.payment-details-form h3{
+.payment-details-form, .dashboard-container h3{
   font-family: 'Merriweather', serif;
   font-weight: 700;
   font-size: 17px;
@@ -540,7 +540,7 @@ body {
   outline: none;
   border: 1px solid #dbdde0;
 }
-.payment-details-form input{
+.payment-details-form, .add-product-form input{
   height: 30px;
   padding: 5px 10px;
   font-size: 15px;
@@ -548,13 +548,42 @@ body {
   border: 1px solid #dbdde0;
   margin-bottom: 20px;
 }
-.payment-details-form label{
+.payment-details-form, .add-product-form label{
   margin-bottom: 10px;
   color: RGB(104, 114, 121);
   font-weight: 700;
   font-size: 15px;
   cursor: pointer;
 } 
+.width100{
+  width: 100%;
+}
+.dashboard-container{
+  margin-top: 130px;
+  /* border: 2px solid grey; */
+  width: 90vw;
+}
+/* .dashboard-container *{
+  border: 1px solid black;
+} */
+.add-product-form{
+  width: 90%;
+  padding: 20px 30px;
+  /* border: 1px solid black; */
+}
+
+.add-product-form input{
+  width: 96%;
+}
+/* .available-product-div{
+  width: 100%;
+  border: 1px solid black;
+  height: 200px;
+}  */
+.products-scrollbar::-webkit-scrollbar {
+  width: 0; 
+}
+
 
 
 
