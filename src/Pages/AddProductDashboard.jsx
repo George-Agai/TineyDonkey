@@ -88,7 +88,7 @@ const AddProductDashboard = () => {
                     </form>
                 </div>
 
-                <div style={{ width: '55%', border: '1px solid black', overflowY: 'auto', height: '70vh' }} className=' products-scrollbar'>
+                <div style={{ width: '55%', overflowY: 'auto', height: '70vh' }} className='flex-column-align-center products-scrollbar'>
                     <h3>All figurines</h3>
                     <AvailableProduct AllProducts={AllProducts}/>
                 </div>

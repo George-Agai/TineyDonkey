@@ -1,10 +1,9 @@
 //import React from 'react'
-import TineyDonkey from '../TineyDonkeyAssets/20231220_133614.jpg'
 import { AiFillDelete } from "react-icons/ai";
 
 function AvailableProduct({ AllProducts }) {
     return (
-        <div style={{ width: '100%' }} className="available-product-div">
+        <div style={{ width: '90%' }} className="available-product-div">
             {/* {AllProducts == null
                 ? ""
                 : AllProducts.map((data) => (
@@ -21,7 +20,7 @@ function AvailableProduct({ AllProducts }) {
                 ))} */}
 
 
-            <table>
+            <table style={{ width: '100%' }}>
                 <thead>
                     <tr>
                         <td className='text-align-left'>Product</td>
