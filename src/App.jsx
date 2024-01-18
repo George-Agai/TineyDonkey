@@ -6,7 +6,8 @@ import About from './Pages/About';
 import Contact from './Pages/Contact';
 import Cart from './Pages/Cart';
 import Checkout from './Pages/Checkout';
-import ImageUploader from './Pages/ImageUpoader';
+import ImageUploader from './Pages/AddProductDashboard';
+import AddProductDashboard from './Pages/AddProductDashboard';
 import './App.css'
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
           <Route path='/Cart' element={<Cart />} />
           <Route path='/Checkout' element={<Checkout />} />
           <Route path='/ImageUploader' element={<ImageUploader />} />
-          {/*<Route path='/SellerProfilePage' element={<SellerProfilePage />} /> */}
+          <Route path='/AddProductDashboard' element={<AddProductDashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
