@@ -35,10 +35,10 @@ function AvailableProduct({ AllProducts }) {
                             <tr key={data._id}>
                                 <td className='' style={{ display: 'flex', alignItems: 'center' }}>
                                     <img src={`http://localhost:3000/Images/` + data.image} alt='Product' style={{ width: '100px' }} />
-                                    <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>Attuma</p>
+                                    <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>{data.productName}</p>
                                 </td>
-                                <td className='text-align-center'>300</td>
-                                <td className='text-align-center'>Pending</td>
+                                <td className='text-align-center'>{data.price}</td>
+                                <td className='text-align-center'>{data.status ? <span>Pending</span> :<span>Sold</span>}</td>
                                 <td className='text-align-center'><AiFillDelete id='delete-icon' style={{ color: 'grey' }} /></td>
                             </tr>
                         ))}
