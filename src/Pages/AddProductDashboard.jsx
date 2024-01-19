@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import AvailableProduct from '../Components/AvailableProduct';
-//import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
-import { FaDisplay } from 'react-icons/fa6';
 
 const AddProductDashboard = () => {
 
@@ -35,13 +33,6 @@ const AddProductDashboard = () => {
 
     const handleUpload = (e) => {
         e.preventDefault()
-        // const formdata = new FormData()
-        // formdata.append('image', file)
-        // const product = {
-        //     formdata,
-        //     productName: Name,
-        //     price: Price,
-        // };
         const priceInteger = parseInt(Price, 10);
         const formData = new FormData();
         formData.append('image', file);

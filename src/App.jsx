@@ -8,6 +8,7 @@ import Cart from './Pages/Cart';
 import Checkout from './Pages/Checkout';
 import ImageUploader from './Pages/AddProductDashboard';
 import AddProductDashboard from './Pages/AddProductDashboard';
+import Dashboard from './Pages/Dashboard';
 import './App.css'
 
 function App() {
@@ -23,8 +24,9 @@ function App() {
           <Route path='/Contact' element={<Contact />} />
           <Route path='/Cart' element={<Cart />} />
           <Route path='/Checkout' element={<Checkout />} />
-          <Route path='/ImageUploader' element={<ImageUploader />} />
+          <Route path='/UploadProductDashboard' element={<ImageUploader />} />
           <Route path='/AddProductDashboard' element={<AddProductDashboard />} />
+          <Route path='/Dashboard' element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
