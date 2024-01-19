@@ -58,23 +58,23 @@ function Cart() {
                 <h1 className='font-merriweatheader' style={{ fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px' }}>Cart</h1>
             </div>
 
-            <div className='flex-justify-content-space-around  flex-column-container' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
-                <table>
+            <div className='flex-justify-content-space-around  flex-column-container ' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
+                <table className='cart-table'>
                     <thead>
                         <tr>
                             <td className='text-align-left'>Product</td>
-                            <td className='text-align-center'>Quantity</td>
+                            <td className='text-align-center quantity-th'>Quantity</td>
                             <td className='text-align-center'>Subtotal</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td className='' style={{display: 'flex', alignItems: 'center'}}>
-                                <img src={TineyDonkey} alt='TineyDonkey' style={{ width: '100px' }} />
-                                <p style={{marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px'}} className='font-merriweather'>Attuma</p>
+                                <img src={TineyDonkey} alt='TineyDonkey' style={{ width: '70px' }} />
+                                <p style={{marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px'}} className='font-merriweather'>Attuma<span className='quantity'> × 1</span></p>
                             </td>
-                            <td className='text-align-center'>1</td>
-                            <td className='text-align-center'>KSh300.00</td>
+                            <td className='text-align-center quantity-th'>1</td>
+                            <td className='text-align-center'><span className='quantity-th'>KSh</span>300.00</td>
                             <td className='text-align-center'><AiFillDelete id='delete-icon' style={{color: 'grey'}}/></td>
                         </tr>
                     </tbody>

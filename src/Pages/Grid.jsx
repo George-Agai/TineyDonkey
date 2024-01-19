@@ -5,6 +5,7 @@ import axios from 'axios';
 function Grid() {
     const navigate = useNavigate()
     const [AllProducts, setAllProducts] = useState(null);
+    console.log(AllProducts)
 
     useEffect(() => {
         axios.get('http://localhost:3000/get-image')

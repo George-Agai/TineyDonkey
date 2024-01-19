@@ -87,13 +87,13 @@ const AddProductDashboard = () => {
                 <div style={{ width: '40%', border: '2px solid rgb(231, 230, 230)', marginRight: '20px', height: '70vh' }} className='flex-align-center-justify-center'>
                     <form onSubmit={handleUpload} className=' add-product-form'>
                         <h3>Add a figurine</h3>
-                        <label htmlFor='image'>Image*</label>
+                        <label htmlFor='image'>Image *</label>
                         <input type="file" id='image' required='true' onChange={e => setFile(e.target.files[0])} />
 
-                        <label htmlFor='name'>Name*</label>
+                        <label htmlFor='name'>Name *</label>
                         <input placeholder='Name' type='text' required='true' id='name' value={Name} onChange={e => setName(e.target.value)} />
 
-                        <label htmlFor='price'>Price*</label>
+                        <label htmlFor='price'>Price *</label>
                         <input placeholder='Amount' type='number' required='true' id='price' value={Price} onChange={e => setPrice(e.target.value)} />
 
                         <button type='submit' className='cta-button width100'>Upload</button>

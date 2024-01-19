@@ -14,8 +14,8 @@ function Footer() {
                     <li onClick={()=>navigate('/Products')}><a>Products</a></li>
                     <li onClick={()=>navigate('/About')}><a>About</a></li>
                     <li onClick={()=>navigate('/Contact')}><a>Contact</a></li>
-                    <li onClick={()=>navigate('/')}><a>My Cart</a></li>
-                    <li onClick={()=>navigate('/')}><a>Checkout</a></li>
+                    <li onClick={()=>navigate('/Cart')}><a>My Cart</a></li>
+                    <li onClick={()=>navigate('/Checkout')}><a>Checkout</a></li>
                 </ul>
                 <div className="newsletter-div flex-column-justify-flex-start">
                     <h1>Email Newsletter</h1>
