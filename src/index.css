@@ -464,7 +464,7 @@ body {
 .flex-column-container img{
   width: 40%;
 }
-.flex-column-container, .available-product-div table{
+.flex-column-container table, .available-product-div table{
   width: 55%;
   padding-bottom: 20px;
   border-collapse: collapse;
@@ -484,13 +484,13 @@ body {
 .contact-us-icons{
   font-size: 50px;
 }
-.flex-column-container, .available-product-div tbody tr{
+.flex-column-container tbody tr, .available-product-div tbody tr{
   border-bottom: 1px dotted #dbdbdb;
 }
-.flex-column-container, .available-product-div thead tr{
+.flex-column-container thead tr, .available-product-div thead tr{
   border-bottom: 2px solid rgb(231, 230, 230);
 }
-.flex-column-container, .available-product-div thead tr td{
+.flex-column-container thead tr td, .available-product-div thead tr td{
   color: rgb(17, 21, 24);
   font-size: 15px;
   font-weight: 600;

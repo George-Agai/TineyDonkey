@@ -4,7 +4,7 @@ import { AiFillDelete } from "react-icons/ai";
 function AvailableProduct({ AllProducts }) {
     return (
         <div style={{ width: '90%' }} className="available-product-div">
-            <table style={{ width: '100%' }}>
+            <table style={{ width: '100%'}}>
                 <thead>
                     <tr>
                         <td className='text-align-left'>Product</td>
@@ -14,7 +14,7 @@ function AvailableProduct({ AllProducts }) {
                 </thead>
                 <tbody>
                     {AllProducts == null
-                        ? ""
+                        ? "Please wait...."
                         : AllProducts.map((data) => (
                             <tr key={data._id}>
                                 <td className='' style={{ display: 'flex', alignItems: 'center' }}>

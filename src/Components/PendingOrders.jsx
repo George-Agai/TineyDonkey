@@ -5,7 +5,7 @@ function PendingOrders({ AllProducts }) {
     <div style={{ width: '100%' }} className="available-product-div">
             <table style={{ width: '100%' }}>
                 <thead>
-                    <tr>
+                    <tr style={{borderTop: '2px solid rgb(231, 230, 230)'}}>
                         <td className='text-align-left'>Product</td>
                         <td className='text-align-center'>Bought by</td>
                         <td className='text-align-center'>Price</td>

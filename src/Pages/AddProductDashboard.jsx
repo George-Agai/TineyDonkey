@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MdOutlineShoppingBag } from "react-icons/md";
+import { FaRegUserCircle } from "react-icons/fa";
 import AvailableProduct from '../Components/AvailableProduct';
 import axios from 'axios';
 
@@ -79,7 +79,7 @@ const AddProductDashboard = () => {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
                     <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-                        <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                        <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
                     </div>
                 </section>
             </nav>

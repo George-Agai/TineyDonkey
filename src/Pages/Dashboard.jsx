@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { MdOutlineShoppingBag } from "react-icons/md";
+import { FaRegUserCircle } from "react-icons/fa";
 import PendingOrders from '../Components/PendingOrders';
 import axios from 'axios';
 
@@ -46,17 +46,17 @@ function Dashboard() {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
                     <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-                        <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                        <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
                     </div>
                 </section>
             </nav>
 
             <div className='width100 flex-justify-content-space-between'>
-                <div style={{ border: '2px solid rgb(231, 230, 230)', padding: '15px', minWidth: '200px'}}>
+                <div style={{ border: '2px solid rgb(231, 230, 230)', padding: '15px 25px', minWidth: '200px'}}>
                     <h3 className=''>Total sales</h3>
                     <h1>Ksh850</h1>
                 </div>
-                <button className='cta-button'>Add product</button>
+                <button className='cta-button' onClick={() => navigate('/AddProductDashboard')}>Add product</button>
             </div>
             <div className='width100' style={{ marginTop: '100px'}}>
                 <h3>Pending orders</h3>
