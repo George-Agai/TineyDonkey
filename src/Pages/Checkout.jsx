@@ -116,7 +116,7 @@ function Checkout() {
                             <p>You will be prompted to verify the transaction via an STK push</p>
                         </div>
                         <div style={{width: '100%', marginBottom: '15px'}}>
-                            <p style={{color: 'RGB(104, 114, 121)', fontSize: '13px', fontWeight: '400'}}>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</p>
+                            <p style={{color: 'RGB(104, 114, 121)', fontSize: '13px', fontWeight: '400'}}>Your personal data will only be used to process your order and to support your experience throughout this website.</p>
                         </div>
                         <button type='submit' className='cta-button' style={{ width: '100%', marginBottom: '20px' }}>Place order</button>
                     </div>

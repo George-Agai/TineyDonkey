@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MdOutlineShoppingBag } from "react-icons/md";
+import { FaRegUserCircle } from "react-icons/fa";
 import AvailableProduct from '../Components/AvailableProduct';
-//import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
-import { FaDisplay } from 'react-icons/fa6';
 
 const AddProductDashboard = () => {
 
@@ -35,13 +33,6 @@ const AddProductDashboard = () => {
 
     const handleUpload = (e) => {
         e.preventDefault()
-        // const formdata = new FormData()
-        // formdata.append('image', file)
-        // const product = {
-        //     formdata,
-        //     productName: Name,
-        //     price: Price,
-        // };
         const priceInteger = parseInt(Price, 10);
         const formData = new FormData();
         formData.append('image', file);
@@ -88,7 +79,7 @@ const AddProductDashboard = () => {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
                     <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-                        <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                        <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
                     </div>
                 </section>
             </nav>
@@ -96,13 +87,13 @@ const AddProductDashboard = () => {
                 <div style={{ width: '40%', border: '2px solid rgb(231, 230, 230)', marginRight: '20px', height: '70vh' }} className='flex-align-center-justify-center'>
                     <form onSubmit={handleUpload} className=' add-product-form'>
                         <h3>Add a figurine</h3>
-                        <label htmlFor='image'>Image*</label>
+                        <label htmlFor='image'>Image *</label>
                         <input type="file" id='image' required='true' onChange={e => setFile(e.target.files[0])} />
 
-                        <label htmlFor='name'>Name*</label>
+                        <label htmlFor='name'>Name *</label>
                         <input placeholder='Name' type='text' required='true' id='name' value={Name} onChange={e => setName(e.target.value)} />
 
-                        <label htmlFor='price'>Price*</label>
+                        <label htmlFor='price'>Price *</label>
                         <input placeholder='Amount' type='number' required='true' id='price' value={Price} onChange={e => setPrice(e.target.value)} />
 
                         <button type='submit' className='cta-button width100'>Upload</button>

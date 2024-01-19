@@ -445,7 +445,7 @@ body {
   border: 0.5px solid #eef0f3;
 }
 
-.contact-us-email-div input, .add-product-form input, .payment-details-form input:focus {
+.contact-us-email-div input:focus, .add-product-form input:focus, .payment-details-form input:focus {
   outline: none;
   font-size: 15px;
 }
@@ -464,10 +464,11 @@ body {
 .flex-column-container img{
   width: 40%;
 }
-.flex-column-container, .available-product-div table{
+.flex-column-container table, .available-product-div table{
   width: 55%;
   padding-bottom: 20px;
   border-collapse: collapse;
+  /* border: 1px solid black; */
 }
 .cart-totals-div{
   max-width: 350px;
@@ -484,13 +485,13 @@ body {
 .contact-us-icons{
   font-size: 50px;
 }
-.flex-column-container, .available-product-div tbody tr{
+.flex-column-container tbody tr, .available-product-div tbody tr{
   border-bottom: 1px dotted #dbdbdb;
 }
-.flex-column-container, .available-product-div thead tr{
+.flex-column-container thead tr, .available-product-div thead tr{
   border-bottom: 2px solid rgb(231, 230, 230);
 }
-.flex-column-container, .available-product-div thead tr td{
+.flex-column-container thead tr td, .available-product-div thead tr td{
   color: rgb(17, 21, 24);
   font-size: 15px;
   font-weight: 600;
@@ -525,7 +526,7 @@ body {
   font-size: 15px;
   font-family: 'Open Sans', sans-serif;
 }
-.payment-details-form, .dashboard-container h3{
+.payment-details-form h3, .dashboard-container h3{
   font-family: 'Merriweather', serif;
   font-weight: 700;
   font-size: 17px;
@@ -540,7 +541,7 @@ body {
   outline: none;
   border: 1px solid #dbdde0;
 }
-.payment-details-form, .add-product-form input{
+.payment-details-form input, .add-product-form input{
   height: 30px;
   padding: 5px 10px;
   font-size: 15px;
@@ -548,7 +549,7 @@ body {
   border: 1px solid #dbdde0;
   margin-bottom: 20px;
 }
-.payment-details-form, .add-product-form label{
+.payment-details-form label, .add-product-form label{
   margin-bottom: 10px;
   color: RGB(104, 114, 121);
   font-weight: 700;
@@ -575,15 +576,12 @@ body {
 .add-product-form input{
   width: 96%;
 }
-/* .available-product-div{
-  width: 100%;
-  border: 1px solid black;
-  height: 200px;
-}  */
 .products-scrollbar::-webkit-scrollbar {
   width: 0; 
 }
-
+.quantity{
+  display: none;
+}
 
 
 
@@ -720,6 +718,9 @@ body {
     display: flex;
     flex-direction: column;
   }
+  .cart-table{
+    margin-top: -50px;
+  }
   .flex-column-container div{
     width: 90%;
     text-align: center;
@@ -727,10 +728,20 @@ body {
   .flex-column-container div h1{
     width: 100%;
   }
-  .flex-column-container img{
+  .flex-column-container table{
     width: 90%;
-    margin-bottom: 30px;
-    margin-top: -50px;
+  }
+  .quantity-th{
+    display: none;
+  }
+  .quantity{
+    display: inline;
+  }
+  .cart-totals-div{
+    margin-left: 0px;
+    max-width: 80vw;
+    padding: 5px 25px;
+    margin-top: 50px;
   }
   .contact-us-icons{
     font-size: 35px;
