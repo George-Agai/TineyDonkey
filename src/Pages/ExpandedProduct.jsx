@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import Footer from '../Components/Footer';
 
 function ExpandedProduct() {
+    const navigate = useNavigate();
+
     const products = {
         image: ["170565244777920231220_111804.jpg", "170565260209220231220_113800.jpg", "170565465898520231207_123915 (2).jpg"],
         price: 300,
@@ -35,16 +38,16 @@ function ExpandedProduct() {
 
     return (
         <div className='expanded-product-container flex-column-align-center'>
-            <nav className={`navbar ${scrolling ? 'scrolled' : ''}`} style={{ border: 'none' }}>
-                <section className="flex-justify-content-space-between" style={{ borderBottom: scrolling ? 'none' : '1px solid lightgrey' }}>
+            <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
+                <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p>TineyDonkey</p>
                     <ul>
-                        <li style={{ color: 'grey' }}>Home</li>
-                        <li style={{ color: 'grey' }}>Products</li>
-                        <li style={{ color: 'grey' }}>Contact</li>
-                        <li style={{ color: 'grey' }}>About</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/Products')}>Products</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
-                    <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
+                    <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
                         <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
                     </div>
                 </section>
@@ -92,12 +95,12 @@ function ExpandedProduct() {
                 <div className='expanded-product-right-div flex-column-justify-flex-start'>
                     <h1 className='font-merriweather width100'>Attuma from Black Panther</h1>
                     <h3>KSh300</h3>
-                    <p>1 in stock</p>
+                    <p id='stock'>1 in stock</p>
                     <div className='flex-align-center-justify-center width100'>
                         <button className='cta-button width100'>Add to cart</button>
                         {/* <button className='cta-button'>View cart</button> */}
                     </div>
-                    <p style={{color: '#687279', fontSize: '13px', fontWeight: '700'}}>CATEGORY:<span style={{color: '#687279', fontSize: '13px', fontWeight: '500'}}> FIGURINES</span></p>
+                    <p style={{color: '#687279', fontSize: '13px', fontWeight: '700', marginTop: '30px'}}>CATEGORY:<span style={{color: '#687279', fontSize: '13px', fontWeight: '500'}}> FIGURINES</span></p>
                 </div>
             </main>
             <Footer />

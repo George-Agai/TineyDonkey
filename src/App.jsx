@@ -9,6 +9,7 @@ import Checkout from './Pages/Checkout';
 import ImageUploader from './Pages/AddProductDashboard';
 import AddProductDashboard from './Pages/AddProductDashboard';
 import Dashboard from './Pages/Dashboard';
+import AdminLogin from './Pages/AdminLogin';
 import './App.css'
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LandingPage />} />
-          <Route path='/ExpandedProduct' element={<ExpandedProduct />} />
+          <Route path='/Product' element={<ExpandedProduct />} />
           <Route path='/Products' element={<Products />} />
           <Route path='/About' element={<About />} />
           <Route path='/Contact' element={<Contact />} />
@@ -27,6 +28,7 @@ function App() {
           <Route path='/UploadProductDashboard' element={<ImageUploader />} />
           <Route path='/AddProductDashboard' element={<AddProductDashboard />} />
           <Route path='/Dashboard' element={<Dashboard />} />
+          <Route path='/Admin' element={<AdminLogin />} />
         </Routes>
       </BrowserRouter>
     </div>

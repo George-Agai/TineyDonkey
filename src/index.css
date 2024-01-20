@@ -946,4 +946,11 @@ textarea {
   .product-gallery{
     width: 100%;
   }
+  #stock{
+    margin-top: 0px;
+  }
+  .expanded-product-right-div div{
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 }
