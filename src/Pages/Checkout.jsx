@@ -113,10 +113,10 @@ function Checkout() {
                         </table>
                         <div className='flex-align-center-justify-center mpesa-notification-div' style={{width: '92%', marginTop: '15px'}}>
                             <img src={mpesa} alt='mpesa-icon'/>
-                            <p>You will be prompted to verify the transaction via an STK push</p>
+                            <p className='text-align-left'>You will be prompted to verify the transaction via an STK push</p>
                         </div>
                         <div style={{width: '100%', marginBottom: '15px'}}>
-                            <p style={{color: 'RGB(104, 114, 121)', fontSize: '13px', fontWeight: '400'}}>Your personal data will only be used to process your order and to support your experience throughout this website.</p>
+                            <p className='text-align-left' style={{color: 'RGB(104, 114, 121)', fontSize: '13px', fontWeight: '400', width: '100%'}}>Your personal data will only be used to process your order and to support your experience throughout this website.</p>
                         </div>
                         <button type='submit' className='cta-button' style={{ width: '100%', marginBottom: '20px' }}>Place order</button>
                     </div>
