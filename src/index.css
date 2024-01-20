@@ -477,7 +477,7 @@ body {
   padding: 10px 30px;
 }
 .checkout-totals-div{
-  max-width: 500px;
+  width: 500px;
   border: 2px solid rgb(231, 230, 230);
   padding: 10px 30px;
   margin-left: 20px;
@@ -641,6 +641,10 @@ body {
 
   .main-container {
     padding-left: 0px;
+    height: 98vh;
+  }
+  .overlay{
+    height: 98vh;
   }
 
   body {
@@ -684,6 +688,7 @@ body {
     margin-left: 0px;
     padding: 20px 5px;
     padding-bottom: 40px;
+    margin-top: -140px;
   }
 
   .banner-div {
@@ -714,12 +719,12 @@ body {
   .page-header{
     margin-top: 100px;
   }
-  .flex-column-container, .contact-us-flex-container{
+  .flex-column-container, .contact-us-flex-container, .payment-details-form{
     display: flex;
     flex-direction: column;
   }
   .cart-table{
-    margin-top: -50px;
+    margin-top: -60px;
   }
   .flex-column-container div{
     width: 90%;
@@ -759,5 +764,23 @@ body {
   .email-container h1{
     width: 110%;
     text-align: center;
+  }
+  .checkout-totals-div{
+    border: 2px solid rgb(231, 230, 230);
+    padding: 10px 25px;
+    margin-left: 0px;
+    margin-top: 40px;
+  }
+  .mpesa-notification-div{
+    padding: 5px 20px;
+    margin-bottom: 15px;
+  }
+  .mpesa-notification-div img{
+    margin-left: -5px;
+  }
+  .payment-details-form .span{
+    padding: 10px 20px;
+    margin-top: -30px;
+    margin-left: -15px;
   }
 }

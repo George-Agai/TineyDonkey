@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
-import TineyDonkey from '../TineyDonkeyAssets/20231220_133614.jpg'
+import TineyDonkey from '../TineyDonkeyAssets/20231207_123915 (2).jpg'
 import { AiFillDelete } from "react-icons/ai";
 import Footer from '../Components/Footer';
 
@@ -71,7 +71,7 @@ function Cart() {
                         <tr>
                             <td className='' style={{display: 'flex', alignItems: 'center'}}>
                                 <img src={TineyDonkey} alt='TineyDonkey' style={{ width: '70px' }} />
-                                <p style={{marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px'}} className='font-merriweather'>Attuma<span className='quantity'> × 1</span></p>
+                                <p style={{marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px'}} className='font-merriweather'>Minion<span className='quantity'> × 1</span></p>
                             </td>
                             <td className='text-align-center quantity-th'>1</td>
                             <td className='text-align-center'><span className='quantity-th'>KSh</span>300.00</td>
