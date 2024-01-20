@@ -719,7 +719,7 @@ body {
   .page-header{
     margin-top: 100px;
   }
-  .flex-column-container, .contact-us-flex-container, .payment-details-form{
+  .flex-column-container, .contact-us-flex-container, .payment-details-form, .dashboard-total-sales-div{
     display: flex;
     flex-direction: column;
   }
@@ -781,6 +781,14 @@ body {
   .payment-details-form .span{
     padding: 10px 20px;
     margin-top: -30px;
-    margin-left: -15px;
+    margin-left: -20px;
+  }
+  .dashboard-total-sales-div button{
+    margin-top: 30px;
+    margin-bottom: -15px;
+  }
+  .dashboard-total-sales-div div{
+    /* box-shadow: 0 10px 15px 0 rgb(238, 238, 238); */
+    width: 70vw;
   }
 }
