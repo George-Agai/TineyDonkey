@@ -83,8 +83,8 @@ const AddProductDashboard = () => {
                     </div>
                 </section>
             </nav>
-            <div className='width100 flex-justify-content-space-between' style={{ display: 'flex' }}>
-                <div style={{ width: '40%', border: '2px solid rgb(231, 230, 230)', marginRight: '20px', height: '70vh' }} className='flex-align-center-justify-center'>
+            <div className='width100 flex-justify-content-space-between add-product-main-container' style={{ display: 'flex' }}>
+                <div style={{ border: '2px solid rgb(231, 230, 230)' }} className='flex-align-center-justify-center add-figurine-fom-div'>
                     <form onSubmit={handleUpload} className=' add-product-form'>
                         <h3>Add a figurine</h3>
                         <label htmlFor='image'>Image *</label>
@@ -100,7 +100,7 @@ const AddProductDashboard = () => {
                     </form>
                 </div>
 
-                <div style={{ width: '55%', overflowY: 'auto', height: '70vh' }} className='flex-column-align-center products-scrollbar'>
+                <div style={{ overflowY: 'auto', height: '70vh' }} className='flex-column-align-center products-scrollbar'>
                     <h3>All figurines</h3>
                     <AvailableProduct AllProducts={AllProducts} />
                 </div>

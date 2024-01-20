@@ -51,7 +51,7 @@ function Dashboard() {
                 </section>
             </nav>
 
-            <div className='width100 flex-justify-content-space-between'>
+            <div className='width100 flex-justify-content-space-between dashboard-total-sales-div'>
                 <div style={{ border: '2px solid rgb(231, 230, 230)', padding: '15px 25px', minWidth: '200px'}}>
                     <h3 className=''>Total sales</h3>
                     <h1>Ksh850</h1>
