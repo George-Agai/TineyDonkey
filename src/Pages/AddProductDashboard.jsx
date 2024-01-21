@@ -24,12 +24,17 @@ const AddProductDashboard = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    const readFromLocalStorage = (key) => {
+        const value = localStorage.getItem(key);
+        return JSON.parse(value);
+    };
 
     const [file, setFile] = useState();
     const [AllProducts, setAllProducts] = useState(null);
     const [scrolling, setScrolling] = useState(false);
     const [Name, setName] = useState();
     const [Price, setPrice] = useState();
+    const [token, setToken] = useState(readFromLocalStorage('token'))
 
     const handleUpload = (e) => {
         e.preventDefault()
@@ -59,12 +64,41 @@ const AddProductDashboard = () => {
             .catch(error => console.log(error))
     }
     useEffect(() => {
-        axios.get('http://localhost:3000/get-image')
-            .then((res) => {
-                setAllProducts(res.data);
-            })
-            .catch(error => console.log(error))
-    }, [])
+        const fetchData = async () => {
+            try {
+                await axios.get('https://ruby-uninterested-antelope.cyclic.app/business/protected', {
+                    headers: {
+                        'Authorization': `${token}`,
+                    },
+                })
+                    .then((tokenAuthenticationPayload) => {
+                        if (tokenAuthenticationPayload.data.message === 'Access denied. No token provided' || tokenAuthenticationPayload.data.message === 'Invalid token') {
+                            navigate('/Admin')
+                        }
+                        else if (tokenAuthenticationPayload.data.message === 'Access granted') {
+                            axios.get('http://localhost:3000/get-image')
+                                .then((res) => {
+                                    setAllProducts(res.data);
+                                })
+                                .catch(error => console.log(error))
+                        }
+                    })
+                    .catch(error => console.log(error))
+
+            }
+            catch (error) {
+            console.error(error);
+        }
+    };
+    fetchData();
+}, [])
+
+const handleLogout =()=> {
+    localStorage.removeItem('token')
+    setTimeout(()=>{
+        navigate('/Admin')
+    }, 1000)
+}
 
 
     return (
@@ -79,7 +113,7 @@ const AddProductDashboard = () => {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
                     <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-                        <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                        <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout}/>
                     </div>
                 </section>
             </nav>

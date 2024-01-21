@@ -6,7 +6,6 @@ import About from './Pages/About';
 import Contact from './Pages/Contact';
 import Cart from './Pages/Cart';
 import Checkout from './Pages/Checkout';
-import ImageUploader from './Pages/AddProductDashboard';
 import AddProductDashboard from './Pages/AddProductDashboard';
 import Dashboard from './Pages/Dashboard';
 import AdminLogin from './Pages/AdminLogin';
@@ -25,7 +24,6 @@ function App() {
           <Route path='/Contact' element={<Contact />} />
           <Route path='/Cart' element={<Cart />} />
           <Route path='/Checkout' element={<Checkout />} />
-          <Route path='/UploadProductDashboard' element={<ImageUploader />} />
           <Route path='/AddProductDashboard' element={<AddProductDashboard />} />
           <Route path='/Dashboard' element={<Dashboard />} />
           <Route path='/Admin' element={<AdminLogin />} />

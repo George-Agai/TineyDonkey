@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
+import Notification from '../Components/Notification';
 import axios from 'axios';
 
 function AdminLogin() {
     const [scrolling, setScrolling] = useState(false);
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
+    const [wrongPassword, setWrongPassword] = useState(false)
+    const [notificationText, setNotificationText] = useState()
     const navigate = useNavigate()
 
     const saveToLocalStorage = (key, value) => {
@@ -32,8 +35,6 @@ function AdminLogin() {
 
     const handleLogin = async(e)=>{
         e.preventDefault()
-        console.log(username);
-        console.log(password);
         try {
             const userLoginObject = {
                 username: username,
@@ -55,19 +56,15 @@ function AdminLogin() {
                 }
 
                 if (loginResponseMessage === "Auth successful") {
-                    // setTimeout(() => {
-                    //     setLoadingFlag(false)
-                    //     navigate('/Dashboard', { state: { user } })
-                    // }, 1000);
-                    console.log('Auth successful')
+                    setTimeout(() => {
+                        navigate('/Dashboard', { state: { user } })
+                    }, 1000);
                 }
                 else if (loginResponseMessage === "Auth Failed") {
-                    // loginResponse = 'Wrong password'
-                    // setTimeout(() => {
-                    //     setLoadingFlag(false)
-                    //     setWrongPasswordFlag(true)
-                    // }, 1000);
-                    console.log('Auth failed')
+                    setNotificationText("Wrong password")
+                    setTimeout(() => {
+                        setWrongPassword(true)
+                    }, 1000);
                 }
                 else {
                     console.log('Nothing')
@@ -80,6 +77,16 @@ function AdminLogin() {
         } catch (error) {
             console.error('Error sending data:', error);
         }
+    }
+
+
+    const handleUsernameChange =(e)=>{
+        setUsername(e.target.value)
+        setWrongPassword(false)
+    }
+    const handlePasswordChange =(e)=>{
+        setPassword(e.target.value)
+        setWrongPassword(false)
     }
     return (
         <div className='flex-align-center-justify-center width100' style={{ height: '90vh', width: '100vw' }}>
@@ -100,10 +107,10 @@ function AdminLogin() {
             <div className='flex-column-align-center login-form-div box-shadow'>
                 <form onSubmit={(e)=>handleLogin(e)} className='flex-column-align-center'>
                     <label htmlFor='username'>Username</label>
-                    <input type="text" required='true' id='username' placeholder='Your username' value={username} onChange={(e)=>setUsername(e.target.value)}/>
-
+                    <input type="text" required='true' id='username' placeholder='Your username' value={username} onChange={(e)=>handleUsernameChange(e)}/>
+                    {wrongPassword ? <Notification text={notificationText}/> : null}
                     <label htmlFor='password'>Password</label>
-                    <input type="password" required='true' id='passsword' placeholder='Password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                    <input type="password" required='true' id='passsword' placeholder='Password' value={password} onChange={(e)=>handlePasswordChange(e)}/>
                     <button className='cta-button width100' type='submit'>Login</button>
                 </form>
             </div>
