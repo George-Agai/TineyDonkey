@@ -18,7 +18,7 @@ function AvailableProduct({ AllProducts }) {
                         : AllProducts.map((data) => (
                             <tr key={data._id}>
                                 <td className='' style={{ display: 'flex', alignItems: 'center' }}>
-                                    <img src={`http://localhost:3000/Images/` + data.image} alt='Product' style={{ width: '100px' }} />
+                                    <img src={`http://localhost:3000/Images/` + data.image[0]} alt='Product' style={{ width: '100px' }} />
                                     <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>{data.productName}</p>
                                 </td>
                                 <td className='text-align-center'>{data.price}</td>
