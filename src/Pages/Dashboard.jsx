@@ -15,7 +15,6 @@ function Dashboard() {
     const [token, setToken] = useState(readFromLocalStorage('token'))
     const navigate = useNavigate()
 
-    console.log('token from ls-->', token)
     // localStorage.removeItem('token')
     useEffect(() => {
         const handleScroll = () => {
@@ -55,7 +54,6 @@ function Dashboard() {
                         }
                     })
                     .catch(error => console.log(error))
-
             }
             catch (error) {
             console.error(error);

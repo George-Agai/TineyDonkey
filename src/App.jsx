@@ -9,12 +9,14 @@ import Checkout from './Pages/Checkout';
 import AddProductDashboard from './Pages/AddProductDashboard';
 import Dashboard from './Pages/Dashboard';
 import AdminLogin from './Pages/AdminLogin';
+import { CartProvider } from 'react-use-cart';
 import './App.css'
 
 function App() {
 
   return (
     <div>
+      <CartProvider>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LandingPage />} />
@@ -29,6 +31,7 @@ function App() {
           <Route path='/Admin' element={<AdminLogin />} />
         </Routes>
       </BrowserRouter>
+      </CartProvider>
     </div>
   )
 }
