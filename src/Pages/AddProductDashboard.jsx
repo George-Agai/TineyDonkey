@@ -36,33 +36,69 @@ const AddProductDashboard = () => {
     const [Price, setPrice] = useState();
     const [token, setToken] = useState(readFromLocalStorage('token'))
 
+    // const handleUpload = (e) => {
+    //     e.preventDefault()
+    //     const priceInteger = parseInt(Price, 10);
+    //     const formData = new FormData();
+    //     formData.append('image', file);
+    //     formData.append('productName', Name);
+    //     formData.append('price', priceInteger);
+    //     axios.post('http://localhost:3000/upload-image', formData, {
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //         },
+    //     })
+    //         .then((res) => {
+    //             if (res.data.message === "Upload successful") {
+    //                 console.log("Upload successful")
+    //                 setAllProducts(res.data.data)
+    //                 setName("")
+    //                 setPrice("")
+    //                 setFile("")
+    //             }
+    //             else {
+    //                 console.log("Upload failed")
+    //                 alert("Upload failed")
+    //             }
+    //         })
+    //         .catch(error => console.log(error))
+    // }
+
     const handleUpload = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
         const priceInteger = parseInt(Price, 10);
         const formData = new FormData();
-        formData.append('image', file);
+
+        // Append each selected file to the FormData
+        for (let i = 0; i < file.length; i++) {
+            formData.append('image', file[i]);
+        }
+
         formData.append('productName', Name);
         formData.append('price', priceInteger);
-        axios.post('http://localhost:3000/upload-image', formData, {
+
+        axios.post('http://localhost:3000/upload-product', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         })
             .then((res) => {
                 if (res.data.message === "Upload successful") {
-                    console.log("Upload successful")
-                    setAllProducts(res.data.data)
-                    setName("")
-                    setPrice("")
-                    setFile("")
-                }
-                else {
-                    console.log("Upload failed")
-                    alert("Upload failed")
+                    console.log("Upload successful");
+                    setAllProducts(res.data.data);
+                    setName("");
+                    setPrice("");
+                    setFile("");
+                } else {
+                    console.log("Upload failed");
+                    alert("Upload failed");
                 }
             })
-            .catch(error => console.log(error))
+            .catch(error => console.log(error));
     }
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -87,18 +123,18 @@ const AddProductDashboard = () => {
 
             }
             catch (error) {
-            console.error(error);
-        }
-    };
-    fetchData();
-}, [])
+                console.error(error);
+            }
+        };
+        fetchData();
+    }, [])
 
-const handleLogout =()=> {
-    localStorage.removeItem('token')
-    setTimeout(()=>{
-        navigate('/Admin')
-    }, 1000)
-}
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        setTimeout(() => {
+            navigate('/Admin')
+        }, 1000)
+    }
 
 
     return (
@@ -113,7 +149,7 @@ const handleLogout =()=> {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
                     <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-                        <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout}/>
+                        <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout} />
                     </div>
                 </section>
             </nav>
@@ -122,7 +158,7 @@ const handleLogout =()=> {
                     <form onSubmit={handleUpload} className=' add-product-form'>
                         <h3>Add a figurine</h3>
                         <label htmlFor='image'>Image *</label>
-                        <input type="file" id='image' required='true' onChange={e => setFile(e.target.files[0])} />
+                        <input type="file" id='image' required='true' onChange={e => setFile(e.target.files)} multiple />
 
                         <label htmlFor='name'>Name *</label>
                         <input placeholder='Name' type='text' required='true' id='name' value={Name} onChange={e => setName(e.target.value)} />
