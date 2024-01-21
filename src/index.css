@@ -456,7 +456,8 @@ body {
 
 .contact-us-email-div input:focus,
 .add-product-form input:focus,
-.payment-details-form input:focus {
+.payment-details-form input:focus,
+.login-form-div form input:focus {
   outline: none;
   font-size: 15px;
 }
@@ -584,7 +585,8 @@ textarea {
 }
 
 .payment-details-form input,
-.add-product-form input {
+.add-product-form input,
+.login-form-div form input {
   height: 30px;
   padding: 5px 10px;
   font-size: 15px;
@@ -594,7 +596,8 @@ textarea {
 }
 
 .payment-details-form label,
-.add-product-form label {
+.add-product-form label,
+.login-form-div form label {
   margin-bottom: 10px;
   color: RGB(104, 114, 121);
   font-weight: 700;
@@ -616,7 +619,7 @@ textarea {
   padding: 20px 30px;
 }
 
-.add-product-form input {
+.add-product-form input, .login-form-div form input {
   width: 96%;
 }
 .products-scrollbar{
@@ -686,6 +689,23 @@ textarea {
   transform: scale(1.7);
   transition: 0.4s ease;
 }
+.login-form-div{
+  height: max-content;
+  width: 30%;
+  padding: 20px;
+  border: 2px solid rgb(231, 230, 230);
+}
+.login-form-div form{
+  /* height: max-content;
+  width: 30%;
+  padding: 20px;
+  border: 1px solid black; */
+  /* border: 1px solid blue; */
+  width: 100%;
+}
+.login-form-div form *{
+  width: 100%;
+}
 
 
 
@@ -746,12 +766,12 @@ textarea {
 
   .main-container {
     padding-left: 0px;
-    /* height: 98vh; */
+    height: 100vh;
   }
 
-  /* .overlay {
-    height: 98vh;
-  } */
+  .overlay {
+    height: 100vh;
+  }
 
   body {
     overflow-x: hidden;
@@ -794,7 +814,7 @@ textarea {
     margin-left: 0px;
     padding: 20px 5px;
     padding-bottom: 40px;
-    margin-top: -50px;
+    margin-top: -120px;
   }
 
   .banner-div {
@@ -952,5 +972,11 @@ textarea {
   .expanded-product-right-div div{
     padding-top: 30px;
     padding-bottom: 30px;
+  }
+  .login-form-div{
+    height: max-content;
+    width: 80%;
+    padding: 20px;
+    border: 2px solid rgb(231, 230, 230);
   }
 }

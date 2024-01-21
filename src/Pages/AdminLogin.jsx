@@ -57,7 +57,7 @@ function AdminLogin() {
                 if (loginResponseMessage === "Auth successful") {
                     // setTimeout(() => {
                     //     setLoadingFlag(false)
-                    //     navigate('/HomePage', { state: { user } })
+                    //     navigate('/Dashboard', { state: { user } })
                     // }, 1000);
                     console.log('Auth successful')
                 }
@@ -82,7 +82,7 @@ function AdminLogin() {
         }
     }
     return (
-        <div className='flex-align-center-justify-center width100' style={{ border: '1px solid black', height: '90vh', width: '100vw' }}>
+        <div className='flex-align-center-justify-center width100' style={{ height: '90vh', width: '100vw' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p>TineyDonkey</p>
@@ -97,14 +97,14 @@ function AdminLogin() {
                     </div>
                 </section>
             </nav>
-            <div style={{ height: '100px', width: '100px', backgroundColor: 'blue'}}>
-                <form onSubmit={(e)=>handleLogin(e)}>
+            <div className='flex-column-align-center login-form-div box-shadow'>
+                <form onSubmit={(e)=>handleLogin(e)} className='flex-column-align-center'>
                     <label htmlFor='username'>Username</label>
                     <input type="text" required='true' id='username' placeholder='Your username' value={username} onChange={(e)=>setUsername(e.target.value)}/>
 
                     <label htmlFor='password'>Password</label>
                     <input type="password" required='true' id='passsword' placeholder='Password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
-                    <button className='cta-button' type='submit'>Login</button>
+                    <button className='cta-button width100' type='submit'>Login</button>
                 </form>
             </div>
         </div>
