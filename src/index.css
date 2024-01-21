@@ -692,15 +692,10 @@ textarea {
 .login-form-div{
   height: max-content;
   width: 30%;
-  padding: 20px;
+  padding: 30px;
   border: 2px solid rgb(231, 230, 230);
 }
 .login-form-div form{
-  /* height: max-content;
-  width: 30%;
-  padding: 20px;
-  border: 1px solid black; */
-  /* border: 1px solid blue; */
   width: 100%;
 }
 .login-form-div form *{
