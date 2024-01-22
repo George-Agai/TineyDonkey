@@ -41,7 +41,7 @@ function Grid({ Page }) {
                 <div className="container">
                     <div className="product-grid">
                         {AllProducts == null
-                            ? <div className="width100 flex-align-center-justify-center">
+                            ? <div className="width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
                                 <p>Loading...</p>
                             </div>
                             : AllProducts.map((data) => (
