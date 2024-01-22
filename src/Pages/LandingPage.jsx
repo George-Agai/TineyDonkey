@@ -21,6 +21,7 @@ function LandingPage() {
         setScrolling(false);
       }
     };
+    window.scrollTo(0,0)
 
     window.addEventListener('scroll', handleScroll);
 
@@ -29,9 +30,10 @@ function LandingPage() {
     };
   }, []);
 
-  function HandleScrollToTop() {
-    var targetDiv = document.getElementById('landing');
-    targetDiv.scrollIntoView({ behavior: 'smooth' });
+  function HandleViewAllButton() {
+    // var targetDiv = document.getElementById('landing');
+    // targetDiv.scrollIntoView({ behavior: 'smooth' });
+    navigate('/products')
   }
 
   return (
@@ -83,9 +85,9 @@ function LandingPage() {
         <h1 className="main-title">Featured Products</h1>
         <p className="min-content">Check out latest updates</p>
       </div>
-      <Grid />
+      <Grid Page={'Landing'}/>
       <div className="flex-align-center-justify-center" style={{ width: '100%', marginTop: '30px', marginBottom: '50px' }}>
-        <button className="cta-button" onClick={HandleScrollToTop}>Scroll To The Top</button>
+        <button className="cta-button" onClick={HandleViewAllButton}>View All</button>
       </div>
       <Footer />
     </div>
