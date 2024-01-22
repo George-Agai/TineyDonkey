@@ -85,7 +85,6 @@ function Cart() {
                                 </tr>
                             )
                         })
-
                         }
 
                     </tbody>

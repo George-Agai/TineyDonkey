@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { useCart } from 'react-use-cart';
 import Footer from '../Components/Footer';
+import axios from 'axios';
 
 function ExpandedProduct() {
     const navigate = useNavigate();
-
-    const products = {
-        image: ["170565244777920231220_111804.jpg", "170565260209220231220_113800.jpg", "170565465898520231207_123915 (2).jpg"],
-        price: 300,
-        productName: "Iron man"
-    }
+    const location = useLocation();
 
     const [scrolling, setScrolling] = useState(false);
     const [activeThumbnailIndex, setActiveThumbnailIndex] = useState(0);
+    const [product, setProduct] = useState()
+
+    const { addItem, items } = useCart();
 
     const handleThumbnailClick = (index) => {
         setActiveThumbnailIndex(index)
@@ -27,6 +27,7 @@ function ExpandedProduct() {
                 setScrolling(false);
             }
         };
+        window.scrollTo(0,0)
 
         window.addEventListener('scroll', handleScroll);
 
@@ -35,7 +36,47 @@ function ExpandedProduct() {
         };
     }, []);
 
+    useEffect(() => {
+        if(location.state){
+            const { data } = location.state;
+            setProduct(data)
+        }
+    
+    }, [location.state])
+    
 
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const idFromQuery = searchParams.get('id');
+        console.log('id from query', idFromQuery)
+        const fetchData = async() =>{
+            await axios.get(`http://localhost:3000/fetchProduct?id=${idFromQuery}`)
+            .then((prod) =>{
+                console.log('!product useEffect response', prod)
+                setProduct(prod.data)
+            })
+            .catch(err => console.log(err))
+        }
+        if(product === null || product === undefined){
+            fetchData()
+        }
+        
+    }, [location.search, product])
+
+    console.log('Product outside', product)
+
+    const handleAddProductToCart =()=> {
+        if(product){
+            const updatedProducts = {
+                id: product._id,
+                image: product.image,
+                productName: product.productName,
+                price: product.price
+            }
+            addItem(updatedProducts)
+        }
+    }
     return (
         <div className='expanded-product-container flex-column-align-center'>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
@@ -56,12 +97,13 @@ function ExpandedProduct() {
             <main className='expanded-flex-container flex-justify-content-space-between'>
                 <div className="product-gallery">
                     <div>
-                        <p><span>HOME / FIGURINES / </span>ATTUMA</p>
+                        <p><span>HOME / FIGURINES / </span>{product && product.productName.toUpperCase()}</p>
                     </div>
                     <div style={{overflow: 'hidden'}}>
                         <img
-                            src={`http://localhost:3000/Images/${products.image[activeThumbnailIndex]}`}
+                            src={`http://localhost:3000/Images/${product && product.image[activeThumbnailIndex]}`}
                             alt="Main Product"
+                            loading='lazy'
                             style={{
                                 maxWidth: '100%',
                                 loading: 'lazy',
@@ -72,10 +114,11 @@ function ExpandedProduct() {
                     </div>
 
                     <div className='flex-justify-flex-start width100' style={{ marginTop: "10px" }}>
-                        {products.image.map((imageName, index) => (
+                        {product && product.image.map((imageName, index) => (
                             <img
                                 key={index}
-                                src={`http://localhost:3000/Images/${imageName}`}
+                                loading='lazy'
+                                src={`http://localhost:3000/Images/${product && imageName}`}
                                 alt={`Thumbnail ${index + 1}`}
                                 style={{
                                     maxWidth: "100px",
@@ -93,11 +136,11 @@ function ExpandedProduct() {
                 </div>
 
                 <div className='expanded-product-right-div flex-column-justify-flex-start'>
-                    <h1 className='font-merriweather width100'>Attuma from Black Panther</h1>
-                    <h3>KSh300</h3>
+                    <h1 className='font-merriweather width100'>{product && product.productName}</h1>
+                    <h3>KSh{product && product.price}</h3>
                     <p id='stock'>1 in stock</p>
                     <div className='flex-align-center-justify-center width100'>
-                        <button className='cta-button width100'>Add to cart</button>
+                        <button className='cta-button width100' onClick={handleAddProductToCart}>Add to cart</button>
                         {/* <button className='cta-button'>View cart</button> */}
                     </div>
                     <p style={{color: '#687279', fontSize: '13px', fontWeight: '700', marginTop: '30px'}}>CATEGORY:<span style={{color: '#687279', fontSize: '13px', fontWeight: '500'}}> FIGURINES</span></p>

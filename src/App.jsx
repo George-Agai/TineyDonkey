@@ -9,6 +9,7 @@ import Checkout from './Pages/Checkout';
 import AddProductDashboard from './Pages/AddProductDashboard';
 import Dashboard from './Pages/Dashboard';
 import AdminLogin from './Pages/AdminLogin';
+import Grid from './Pages/Grid';
 import { CartProvider } from 'react-use-cart';
 import './App.css'
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/grid' element={<Grid />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/addProductDashboard' element={<AddProductDashboard />} />
           <Route path='/dashboard' element={<Dashboard />} />
