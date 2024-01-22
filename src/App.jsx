@@ -20,15 +20,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LandingPage />} />
-          <Route path='/Product' element={<ExpandedProduct />} />
-          <Route path='/Products' element={<Products />} />
-          <Route path='/About' element={<About />} />
-          <Route path='/Contact' element={<Contact />} />
-          <Route path='/Cart' element={<Cart />} />
-          <Route path='/Checkout' element={<Checkout />} />
-          <Route path='/AddProductDashboard' element={<AddProductDashboard />} />
-          <Route path='/Dashboard' element={<Dashboard />} />
-          <Route path='/Admin' element={<AdminLogin />} />
+          <Route path='/product' element={<ExpandedProduct />} />
+          <Route path='/products' element={<Products />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/checkout' element={<Checkout />} />
+          <Route path='/addProductDashboard' element={<AddProductDashboard />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/admin' element={<AdminLogin />} />
         </Routes>
       </BrowserRouter>
       </CartProvider>
