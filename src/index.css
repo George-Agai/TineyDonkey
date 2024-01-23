@@ -704,13 +704,46 @@ textarea {
 .height100vh{
   height: 100vh;
 }
+.transaction-response-container{
+  width: 90vw;
+  height: 80vh;
+}
+.transaction-center-div{
+  width: 70%;
+  /* border: 1px solid black; */
+}
+.transaction-center-div p{
+  color: #687279;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner{
+  width: 130px;
+  animation: spin 1s linear infinite;
+}
+.response-icon{
+  width: 130px;
+}
 
 
 
 
 
 
-@media screen and (max-width: 790px) {
+
+
+@media screen and (max-width: 1100px) {
   .main-container-content {
     display: flex;
     flex-direction: column;
@@ -976,5 +1009,9 @@ textarea {
     width: 80%;
     padding: 20px;
     border: 2px solid rgb(231, 230, 230);
+  }
+  .transaction-center-div{
+    width: 100%;
+    /* border: 1px solid black; */
   }
 }
