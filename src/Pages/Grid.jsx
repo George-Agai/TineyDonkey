@@ -41,7 +41,9 @@ function Grid({ Page }) {
                 <div className="container">
                     <div className="product-grid">
                         {AllProducts == null
-                            ? "Please wait..."
+                            ? <div className="width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
+                                <p>Loading...</p>
+                            </div>
                             : AllProducts.map((data) => (
                                 <div className="card stacked" key={data._id} onClick={() => handleProductSelected(data)}>
                                     <img src={`http://localhost:3000/Images/` + data.image[0]} alt="Teeny" className="card__img" loading="lazy" />

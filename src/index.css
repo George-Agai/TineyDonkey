@@ -701,6 +701,9 @@ textarea {
 .login-form-div form *{
   width: 100%;
 }
+.height100vh{
+  height: 100vh;
+}
 
 
 
@@ -756,7 +759,7 @@ textarea {
   }
 
   .main-container div {
-    margin-top: -130px;
+    margin-top: -80px;
   }
 
   .main-container {

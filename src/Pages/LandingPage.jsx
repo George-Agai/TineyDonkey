@@ -57,7 +57,7 @@ function LandingPage() {
 
         <div className="main-container">
           <div className="flex-column-justify-flex-start main-container-content">
-            <h1 className="font-merriweather">We sell cool, tiny stuff</h1>
+            <h1 className="font-merriweather">We sell cool, tiny stuff⚡️</h1>
             <p>Unleash your creativity with developer-inspired figurines</p>
             <button className="cta-button" style={{ marginTop: '40px' }} onClick={()=>navigate('/Products')}>Explore Now</button>
           </div>

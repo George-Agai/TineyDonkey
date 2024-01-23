@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { useCart } from 'react-use-cart';
-import TineyDonkey from '../TineyDonkeyAssets/20231207_123915 (2).jpg'
 import { AiFillDelete } from "react-icons/ai";
 import Footer from '../Components/Footer';
 
 function Cart() {
     const [scrolling, setScrolling] = useState(false);
     const navigate = useNavigate()
-    const { items, cartTotal, removeItem } = useCart()
+    const { items, cartTotal, removeItem, isEmpty } = useCart()
     console.log('items', items)
     console.log('cartTotal', cartTotal)
 
@@ -22,15 +21,17 @@ function Cart() {
             }
         };
 
-        const hoverElement = document.getElementById('delete-icon');
+        if (!isEmpty) {
+            const hoverElement = document.getElementById('delete-icon');
 
-        hoverElement.addEventListener('mouseover', () => {
-            hoverElement.style.color = 'red';
-        });
+            hoverElement.addEventListener('mouseover', () => {
+                hoverElement.style.color = 'red';
+            });
 
-        hoverElement.addEventListener('mouseout', () => {
-            hoverElement.style.color = 'grey';
-        });
+            hoverElement.addEventListener('mouseout', () => {
+                hoverElement.style.color = 'grey';
+            });
+        }
         window.scrollTo(0, 0)
 
         window.addEventListener('scroll', handleScroll);
@@ -59,53 +60,57 @@ function Cart() {
 
             <div className='flex-column-align-center  page-header'>
                 <p style={{ fontSize: '12px' }}><span style={{ color: '#FF6310', cursor: 'pointer' }} onClick={() => navigate('/')}>HOME /</span><span style={{ color: '#687279' }}> CART</span></p>
-                <h1 className='font-merriweatheader' style={{ fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px' }}>Cart</h1>
+                <h1 className='font-merriweather' style={{ fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px' }}>Cart</h1>
             </div>
 
-            <div className='flex-justify-content-space-around  flex-column-container ' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
-                <table className='cart-table'>
-                    <thead>
-                        <tr>
-                            <td className='text-align-left'>Product</td>
-                            <td className='text-align-center quantity-th'>Quantity</td>
-                            <td className='text-align-center'>Subtotal</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {items.map((item) => {
-                            return (
-                                <tr key={item.id}>
-                                    <td className='' style={{ display: 'flex', alignItems: 'center' }}>
-                                        <img src={`http://localhost:3000/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
-                                        <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>{item.productName}<span className='quantity'> × 1</span></p>
-                                    </td>
-                                    <td className='text-align-center quantity-th'>{item.quantity}</td>
-                                    <td className='text-align-center'><span className='quantity-th'>KSh</span>{item.price}.00</td>
-                                    <td className='text-align-center'><AiFillDelete id='delete-icon' style={{ color: 'grey' }} onClick={() => removeItem(item.id)} /></td>
-                                </tr>
-                            )
-                        })
-                        }
-
-                    </tbody>
-                </table>
-                <div className='flex-column-align-center cart-totals-div'>
-                    <h2 style={{ width: '100%', fontSize: '15px', fontWeight: '700', color: 'RGB(17, 21, 24)' }}>Cart totals</h2>
-                    <table style={{ width: '100%', fontSize: '15px' }}>
-                        <tbody>
+            {isEmpty ?
+                <div className="width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
+                    <p>Cart is empty☹️</p>
+                </div> :
+                <div className='flex-justify-content-space-around  flex-column-container ' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
+                    <table className='cart-table'>
+                        <thead>
                             <tr>
-                                <th className='text-align-left' style={{ color: 'RGB(104, 114, 121)' }}>Subtotal</th>
-                                <td className='text-align-right' style={{ color: 'RGB(104, 114, 121)' }}><span>KSh</span>{cartTotal}.00</td>
+                                <td className='text-align-left'>Product</td>
+                                <td className='text-align-center quantity-th'>Quantity</td>
+                                <td className='text-align-center'>Subtotal</td>
                             </tr>
-                            <tr style={{ borderBottom: 'none' }}>
-                                <th className='text-align-left' style={{ color: 'RGB(104, 114, 121)' }}>Total</th>
-                                <td className='text-align-right' style={{ color: 'RGB(104, 114, 121)', fontWeight: '700' }}><span>KSh</span>{cartTotal}.00</td>
-                            </tr>
+                        </thead>
+                        <tbody>
+                            {items.map((item) => {
+                                return (
+                                    <tr key={item.id}>
+                                        <td className='' style={{ display: 'flex', alignItems: 'center' }}>
+                                            <img src={`http://localhost:3000/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
+                                            <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>{item.productName}<span className='quantity'> × 1</span></p>
+                                        </td>
+                                        <td className='text-align-center quantity-th'>{item.quantity}</td>
+                                        <td className='text-align-center'><span className='quantity-th'>KSh</span>{item.price}.00</td>
+                                        <td className='text-align-center'><AiFillDelete id='delete-icon' style={{ color: 'grey' }} onClick={() => removeItem(item.id)} /></td>
+                                    </tr>
+                                )
+                            })
+                            }
+
                         </tbody>
                     </table>
-                    <button className='cta-button' style={{ width: '100%', marginBottom: '20px' }} onClick={() => navigate('/Checkout')}>Proceed to checkout</button>
-                </div>
-            </div>
+                    <div className='flex-column-align-center cart-totals-div'>
+                        <h2 style={{ width: '100%', fontSize: '15px', fontWeight: '700', color: 'RGB(17, 21, 24)' }}>Cart totals</h2>
+                        <table style={{ width: '100%', fontSize: '15px' }}>
+                            <tbody>
+                                <tr>
+                                    <th className='text-align-left' style={{ color: 'RGB(104, 114, 121)' }}>Subtotal</th>
+                                    <td className='text-align-right' style={{ color: 'RGB(104, 114, 121)' }}><span>KSh</span>{cartTotal}.00</td>
+                                </tr>
+                                <tr style={{ borderBottom: 'none' }}>
+                                    <th className='text-align-left' style={{ color: 'RGB(104, 114, 121)' }}>Total</th>
+                                    <td className='text-align-right' style={{ color: 'RGB(104, 114, 121)', fontWeight: '700' }}><span>KSh</span>{cartTotal}.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button className='cta-button' style={{ width: '100%', marginBottom: '20px' }} onClick={() => navigate('/Checkout')}>Proceed to checkout</button>
+                    </div>
+                </div>}
 
             <Footer />
         </div>

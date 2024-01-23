@@ -13,7 +13,7 @@ function ExpandedProduct() {
     const [activeThumbnailIndex, setActiveThumbnailIndex] = useState(0);
     const [product, setProduct] = useState()
 
-    const { addItem, items } = useCart();
+    const { addItem } = useCart();
 
     const handleThumbnailClick = (index) => {
         setActiveThumbnailIndex(index)
@@ -27,7 +27,7 @@ function ExpandedProduct() {
                 setScrolling(false);
             }
         };
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
 
         window.addEventListener('scroll', handleScroll);
 
@@ -37,37 +37,34 @@ function ExpandedProduct() {
     }, []);
 
     useEffect(() => {
-        if(location.state){
+        if (location.state) {
             const { data } = location.state;
             setProduct(data)
         }
-    
+
     }, [location.state])
-    
+
 
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const idFromQuery = searchParams.get('id');
         console.log('id from query', idFromQuery)
-        const fetchData = async() =>{
+        const fetchData = async () => {
             await axios.get(`http://localhost:3000/fetchProduct?id=${idFromQuery}`)
-            .then((prod) =>{
-                console.log('!product useEffect response', prod)
-                setProduct(prod.data)
-            })
-            .catch(err => console.log(err))
+                .then((prod) => {
+                    setProduct(prod.data)
+                })
+                .catch(err => console.log(err))
         }
-        if(product === null || product === undefined){
+        if (product === null || product === undefined) {
             fetchData()
         }
-        
+
     }, [location.search, product])
 
-    console.log('Product outside', product)
-
-    const handleAddProductToCart =()=> {
-        if(product){
+    const handleAddProductToCart = () => {
+        if (product) {
             const updatedProducts = {
                 id: product._id,
                 image: product.image,
@@ -78,7 +75,7 @@ function ExpandedProduct() {
         }
     }
     return (
-        <div className='expanded-product-container flex-column-align-center'>
+        <div className={product ? 'expanded-product-container flex-column-align-center ' : 'height100vh expanded-product-container flex-column-justify-content-space-between'}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p>TineyDonkey</p>
@@ -94,12 +91,12 @@ function ExpandedProduct() {
                 </section>
             </nav>
 
-            <main className='expanded-flex-container flex-justify-content-space-between'>
+            {product ? <main className='expanded-flex-container flex-justify-content-space-between'>
                 <div className="product-gallery">
                     <div>
                         <p><span>HOME / FIGURINES / </span>{product && product.productName.toUpperCase()}</p>
                     </div>
-                    <div style={{overflow: 'hidden'}}>
+                    <div style={{ overflow: 'hidden' }}>
                         <img
                             src={`http://localhost:3000/Images/${product && product.image[activeThumbnailIndex]}`}
                             alt="Main Product"
@@ -143,9 +140,11 @@ function ExpandedProduct() {
                         <button className='cta-button width100' onClick={handleAddProductToCart}>Add to cart</button>
                         {/* <button className='cta-button'>View cart</button> */}
                     </div>
-                    <p style={{color: '#687279', fontSize: '13px', fontWeight: '700', marginTop: '30px'}}>CATEGORY:<span style={{color: '#687279', fontSize: '13px', fontWeight: '500'}}> FIGURINES</span></p>
+                    <p style={{ color: '#687279', fontSize: '13px', fontWeight: '700', marginTop: '30px' }}>CATEGORY:<span style={{ color: '#687279', fontSize: '13px', fontWeight: '500' }}> FIGURINES</span></p>
                 </div>
-            </main>
+            </main> : <div className="width100 flex-align-center-justify-center">
+                <p>Loading...</p>
+            </div>}
             <Footer />
         </div>
     )
