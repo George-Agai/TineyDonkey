@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { useCart } from 'react-use-cart';
-import TineyDonkey from '../TineyDonkeyAssets/20231207_123915 (2).jpg'
 import { AiFillDelete } from "react-icons/ai";
 import Footer from '../Components/Footer';
 
@@ -61,12 +60,12 @@ function Cart() {
 
             <div className='flex-column-align-center  page-header'>
                 <p style={{ fontSize: '12px' }}><span style={{ color: '#FF6310', cursor: 'pointer' }} onClick={() => navigate('/')}>HOME /</span><span style={{ color: '#687279' }}> CART</span></p>
-                <h1 className='font-merriweatheader' style={{ fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px' }}>Cart</h1>
+                <h1 className='font-merriweather' style={{ fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px' }}>Cart</h1>
             </div>
 
             {isEmpty ?
                 <div className="width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
-                    <p>Cart is empty😢</p>
+                    <p>Cart is empty☹️</p>
                 </div> :
                 <div className='flex-justify-content-space-around  flex-column-container ' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
                     <table className='cart-table'>
