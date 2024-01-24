@@ -71,9 +71,7 @@ function Checkout() {
             contact: newContact
         }
 
-        await axios.post('http://localhost:3000/saveOrder', order)
-        .then(res => console.log("response-->", res))
-        .catch(err => console.log(err))
+        navigate('/transaction', {state: { order }})
     }
 
     return (
