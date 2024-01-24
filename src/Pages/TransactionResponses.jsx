@@ -6,43 +6,45 @@ import TransactionState from '../Components/TransactionState'
 import TransactionResponse from '../Components/TransactionResponse'
 import tick from '../TineyDonkeyAssets/tick.png'
 import x from '../TineyDonkeyAssets/x-mark.png'
+import { AiTwotoneSecurityScan } from 'react-icons/ai'
 
 function TransactionResponses() {
+    const location = useLocation()
+    const { formData } = location.state;
+    const { items, removeItem, cartTotal } = useCart()
     const [productAvailabilityFlag, setProductAvailabilityFlag] = useState(true)
     const [availableFlag, setAvailableFlag] = useState(false)
     const [unavailableFlag, setUnavailableFlag] = useState(false)
     const [initiatingTransaction, setInitiatingTransaction] = useState(false)
     const [orderSuccessful, setOrderSuccessful] = useState(false)
     const [unavailableProductName, setUnavailableProductName] = useState()
-    const location = useLocation()
-    const { order } = location.state;
-    const { items } = useCart()
+    const [unavailableProductsArray, setUnavailableProductsArray] = useState()
+    const [itemsArray, setItemsArray] = useState(items)
+
     console.log('items in rs', items)
 
     //const 
-    const findProductWithFalseStatus =(array) => {
+    const findProductWithFalseStatus = (array) => {
         return array.filter(product => !product.status)
     }
     const checkProductAvailability = async () => {
         const idArray = items.map(item => item.id)
-        console.log(idArray)
         await axios.post('http://localhost:3000/checkProduct', idArray)
             .then((res) => {
                 if (res.data.message === "Found products") {
                     // console.log("response-->", res.data)
                     const productsWithFalseStatus = findProductWithFalseStatus(res.data.productStatusResults)
-                    console.log("productsWithFalseStatus-->", productsWithFalseStatus)
-                    if(productsWithFalseStatus.length > 0){
+                    setUnavailableProductsArray(productsWithFalseStatus)
+                    if (productsWithFalseStatus.length > 0) {
                         setUnavailableProductName(productsWithFalseStatus[0].productName)
                         setTimeout(() => {
                             setUnavailableFlag(true)
                             setProductAvailabilityFlag(false)
                         }, 3000)
                     }
-                    else{
+                    else {
                         setProductAvailabilityFlag(false)
                         setAvailableFlag(true)
-                        // setInitiatingTransaction(true)
                         setTimeout(() => {
                             setAvailableFlag(false)
                             setInitiatingTransaction(true)
@@ -58,16 +60,131 @@ function TransactionResponses() {
         checkProductAvailability()
     }, [])
 
+    useEffect(() => {
+        if (unavailableProductsArray && unavailableProductsArray.length > 0) {
+            const newArray = unavailableProductsArray.map((product) => {
+                const { _id } = product
+                return { id: _id }
+            })
+            newArray.map(item => removeItem(item.id))
+        }
+    }, [unavailableProductsArray])
 
+    // const sendOrderToDatabase = async () => {
+    //     await axios.post('http://localhost:3000/saveOrder', order)
+    //         .then(res => console.log("response-->", res))
+    //         .catch(err => console.log(err))
+    // }
 
-    const sendOrderToDatabase = async () => {
-        await axios.post('http://localhost:3000/saveOrder', order)
-            .then(res => console.log("response-->", res))
-            .catch(err => console.log(err))
+   const handleProceedWithoutItem = () => {
+        // console.log('newItems in fn after removing unavailable', items)
+        // const products = items.map((item)=> {
+        //     const { id, productName, itemTotal, image, quantity } = item
+        //     return { _id: id, productName, itemTotal, image, quantity }
+        // })
+        // const order = {
+        //     products: products,
+        //     totalAmount: cartTotal,
+        //     ...formData
+        // }
+        // console.log('order in function', order)
+        handleMakePayment()
     }
 
-    // console.log('order in tr', order)
+
+
+
+
+
+    let counter = 0;
+    let transactionFound = false;
+
+    const sendFindTransactionRequest = async (MerchantRequestID) => {
+        if (!transactionFound && counter < 5) {
+            await axios.get(`http://192.168.100.9:3000/transaction/findTransaction?MerchantRequestID=${MerchantRequestID}`)
+                .then(response => {
+                    if (response.data.message === 'Transaction found') {
+                        transactionFound = true;
+                        console.log('Transaction found:', response.data.transaction.ResultDesc);
+                        if (response.data.transaction.ResultCode === 0) {
+                            axios.post('http://192.168.100.9:3000/salesHistory/saveSaleDetails', Sale)
+                                .then(response => {
+                                    if (response.data.message === 'Sales details saved') {
+                                        setOrderSuccessful(true)
+                                        setInitiatingTransaction(false)
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log('Error:', error)
+                                })
+
+                        }
+                        else {
+                            console.log(response.data.transaction.ResultDesc)
+                            const { ResultDesc } = response.data.transaction
+                            console.log(ResultDesc)
+                        }
+                    } else if (response.data.message === 'Transaction not found') {
+                        console.log('Transaction not found')
+                        console.log('counter-->', counter)
+                        counter++;
+                        if (counter === 5) {
+                            const ResultDesc = 'Transaction not found'
+                            console.log(ResultDesc)
+                        }
+                        setTimeout(() => sendFindTransactionRequest(MerchantRequestID), 4000);
+                    } else {
+                        console.log('Unexpected response:', response.data);
+                    }
+                })
+                .catch(error => {
+                    console.log('errorr bro', error)
+                })
+        }
+    };
+
+    let Sale
+
+    const handleMakePayment = async () => {
+        const products = items.map((item)=> {
+            const { id, productName, itemTotal, image, quantity } = item
+            return { _id: id, productName, itemTotal, image, quantity }
+        })
+        const order = {
+            products: products,
+            totalAmount: cartTotal,
+            ...formData
+        }
+        console.log('order in function', order)
+
+        let tots = cartTotal
+        if (tots > 50) {
+            tots = 1
+        }
+
+        // const sale = {
+        //     products: simplifiedCart,
+        //     // totalAmount: calculateTotal()
+        //     totalAmount: tots
+        // }
+        // Sale = sale
+        const paymentDetailsObject = {
+            phone: formData.contact,
+            accountNumber: "4154310",
+            amount: tots
+        }
+        await axios.post('http://192.168.100.9:3000/payment/api/stkpush', paymentDetailsObject)
+            .then(response => {
+                console.log(response.data)
+                sendFindTransactionRequest(response.data.MerchantRequestID);
+            })
+            .catch(error => {
+                console.log('Error:', error)
+            })
+    }
+
     
+
     return (
         <div className='transaction-response-container flex-align-center-justify-center' style={{ paddingBottom: '40px' }}>
             <div className="transaction-center-div">
@@ -78,10 +195,18 @@ function TransactionResponses() {
                         : unavailableFlag ?
                             <TransactionResponse image={x} text={unavailableProductName && `Oops, someone just bought ${unavailableProductName} 2 minutes ago`} />
                             : initiatingTransaction ?
-                                <TransactionState text={'Initiating transaction...'} />
+                                <TransactionState text={'Processing transaction...'} />
                                 : orderSuccessful ?
                                     <TransactionResponse image={tick} text={'Order placed successfully'} />
                                     : null
+                }
+
+                {unavailableFlag ?
+                    <div className='flex-column-align-center'>
+                        <button className='cta-button' style={{ marginTop: '50px', width: '50%' }} onClick={handleProceedWithoutItem}>Proceed without item</button>
+                        <button className='cta-button' style={{ marginTop: '15px', width: '50%' }}>Continue shopping</button>
+                    </div>
+                    : null
                 }
             </div>
         </div>
