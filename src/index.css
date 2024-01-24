@@ -730,7 +730,7 @@ textarea {
 
 .spinner{
   width: 130px;
-  animation: spin 1s linear infinite;
+  animation: spin 1.3s linear infinite;
 }
 .response-icon{
   width: 130px;
