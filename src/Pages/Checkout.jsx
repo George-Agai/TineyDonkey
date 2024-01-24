@@ -18,7 +18,7 @@ function Checkout() {
 
     const navigate = useNavigate()
 
-    const { items, cartTotal, removeItem, isEmpty } = useCart()
+    const { items, cartTotal, isEmpty } = useCart()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -49,29 +49,21 @@ function Checkout() {
 
     const handlePlaceOrder = async (e)=> {
         e.preventDefault()
-
-        const products = items.map((item)=> {
-            const { id, productName, itemTotal, image, quantity } = item
-            return { _id: id, productName, itemTotal, image, quantity }
-        })
-        
         const fullName = firstName +" "+ lastName
         let newContact = contact
         if(newContact.startsWith("07")){
             newContact = "254" + newContact.slice(1)
         }
-        const order = {
+        const formData = {
             boughtBy: fullName,
-            products: products,
             town: town,
             orderNotes: orderNotes && orderNotes.length > 3 ? orderNotes : "empty",
             orderStatus: "pending",
             country: country && country.length > 1 ? country : "empty",
-            totalAmount: cartTotal,
             contact: newContact
         }
 
-        navigate('/transaction', {state: { order }})
+        navigate('/transaction', {state: { formData }})
     }
 
     return (
