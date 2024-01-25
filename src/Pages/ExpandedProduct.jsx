@@ -13,7 +13,7 @@ function ExpandedProduct() {
     const [activeThumbnailIndex, setActiveThumbnailIndex] = useState(0);
     const [product, setProduct] = useState()
 
-    const { addItem } = useCart();
+    const { addItem, isEmpty, totalItems } = useCart();
 
     const handleThumbnailClick = (index) => {
         setActiveThumbnailIndex(index)
@@ -51,7 +51,7 @@ function ExpandedProduct() {
         const idFromQuery = searchParams.get('id');
         console.log('id from query', idFromQuery)
         const fetchData = async () => {
-            await axios.get(`http://localhost:3000/fetchProduct?id=${idFromQuery}`)
+            await axios.get(`http://192.168.100.9:3000/fetchProduct?id=${idFromQuery}`)
                 .then((prod) => {
                     setProduct(prod.data)
                 })
@@ -85,8 +85,11 @@ function ExpandedProduct() {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
-                    <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-                        <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                    <div className=' navbar-icon-div'>
+                        <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
+                            <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                            {isEmpty ? null : <span className="total-items flex-align-center-justify-center">{totalItems}</span>}
+                        </span>
                     </div>
                 </section>
             </nav>
@@ -94,11 +97,11 @@ function ExpandedProduct() {
             {product ? <main className='expanded-flex-container flex-justify-content-space-between'>
                 <div className="product-gallery">
                     <div>
-                        <p><span>HOME / FIGURINES / </span>{product && product.productName.toUpperCase()}</p>
+                        <p><span onClick={() => navigate('/')}>HOME /  </span><span onClick={() => navigate('/products')}>FIGURINES / </span>{product && product.productName.toUpperCase()}</p>
                     </div>
                     <div style={{ overflow: 'hidden' }}>
                         <img
-                            src={`http://localhost:3000/Images/${product && product.image[activeThumbnailIndex]}`}
+                            src={`http://192.168.100.9:3000/Images/${product && product.image[activeThumbnailIndex]}`}
                             alt="Main Product"
                             loading='lazy'
                             style={{
@@ -115,15 +118,13 @@ function ExpandedProduct() {
                             <img
                                 key={index}
                                 loading='lazy'
-                                src={`http://localhost:3000/Images/${product && imageName}`}
+                                className='expanded-image-thumbnail'
+                                src={`http://192.168.100.9:3000/Images/${product && imageName}`}
                                 alt={`Thumbnail ${index + 1}`}
                                 style={{
                                     maxWidth: "100px",
-                                    // height: "80px",
                                     marginRight: "10px",
                                     cursor: "pointer",
-                                    // aspectRatio: '1 / 1',
-                                    loading: 'lazy',
                                     border: index === activeThumbnailIndex ? "2px solid rgb(208, 228, 208)" : "2px solid transparent"
                                 }}
                                 onClick={() => handleThumbnailClick(index)}

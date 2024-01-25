@@ -18,7 +18,7 @@ function Checkout() {
 
     const navigate = useNavigate()
 
-    const { items, cartTotal, isEmpty } = useCart()
+    const { items, cartTotal, isEmpty, totalItems } = useCart()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -62,7 +62,6 @@ function Checkout() {
             country: country && country.length > 1 ? country : "empty",
             contact: newContact
         }
-
         navigate('/transaction', {state: { formData }})
     }
 
@@ -77,8 +76,11 @@ function Checkout() {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
-                    <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-                        <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                    <div className=' navbar-icon-div'>
+                        <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
+                            <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                            {isEmpty ? null : <span className="total-items flex-align-center-justify-center">{totalItems}</span>}
+                        </span>
                     </div>
                 </section>
             </nav>

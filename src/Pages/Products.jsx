@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import Grid from './Grid';
 import Footer from '../Components/Footer';
+import { useCart } from 'react-use-cart';
 
 function Products() {
+
+    const { isEmpty, totalItems } = useCart()
     const [scrolling, setScrolling] = useState(false);
     const navigate = useNavigate()
 
@@ -31,12 +34,18 @@ function Products() {
                     <p>TineyDonkey</p>
                     <ul>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
-                        <li style={{ color: '#FF6310', borderBottom: '2px solid #FF6310' }} onClick={() => navigate('/Products')}>Products</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
+                        <li style={{ color: '#FF6310', borderBottom: '2px solid #FF6310' }} onClick={() => navigate('/products')}>Products</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
                     </ul>
-                    <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
+                    {/* <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
                         <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                    </div> */}
+                    <div className=' navbar-icon-div'>
+                        <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
+                            <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                            {isEmpty ? null : <span className="total-items flex-align-center-justify-center">{totalItems}</span>}
+                        </span>
                     </div>
                 </section>
             </nav>

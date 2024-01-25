@@ -476,7 +476,7 @@ body {
   width: 50%;
 }
 
-.flex-column-container img {
+.flex-column-container img, .about-image {
   width: 40%;
 }
 
@@ -735,7 +735,25 @@ textarea {
 .response-icon{
   width: 130px;
 }
-
+.navbar-icon-div{
+  width: 15%;
+  /* padding-right: 30px; */
+}
+.total-items{
+  background-color: yellow;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #687279;
+  font-weight: 700;
+  font-size: 12px;
+  margin-left: -8px;
+  margin-top: -15px;
+}
+.oops-div button{
+  margin-top: 50px;
+  width: 50%;
+}
 
 
 
@@ -750,6 +768,30 @@ textarea {
     justify-content: center;
     align-items: center;
     text-align: center;
+  }
+  .flex-column-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .cart-flex-column-container {
+    width: 40%;
+  }
+  
+  .cart-flex-column-container div {
+    width: 50%;
+  }
+  .flex-column-container table {
+    width: 90%;
+  }
+  .cart-totals-div {
+    margin-left: 0px;
+    max-width: 90vw;
+    padding: 5px 25px;
+    margin-top: 55px;
+  }
+  .banner-div {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -815,8 +857,9 @@ textarea {
 
   .navbar-icon-div {
     padding-right: 0px;
-    width: 100px;
+    width: 150px;
   }
+ 
 
   .footer-container ul {
     padding-left: 0px;
@@ -904,8 +947,8 @@ textarea {
   .flex-column-container table {
     width: 90%;
   }
-  .flex-column-container img {
-    width: 92%;
+  .flex-column-container .about-image {
+    width: 90%;
     margin-top: -30px;
   }
 
@@ -1017,5 +1060,12 @@ textarea {
   .transaction-center-div{
     width: 100%;
     /* border: 1px solid black; */
+  }
+  .expanded-image-thumbnail{
+    width: 70px;
+  }
+  .oops-div button{
+    margin-top: 50px;
+    width: 100%;
   }
 }

@@ -11,6 +11,7 @@ function Footer() {
                 <h2>TineyDonkey</h2>
                 <ul>
                     <h1>Useful links</h1>
+                    <li onClick={()=>navigate('/')}><a>Home</a></li>
                     <li onClick={()=>navigate('/Products')}><a>Products</a></li>
                     <li onClick={()=>navigate('/About')}><a>About</a></li>
                     <li onClick={()=>navigate('/Contact')}><a>Contact</a></li>
