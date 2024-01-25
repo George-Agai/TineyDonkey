@@ -49,6 +49,9 @@ function TransactionResponses() {
                             setAvailableFlag(false)
                             setInitiatingTransaction(true)
                         }, 2000)
+                        setTimeout(() => {
+                            handleMakePayment()
+                        }, 2000)
                     }
                 }
                 else console.log("No product found");
@@ -100,7 +103,7 @@ function TransactionResponses() {
     let transactionFound = false;
 
     const sendFindTransactionRequest = async (MerchantRequestID) => {
-        if (!transactionFound && counter < 5) {
+        if (!transactionFound && counter < 7) {
             await axios.get(`http://192.168.100.9:3000/transaction/findTransaction?MerchantRequestID=${MerchantRequestID}`)
                 .then(response => {
                     if (response.data.message === 'Transaction found') {
@@ -132,7 +135,7 @@ function TransactionResponses() {
                             const ResultDesc = 'Transaction not found'
                             console.log(ResultDesc)
                         }
-                        setTimeout(() => sendFindTransactionRequest(MerchantRequestID), 4000);
+                        setTimeout(() => sendFindTransactionRequest(MerchantRequestID), 6000);
                     } else {
                         console.log('Unexpected response:', response.data);
                     }
@@ -170,7 +173,7 @@ function TransactionResponses() {
         // Sale = sale
         const paymentDetailsObject = {
             phone: formData.contact,
-            accountNumber: "4154310",
+            accountNumber: "348698468",
             amount: tots
         }
         await axios.post('http://192.168.100.9:3000/payment/api/stkpush', paymentDetailsObject)
@@ -195,7 +198,7 @@ function TransactionResponses() {
                         : unavailableFlag ?
                             <TransactionResponse image={x} text={unavailableProductName && `Oops, someone just bought ${unavailableProductName} 2 minutes ago`} />
                             : initiatingTransaction ?
-                                <TransactionState text={'Processing transaction...'} />
+                                <TransactionState text={'Initiating transaction...'} />
                                 : orderSuccessful ?
                                     <TransactionResponse image={tick} text={'Order placed successfully'} />
                                     : null
