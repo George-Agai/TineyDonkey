@@ -46,9 +46,9 @@ function LandingPage() {
             <p>TineyDonkey</p>
             <ul className={`${scrolling ? 'ul-scrolled' : ''}`}>
               <li onClick={() => navigate('/')} style={{ borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white' }}>Home</li>
-              <li onClick={() => navigate('/Products')}>Products</li>
-              <li onClick={() => navigate('/Contact')}>Contact</li>
-              <li onClick={() => navigate('/About')}>About</li>
+              <li onClick={() => navigate('/products')}>Products</li>
+              <li onClick={() => navigate('/contact')}>Contact</li>
+              <li onClick={() => navigate('/about')}>About</li>
             </ul>
             <div className=' navbar-icon-div'>
               <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
@@ -72,17 +72,17 @@ function LandingPage() {
         <div className="banner-div flex-column-align-center">
           <img src={tick} alt='tick' className="banner-icons" />
           <h5>Best Prices</h5>
-          <p>Our prices are literally the best out here</p>
+          <p className="text-align-center">Our prices are literally the best out here</p>
         </div>
         <div className="banner-div flex-column-align-center">
           <img src={delivery} alt='delivery' className="banner-icons" />
           <h5>Free Delivery</h5>
-          <p>Free delivery within Nairobi CBD</p>
+          <p className="text-align-center">Free delivery within Nairobi CBD</p>
         </div>
         <div className="banner-div flex-column-align-center">
           <img src={warranty} alt='warranty' className="banner-icons" />
           <h5>Best Quality</h5>
-          <p>Our figurines are the real deal, you’ll see</p>
+          <p className="text-align-center">Our figurines are the real deal, you’ll see</p>
         </div>
       </div>
       <div className='flex-column-align-center' style={{ width: '90%' }}>

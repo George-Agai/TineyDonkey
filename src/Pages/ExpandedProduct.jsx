@@ -97,7 +97,7 @@ function ExpandedProduct() {
             {product ? <main className='expanded-flex-container flex-justify-content-space-between'>
                 <div className="product-gallery">
                     <div>
-                        <p><span>HOME / FIGURINES / </span>{product && product.productName.toUpperCase()}</p>
+                        <p><span onClick={() => navigate('/')}>HOME /  </span><span onClick={() => navigate('/products')}>FIGURINES / </span>{product && product.productName.toUpperCase()}</p>
                     </div>
                     <div style={{ overflow: 'hidden' }}>
                         <img
@@ -118,15 +118,13 @@ function ExpandedProduct() {
                             <img
                                 key={index}
                                 loading='lazy'
+                                className='expanded-image-thumbnail'
                                 src={`http://192.168.100.9:3000/Images/${product && imageName}`}
                                 alt={`Thumbnail ${index + 1}`}
                                 style={{
                                     maxWidth: "100px",
-                                    // height: "80px",
                                     marginRight: "10px",
                                     cursor: "pointer",
-                                    // aspectRatio: '1 / 1',
-                                    loading: 'lazy',
                                     border: index === activeThumbnailIndex ? "2px solid rgb(208, 228, 208)" : "2px solid transparent"
                                 }}
                                 onClick={() => handleThumbnailClick(index)}
