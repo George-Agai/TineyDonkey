@@ -8,7 +8,7 @@ import Footer from '../Components/Footer';
 function Cart() {
     const [scrolling, setScrolling] = useState(false);
     const navigate = useNavigate()
-    const { items, cartTotal, removeItem, isEmpty } = useCart()
+    const { items, cartTotal, removeItem, isEmpty, totalItems } = useCart()
     console.log('items', items)
     console.log('cartTotal', cartTotal)
 
@@ -52,8 +52,14 @@ function Cart() {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
-                    <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
+                    {/* <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
                         <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                    </div> */}
+                    <div className=' navbar-icon-div'>
+                        <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
+                            <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                            {isEmpty ? null : <span className="total-items flex-align-center-justify-center">{totalItems}</span>}
+                        </span>
                     </div>
                 </section>
             </nav>
@@ -81,7 +87,7 @@ function Cart() {
                                 return (
                                     <tr key={item.id}>
                                         <td className='' style={{ display: 'flex', alignItems: 'center' }}>
-                                            <img src={`http://localhost:3000/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
+                                            <img src={`http://192.168.100.9:3000/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
                                             <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>{item.productName}<span className='quantity'> × 1</span></p>
                                         </td>
                                         <td className='text-align-center quantity-th'>{item.quantity}</td>

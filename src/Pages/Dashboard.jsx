@@ -46,7 +46,7 @@ function Dashboard() {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('http://localhost:3000/get-image')
+                            axios.get('http://192.168.100.9:3000/get-image')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })

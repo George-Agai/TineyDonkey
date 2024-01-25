@@ -7,8 +7,10 @@ import delivery from '../TineyDonkeyAssets/icon-delivery.svg'
 import warranty from '../TineyDonkeyAssets/icon-warranty.svg'
 import Footer from '../Components/Footer.jsx'
 import Grid from './Grid.jsx'
+import { useCart } from "react-use-cart";
 
 function LandingPage() {
+  const { isEmpty, totalItems } = useCart()
   const navigate = useNavigate()
   console.log(navigate)
   const [scrolling, setScrolling] = useState(false);
@@ -21,7 +23,7 @@ function LandingPage() {
         setScrolling(false);
       }
     };
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
 
     window.addEventListener('scroll', handleScroll);
 
@@ -43,14 +45,16 @@ function LandingPage() {
           <section className="flex-justify-content-space-between" style={{ border: scrolling && 'none' }}>
             <p>TineyDonkey</p>
             <ul className={`${scrolling ? 'ul-scrolled' : ''}`}>
-              <li  onClick={() => navigate('/')} style={{ borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white' }}>Home</li>
+              <li onClick={() => navigate('/')} style={{ borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white' }}>Home</li>
               <li onClick={() => navigate('/Products')}>Products</li>
               <li onClick={() => navigate('/Contact')}>Contact</li>
               <li onClick={() => navigate('/About')}>About</li>
             </ul>
-            <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
-              <MdOutlineShoppingBag style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
-              {/* <FaRegUserCircle style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer' }} /> */}
+            <div className=' navbar-icon-div'>
+              <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
+                <MdOutlineShoppingBag style={{ color: scrolling ? 'grey' : 'white', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                {isEmpty ? null : <span className="total-items flex-align-center-justify-center">{totalItems}</span>}
+              </span>
             </div>
           </section>
         </nav>
@@ -59,7 +63,7 @@ function LandingPage() {
           <div className="flex-column-justify-flex-start main-container-content">
             <h1 className="font-merriweather">We sell cool, tiny stuff⚡️</h1>
             <p>Unleash your creativity with developer-inspired figurines</p>
-            <button className="cta-button" style={{ marginTop: '40px' }} onClick={()=>navigate('/Products')}>Explore Now</button>
+            <button className="cta-button" style={{ marginTop: '40px' }} onClick={() => navigate('/Products')}>Explore Now</button>
           </div>
         </div>
         <div className="overlay"></div>
@@ -85,9 +89,9 @@ function LandingPage() {
         <h1 className="main-title">Featured Products</h1>
         <p className="min-content">Check out latest updates</p>
       </div>
-      <Grid Page={'Landing'}/>
+      <Grid Page={'Landing'} />
       <div className="flex-align-center-justify-center" style={{ width: '100%', marginTop: '30px', marginBottom: '50px' }}>
-        <button className="cta-button" onClick={HandleViewAllButton}>View All</button>
+        <button className="cta-button" onClick={HandleViewAllButton}>View All Figurines</button>
       </div>
       <Footer />
     </div>

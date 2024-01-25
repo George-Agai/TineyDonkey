@@ -19,7 +19,6 @@ function TransactionResponses() {
     const [orderSuccessful, setOrderSuccessful] = useState(false)
     const [unavailableProductName, setUnavailableProductName] = useState()
     const [unavailableProductsArray, setUnavailableProductsArray] = useState()
-    const [itemsArray, setItemsArray] = useState(items)
 
     console.log('items in rs', items)
 
@@ -29,7 +28,7 @@ function TransactionResponses() {
     }
     const checkProductAvailability = async () => {
         const idArray = items.map(item => item.id)
-        await axios.post('http://localhost:3000/checkProduct', idArray)
+        await axios.post('http://192.168.100.9:3000/checkProduct', idArray)
             .then((res) => {
                 if (res.data.message === "Found products") {
                     // console.log("response-->", res.data)
@@ -74,7 +73,7 @@ function TransactionResponses() {
     }, [unavailableProductsArray])
 
     // const sendOrderToDatabase = async () => {
-    //     await axios.post('http://localhost:3000/saveOrder', order)
+    //     await axios.post('http://192.168.100.9:3000/saveOrder', order)
     //         .then(res => console.log("response-->", res))
     //         .catch(err => console.log(err))
     // }

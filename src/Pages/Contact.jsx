@@ -5,8 +5,11 @@ import { FaLocationDot } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import Footer from '../Components/Footer';
+import { useCart } from 'react-use-cart';
 
 function Contact() {
+
+    const { isEmpty, totalItems } = useCart()
     const [scrolling, setScrolling] = useState(false);
     const navigate = useNavigate()
 
@@ -38,8 +41,11 @@ function Contact() {
                         <li style={{ color: '#FF6310', borderBottom: '2px solid #FF6310' }} onClick={() => navigate('/Contact')}>Contact</li>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
-                    <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
-                        <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                    <div className=' navbar-icon-div'>
+                        <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
+                            <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                            {isEmpty ? null : <span className="total-items flex-align-center-justify-center">{totalItems}</span>}
+                        </span>
                     </div>
                 </section>
             </nav>
@@ -54,7 +60,7 @@ function Contact() {
                         <FaLocationDot style={{ color: '#FF6310' }} className='contact-us-icons'/>
                         <section className='flex-column-justify-flex-start' style={{ marginLeft: '30px', width: '250px' }}>
                             <h2>Physical Address</h2>
-                            <p>Gate C, Juja</p>
+                            <p>P.O Box 151 - 40001 Ksm</p>
                         </section>
                     </div>
                     <div className='flex-align-center-justify-center'>

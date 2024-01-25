@@ -43,7 +43,7 @@ const AddProductDashboard = () => {
     //     formData.append('image', file);
     //     formData.append('productName', Name);
     //     formData.append('price', priceInteger);
-    //     axios.post('http://localhost:3000/upload-image', formData, {
+    //     axios.post('http://192.168.100.9:3000/upload-image', formData, {
     //         headers: {
     //             'Content-Type': 'multipart/form-data',
     //         },
@@ -78,7 +78,7 @@ const AddProductDashboard = () => {
         formData.append('productName', Name);
         formData.append('price', priceInteger);
 
-        axios.post('http://localhost:3000/upload-product', formData, {
+        axios.post('http://192.168.100.9:3000/upload-product', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -112,7 +112,7 @@ const AddProductDashboard = () => {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('http://localhost:3000/get-image')
+                            axios.get('http://192.168.100.9:3000/get-image')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })

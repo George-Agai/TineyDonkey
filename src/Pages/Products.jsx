@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import Grid from './Grid';
 import Footer from '../Components/Footer';
+import { useCart } from 'react-use-cart';
 
 function Products() {
+
+    const { isEmpty, totalItems } = useCart()
     const [scrolling, setScrolling] = useState(false);
     const navigate = useNavigate()
 
@@ -35,8 +38,14 @@ function Products() {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
                     </ul>
-                    <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
+                    {/* <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
                         <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                    </div> */}
+                    <div className=' navbar-icon-div'>
+                        <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
+                            <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
+                            {isEmpty ? null : <span className="total-items flex-align-center-justify-center">{totalItems}</span>}
+                        </span>
                     </div>
                 </section>
             </nav>
