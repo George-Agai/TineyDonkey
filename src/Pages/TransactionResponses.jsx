@@ -22,7 +22,6 @@ function TransactionResponses() {
     const [somethingWentWrong, setSomethingWentWrong] = useState(false)
     const [sendingOrder, setSendingOrder] = useState(false)
 
-    console.log('items in rs', items)
 
     //const 
     const findProductWithFalseStatus = (array) => {
@@ -33,6 +32,7 @@ function TransactionResponses() {
         await axios.post('http://192.168.100.9:3000/checkProduct', idArray)
             .then((res) => {
                 if (res.data.message === "Found products") {
+                    console.log('checkProduct result', res.data.productStatusResults);
                     const productsWithFalseStatus = findProductWithFalseStatus(res.data.productStatusResults)
                     setUnavailableProductsArray(productsWithFalseStatus)
                     if (productsWithFalseStatus.length > 0) {
@@ -61,7 +61,6 @@ function TransactionResponses() {
                             totalAmount: cartTotal,
                             ...formData
                         }
-                        console.log('order sent to function', order)
                         sendOrderToDatabase(order)
                     }
                 }
@@ -108,6 +107,8 @@ function TransactionResponses() {
     }
 
     const handleProceedWithoutItem = () => {
+        setSendingOrder(true)
+        setUnavailableFlag(false)
         const products = items.map((item) => {
             const { id, productName, itemTotal, image, quantity } = item
             return { _id: id, productName, itemTotal, image, quantity }
@@ -117,7 +118,6 @@ function TransactionResponses() {
             totalAmount: cartTotal,
             ...formData
         }
-        console.log('order sent to function', order)
         sendOrderToDatabase(order)
         // handleMakePayment()
     }

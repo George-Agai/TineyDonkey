@@ -9,8 +9,6 @@ function Cart() {
     const [scrolling, setScrolling] = useState(false);
     const navigate = useNavigate()
     const { items, cartTotal, removeItem, isEmpty, totalItems } = useCart()
-    console.log('items', items)
-    console.log('cartTotal', cartTotal)
 
     useEffect(() => {
         const handleScroll = () => {
