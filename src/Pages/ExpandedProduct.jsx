@@ -49,7 +49,6 @@ function ExpandedProduct() {
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const idFromQuery = searchParams.get('id');
-        console.log('id from query', idFromQuery)
         const fetchData = async () => {
             await axios.get(`http://192.168.100.9:3000/fetchProduct?id=${idFromQuery}`)
                 .then((prod) => {

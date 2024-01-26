@@ -60,7 +60,7 @@ function Contact() {
                         <FaLocationDot style={{ color: '#FF6310' }} className='contact-us-icons'/>
                         <section className='flex-column-justify-flex-start' style={{ marginLeft: '30px', width: '250px' }}>
                             <h2>Physical Address</h2>
-                            <p>P.O Box 151 - 40001 Ksm</p>
+                            <p>P.O Box 151 - 40001 NRB</p>
                         </section>
                     </div>
                     <div className='flex-align-center-justify-center'>

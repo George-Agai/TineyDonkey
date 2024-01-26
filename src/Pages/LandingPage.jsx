@@ -12,7 +12,6 @@ import { useCart } from "react-use-cart";
 function LandingPage() {
   const { isEmpty, totalItems } = useCart()
   const navigate = useNavigate()
-  console.log(navigate)
   const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {

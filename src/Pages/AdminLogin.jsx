@@ -48,8 +48,6 @@ function AdminLogin() {
                 const loginResponseMessage = response.data.message
                 const user = response.data.userSpecifics
                 const token = response.data.token
-                console.log('user-->', user);
-                console.log('token-->', token);
 
                 if (token) {
                     saveToLocalStorage('token', token)
