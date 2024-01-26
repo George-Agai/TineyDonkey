@@ -74,12 +74,12 @@ return (
     <div className='dashboard-container' style={{ paddingBottom: '40px' }}>
         <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
             <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
-                <p>TineyDonkey</p>
+                <p onClick={() => navigate('/')}>TineyDonkey</p>
                 <ul>
                     <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
-                    <li style={{ color: 'grey' }} onClick={() => navigate('/Products')}>Products</li>
-                    <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
-                    <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
+                    <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>Products</li>
+                    <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
+                    <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
                 </ul>
                 <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
                     <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout}/>
@@ -92,7 +92,7 @@ return (
                 <h3 className=''>Total sales</h3>
                 <h1>Ksh850</h1>
             </div>
-            <button className='cta-button' onClick={() => navigate('/AddProductDashboard')}>Add product</button>
+            <button className='cta-button' onClick={() => navigate('/addProductDashboard')}>Add product</button>
         </div>
         <div className='width100' style={{ marginTop: '100px' }}>
             <h3>Pending orders</h3>

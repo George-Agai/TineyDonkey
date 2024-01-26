@@ -55,7 +55,7 @@ function AdminLogin() {
 
                 if (loginResponseMessage === "Auth successful") {
                     setTimeout(() => {
-                        navigate('/Dashboard', { state: { user } })
+                        navigate('/dashboard', { state: { user } })
                     }, 1000);
                 }
                 else if (loginResponseMessage === "Auth Failed") {
@@ -90,12 +90,12 @@ function AdminLogin() {
         <div className='flex-align-center-justify-center width100' style={{ height: '90vh', width: '100vw' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
-                    <p>TineyDonkey</p>
+                    <p onClick={() => navigate('/')}>TineyDonkey</p>
                     <ul>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/Products')}>Products</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>Products</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
                     </ul>
                     <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
                         <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />

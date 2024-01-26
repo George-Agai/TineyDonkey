@@ -109,7 +109,7 @@ const AddProductDashboard = () => {
                 })
                     .then((tokenAuthenticationPayload) => {
                         if (tokenAuthenticationPayload.data.message === 'Access denied. No token provided' || tokenAuthenticationPayload.data.message === 'Invalid token') {
-                            navigate('/Admin')
+                            navigate('/admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
                             axios.get('http://192.168.100.9:3000/get-image')
@@ -132,7 +132,7 @@ const AddProductDashboard = () => {
     const handleLogout = () => {
         localStorage.removeItem('token')
         setTimeout(() => {
-            navigate('/Admin')
+            navigate('/admin')
         }, 1000)
     }
 
@@ -141,12 +141,12 @@ const AddProductDashboard = () => {
         <div className='dashboard-container' style={{ paddingBottom: '40px' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
-                    <p>TineyDonkey</p>
+                    <p onClick={() => navigate('/')}>TineyDonkey</p>
                     <ul>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/Products')}>Products</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>Products</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
                     </ul>
                     <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
                         <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout} />

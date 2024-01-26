@@ -8,15 +8,15 @@ function Footer() {
     return (
         <div className="footer-container flex-column-align-center">
             <div className="footer-container-main-div flex-justify-space-between" style={{width: '94%', borderBottom: '0.3px solid grey'}}>
-                <h2>TineyDonkey</h2>
+                <h2 onClick={() => navigate('/')}>TineyDonkey</h2>
                 <ul>
                     <h1>Useful links</h1>
                     <li onClick={()=>navigate('/')}><a>Home</a></li>
-                    <li onClick={()=>navigate('/Products')}><a>Products</a></li>
-                    <li onClick={()=>navigate('/About')}><a>About</a></li>
-                    <li onClick={()=>navigate('/Contact')}><a>Contact</a></li>
-                    <li onClick={()=>navigate('/Cart')}><a>My Cart</a></li>
-                    <li onClick={()=>navigate('/Checkout')}><a>Checkout</a></li>
+                    <li onClick={()=>navigate('/products')}><a>Products</a></li>
+                    <li onClick={()=>navigate('/about')}><a>About</a></li>
+                    <li onClick={()=>navigate('/contact')}><a>Contact</a></li>
+                    <li onClick={()=>navigate('/cart')}><a>My Cart</a></li>
+                    <li onClick={()=>navigate('/checkout')}><a>Checkout</a></li>
                 </ul>
                 <div className="newsletter-div flex-column-justify-flex-start">
                     <h1>Email Newsletter</h1>

@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { useCart } from 'react-use-cart';
 import mpesa from '../TineyDonkeyAssets/mpesa.png'
-// import { AiFillDelete } from "react-icons/ai";
 import Footer from '../Components/Footer';
-import axios from 'axios';
 
 function Checkout() {
     const [scrolling, setScrolling] = useState(false);
@@ -69,12 +67,12 @@ function Checkout() {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
-                    <p>TineyDonkey</p>
+                    <p onClick={() => navigate('/')}>TineyDonkey</p>
                     <ul>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/Products')}>Products</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>Products</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
                     </ul>
                     <div className=' navbar-icon-div'>
                         <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
@@ -148,8 +146,8 @@ function Checkout() {
                             </tbody>
                         </table>
                         <div className='flex-align-center-justify-center mpesa-notification-div' style={{ width: '92%', marginTop: '15px' }}>
-                            <img src={mpesa} alt='mpesa-icon' loading='lazy' />
-                            <p className='text-align-left'>You will be prompted to verify the transaction via an STK push</p>
+                            {/* <img src={mpesa} alt='mpesa-icon' loading='lazy' /> */}
+                            <p className='text-align-left'>Payment will be made upon delivery of the figurines with no extra charges😌</p>
                         </div>
                         <div style={{ width: '100%', marginBottom: '15px' }}>
                             <p className='text-align-left' style={{ color: 'RGB(104, 114, 121)', fontSize: '13px', fontWeight: '400', width: '100%' }}>Your personal data will only be used to process your order and to support your experience throughout this website.</p>

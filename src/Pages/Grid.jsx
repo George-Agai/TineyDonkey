@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useCart } from "react-use-cart";
+import { AiFillLock } from "react-icons/ai";
 import axios from 'axios';
 
 function Grid({ Page }) {
     const navigate = useNavigate()
-    const { addItem } = useCart()
+    const { addItem, inCart } = useCart()
     const [AllProducts, setAllProducts] = useState(null);
 
     useEffect(() => {
@@ -29,11 +30,21 @@ function Grid({ Page }) {
             productName: item.productName,
             price: item.price
         }
-        addItem(updatedProducts)
+        if(inCart(updatedProducts.id)){
+            alert("Item is already in the cart")
+        }
+        else addItem(updatedProducts)
     }
 
     const handleProductSelected =(data) =>{
         navigate(`/product?id=${data._id}`, {state: { data }})
+    }
+
+    const handleAddToCart =(data)=>{
+        if(data.status){
+            handleAddItemToCart(data)
+        }
+        else console.log("Item has been sold")
     }
     return (
         <div>
@@ -50,7 +61,7 @@ function Grid({ Page }) {
                                     <div className="card__content flex-column-align-center">
                                         <h2 className="card__title">{data.productName}</h2>
                                         <p className="card__price">KSh{data.price}.00</p>
-                                        <button className='cta-button' style={{ padding: '15px 20px' }} onClick={() => handleAddItemToCart(data)}>Add to cart</button>
+                                        <button className={data.status ? 'cta-button' : 'cta-locked-button'} style={{ padding: '15px 20px' }} onClick={() => handleAddToCart(data)}>{data.status ? "Add to cart" : <span className="flex-align-center-justify-center">Sold <AiFillLock/></span>}</button>
                                     </div>
                                 </div>
                             ))}

@@ -30,12 +30,12 @@ function About() {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
         <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
-                    <p>TineyDonkey</p>
+                    <p onClick={() => navigate('/')}>TineyDonkey</p>
                     <ul>
                         <li style={{ color: 'grey' }} onClick={()=>navigate('/')}>Home</li>
-                        <li style={{ color: 'grey' }} onClick={()=>navigate('/Products')}>Products</li>
-                        <li style={{ color: 'grey' }}  onClick={()=>navigate('/Contact')}>Contact</li>
-                        <li style={{  color: '#FF6310', borderBottom: '2px solid #FF6310'  }} onClick={()=>navigate('/About')}>About</li>
+                        <li style={{ color: 'grey' }} onClick={()=>navigate('/products')}>Products</li>
+                        <li style={{ color: 'grey' }}  onClick={()=>navigate('/contact')}>Contact</li>
+                        <li style={{  color: '#FF6310', borderBottom: '2px solid #FF6310'  }} onClick={()=>navigate('/about')}>About</li>
                     </ul>
                     <div className=' navbar-icon-div'>
                         <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>

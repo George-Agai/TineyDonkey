@@ -208,6 +208,16 @@ body {
   font-weight: 600;
   cursor: pointer;
 }
+.cta-locked-button{
+  background-color: #dad4d1;
+  border: none;
+  padding: 20px 40px;
+  font-size: 17px;
+  color: white;
+  z-index: 10;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
 
 .cta-button:hover {
   background-color: rgb(255, 140, 63);

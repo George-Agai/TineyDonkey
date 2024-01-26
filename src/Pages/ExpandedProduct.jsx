@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { AiFillLock } from "react-icons/ai";
 import { useCart } from 'react-use-cart';
 import Footer from '../Components/Footer';
 import axios from 'axios';
@@ -13,7 +14,7 @@ function ExpandedProduct() {
     const [activeThumbnailIndex, setActiveThumbnailIndex] = useState(0);
     const [product, setProduct] = useState()
 
-    const { addItem, isEmpty, totalItems } = useCart();
+    const { addItem, isEmpty, totalItems, inCart } = useCart();
 
     const handleThumbnailClick = (index) => {
         setActiveThumbnailIndex(index)
@@ -64,25 +65,31 @@ function ExpandedProduct() {
 
     const handleAddProductToCart = () => {
         if (product) {
-            const updatedProducts = {
-                id: product._id,
-                image: product.image,
-                productName: product.productName,
-                price: product.price
+            if (product.status) {
+                const updatedProducts = {
+                    id: product._id,
+                    image: product.image,
+                    productName: product.productName,
+                    price: product.price
+                }
+                if(inCart(updatedProducts.id)){
+                    alert("Item is already in the cart")
+                }
+                else addItem(updatedProducts)
             }
-            addItem(updatedProducts)
+            else console.log("Item has been sold")
         }
     }
     return (
         <div className={product ? 'expanded-product-container flex-column-align-center ' : 'height100vh expanded-product-container flex-column-justify-content-space-between'}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
-                    <p>TineyDonkey</p>
+                    <p onClick={() => navigate('/')}>TineyDonkey</p>
                     <ul>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/Products')}>Products</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/Contact')}>Contact</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/About')}>About</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>Products</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
                     </ul>
                     <div className=' navbar-icon-div'>
                         <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
@@ -135,10 +142,10 @@ function ExpandedProduct() {
                 <div className='expanded-product-right-div flex-column-justify-flex-start'>
                     <h1 className='font-merriweather width100'>{product && product.productName}</h1>
                     <h3>KSh{product && product.price}</h3>
-                    <p id='stock'>1 in stock</p>
-                    <div className='flex-align-center-justify-center width100'>
-                        <button className='cta-button width100' onClick={handleAddProductToCart}>Add to cart</button>
-                        {/* <button className='cta-button'>View cart</button> */}
+                    <p id='stock'>{product.status ? "1 in stock" : `Oops, somebody already bought ${product.productName}😔`}</p>
+                    <div className='flex-column-align-center width100'>
+                        <button className={product && product.status ? 'cta-button width100' : 'cta-locked-button width100'} onClick={handleAddProductToCart}>{product && product.status ? "Add to cart" : <span className="flex-align-center-justify-center">Sold <AiFillLock /></span>}</button>
+                        { inCart(product._id) ? <button className='cta-button width100' style={{marginTop: '10px'}} onClick={() => navigate('/checkout')}>Checkout</button> : null}
                     </div>
                     <p style={{ color: '#687279', fontSize: '13px', fontWeight: '700', marginTop: '30px' }}>CATEGORY:<span style={{ color: '#687279', fontSize: '13px', fontWeight: '500' }}> FIGURINES</span></p>
                 </div>
