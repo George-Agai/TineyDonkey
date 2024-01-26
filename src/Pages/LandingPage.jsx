@@ -42,7 +42,7 @@ function LandingPage() {
       <div className='landing-page' id="landing">
         <nav className={`navbar ${scrolling ? 'scrolled' : ''}`} style={{ border: 'none' }}>
           <section className="flex-justify-content-space-between" style={{ border: scrolling && 'none' }}>
-            <p>TineyDonkey</p>
+            <p onClick={() => navigate('/')}>TineyDonkey</p>
             <ul className={`${scrolling ? 'ul-scrolled' : ''}`}>
               <li onClick={() => navigate('/')} style={{ borderBottom: scrolling ? '2px solid #FF6310' : '2px solid white', color: scrolling ? '#FF6310' : 'white' }}>Home</li>
               <li onClick={() => navigate('/products')}>Products</li>
@@ -62,7 +62,7 @@ function LandingPage() {
           <div className="flex-column-justify-flex-start main-container-content">
             <h1 className="font-merriweather">We sell cool, tiny stuff⚡️</h1>
             <p>Unleash your creativity with developer-inspired figurines</p>
-            <button className="cta-button" style={{ marginTop: '40px' }} onClick={() => navigate('/Products')}>Explore Now</button>
+            <button className="cta-button" style={{ marginTop: '40px' }} onClick={() => navigate('/products')}>Explore Now</button>
           </div>
         </div>
         <div className="overlay"></div>

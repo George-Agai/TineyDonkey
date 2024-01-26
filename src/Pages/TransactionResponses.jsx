@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
 import axios from 'axios'
 import TransactionState from '../Components/TransactionState'
 import TransactionResponse from '../Components/TransactionResponse'
 import tick from '../TineyDonkeyAssets/tick.png'
 import x from '../TineyDonkeyAssets/x-mark.png'
-import { AiTwotoneSecurityScan } from 'react-icons/ai'
 
 function TransactionResponses() {
     const location = useLocation()
+    const navigate = useNavigate()
     const { formData } = location.state;
-    const { items, removeItem, cartTotal } = useCart()
+    const { items, removeItem, cartTotal, emptyCart, isEmpty } = useCart()
     const [productAvailabilityFlag, setProductAvailabilityFlag] = useState(true)
     const [availableFlag, setAvailableFlag] = useState(false)
     const [unavailableFlag, setUnavailableFlag] = useState(false)
@@ -47,7 +47,7 @@ function TransactionResponses() {
                             setAvailableFlag(true)
                             setProductAvailabilityFlag(false)
                         }, 2000)
-                        
+
                         setTimeout(() => {
                             setAvailableFlag(false)
                             setSendingOrder(true)
@@ -92,6 +92,7 @@ function TransactionResponses() {
                         setSendingOrder(false)
                         setAvailableFlag(false)
                         setUnavailableFlag(false)
+                        emptyCart()
                     }, 7000)
                 }
                 else {
@@ -107,114 +108,24 @@ function TransactionResponses() {
     }
 
     const handleProceedWithoutItem = () => {
-        setSendingOrder(true)
-        setUnavailableFlag(false)
-        const products = items.map((item) => {
-            const { id, productName, itemTotal, image, quantity } = item
-            return { _id: id, productName, itemTotal, image, quantity }
-        })
-        const order = {
-            products: products,
-            totalAmount: cartTotal,
-            ...formData
+        if (isEmpty) {
+            navigate('/cart')
         }
-        sendOrderToDatabase(order)
-        // handleMakePayment()
+        else {
+            setSendingOrder(true)
+            setUnavailableFlag(false)
+            const products = items.map((item) => {
+                const { id, productName, itemTotal, image, quantity } = item
+                return { _id: id, productName, itemTotal, image, quantity }
+            })
+            const order = {
+                products: products,
+                totalAmount: cartTotal,
+                ...formData
+            }
+            sendOrderToDatabase(order)
+        }
     }
-
-
-
-
-
-
-    // let counter = 0;
-    // let transactionFound = false;
-
-    // const sendFindTransactionRequest = async (MerchantRequestID) => {
-    //     if (!transactionFound && counter < 7) {
-    //         await axios.get(`http://192.168.100.9:3000/transaction/findTransaction?MerchantRequestID=${MerchantRequestID}`)
-    //             .then(response => {
-    //                 if (response.data.message === 'Transaction found') {
-    //                     transactionFound = true;
-    //                     console.log('Transaction found:', response.data.transaction.ResultDesc);
-    //                     if (response.data.transaction.ResultCode === 0) {
-    //                         axios.post('http://192.168.100.9:3000/salesHistory/saveSaleDetails', Sale)
-    //                             .then(response => {
-    //                                 if (response.data.message === 'Sales details saved') {
-    //                                     setOrderSuccessful(true)
-    //                                     setInitiatingTransaction(false)
-    //                                 }
-    //                             })
-    //                             .catch(error => {
-    //                                 console.log('Error:', error)
-    //                             })
-
-    //                     }
-    //                     else {
-    //                         console.log(response.data.transaction.ResultDesc)
-    //                         const { ResultDesc } = response.data.transaction
-    //                         console.log(ResultDesc)
-    //                     }
-    //                 } else if (response.data.message === 'Transaction not found') {
-    //                     console.log('Transaction not found')
-    //                     console.log('counter-->', counter)
-    //                     counter++;
-    //                     if (counter === 5) {
-    //                         const ResultDesc = 'Transaction not found'
-    //                         console.log(ResultDesc)
-    //                     }
-    //                     setTimeout(() => sendFindTransactionRequest(MerchantRequestID), 6000);
-    //                 } else {
-    //                     console.log('Unexpected response:', response.data);
-    //                 }
-    //             })
-    //             .catch(error => {
-    //                 console.log('errorr bro', error)
-    //             })
-    //     }
-    // };
-
-    // let Sale
-
-    // const handleMakePayment = async () => {
-    //     const products = items.map((item)=> {
-    //         const { id, productName, itemTotal, image, quantity } = item
-    //         return { _id: id, productName, itemTotal, image, quantity }
-    //     })
-    //     const order = {
-    //         products: products,
-    //         totalAmount: cartTotal,
-    //         ...formData
-    //     }
-    //     console.log('order in function', order)
-
-    //     let tots = cartTotal
-    //     if (tots > 50) {
-    //         tots = 1
-    //     }
-
-    //     // const sale = {
-    //     //     products: simplifiedCart,
-    //     //     // totalAmount: calculateTotal()
-    //     //     totalAmount: tots
-    //     // }
-    //     // Sale = sale
-    //     const paymentDetailsObject = {
-    //         phone: formData.contact,
-    //         accountNumber: "348698468",
-    //         amount: tots
-    //     }
-    //     await axios.post('http://192.168.100.9:3000/payment/api/stkpush', paymentDetailsObject)
-    //         .then(response => {
-    //             console.log(response.data)
-    //             sendFindTransactionRequest(response.data.MerchantRequestID);
-    //         })
-    //         .catch(error => {
-    //             console.log('Error:', error)
-    //         })
-    // }
-
-
 
     return (
         <div className='transaction-response-container flex-align-center-justify-center' style={{ paddingBottom: '40px' }}>
@@ -238,8 +149,8 @@ function TransactionResponses() {
 
                 {unavailableFlag ?
                     <div className='flex-column-align-center oops-div'>
-                        <button className='cta-button' style={{ marginTop: '50px'}} onClick={handleProceedWithoutItem}>Proceed without item</button>
-                        <button className='cta-button' style={{ marginTop: '15px' }}>Continue shopping</button>
+                        <button className='cta-button' style={{ marginTop: '50px' }} onClick={handleProceedWithoutItem}>Proceed without item</button>
+                        <button className='cta-button' style={{ marginTop: '15px' }} onClick={() => navigate('/products')}>Continue shopping</button>
                     </div>
                     : null
                 }

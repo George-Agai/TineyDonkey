@@ -31,7 +31,7 @@ function Products() {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
-                    <p>TineyDonkey</p>
+                    <p onClick={() => navigate('/')}>TineyDonkey</p>
                     <ul>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
                         <li style={{ color: '#FF6310', borderBottom: '2px solid #FF6310' }} onClick={() => navigate('/products')}>Products</li>
