@@ -29,7 +29,7 @@ function Contact() {
             }
         };
 
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
 
         window.addEventListener('scroll', handleScroll);
 
@@ -38,11 +38,11 @@ function Contact() {
         };
     }, []);
 
-    const handleSendMessage = async()=> {
+    const handleSendMessage = async () => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const isValid = emailPattern.test(emailAddress);
         setIsValidEmail(isValid);
-        if(isValid){
+        if (isValid) {
             const newMessage = {
                 emailAddress: emailAddress,
                 name: name,
@@ -50,17 +50,16 @@ function Contact() {
                 message: message
             }
             await axios.post('http://192.168.100.9:3000/sendMessage', newMessage)
-            .then((res) => {
-                console.log(res);
-                if(res.data.message === "Message saved successfully"){
-                    setEmailSent(true)
-                    setEmailAddress("")
-                    setMessage("")
-                    setSubject("")
-                    setName("")
-                }
-            })
-            .catch(err => console.log(err))
+                .then((res) => {
+                    if (res.data.message === "Message saved successfully") {
+                        setEmailSent(true)
+                        setEmailAddress("")
+                        setMessage("")
+                        setSubject("")
+                        setName("")
+                    }
+                })
+                .catch(err => console.log(err))
         }
         else console.log("Email is not valid")
     }
@@ -91,21 +90,21 @@ function Contact() {
             <div className='flex-justify-content-space-around contact-us-flex-container' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
                 <div className='flex-column-align-center contact-details-div' style={{ width: '40%' }}>
                     <div className='flex-align-center-justify-center'>
-                        <FaLocationDot style={{ color: '#FF6310' }} className='contact-us-icons'/>
+                        <FaLocationDot style={{ color: '#FF6310' }} className='contact-us-icons' />
                         <section className='flex-column-justify-flex-start' style={{ marginLeft: '30px', width: '250px' }}>
                             <h2>Physical Address</h2>
                             <p>P.O Box 151 - 40001 NRB</p>
                         </section>
                     </div>
                     <div className='flex-align-center-justify-center'>
-                        <MdEmail style={{ color: '#FF6310' }} className='contact-us-icons'/>
+                        <MdEmail style={{ color: '#FF6310' }} className='contact-us-icons' />
                         <section className='flex-column-justify-flex-start' style={{ marginLeft: '30px', width: '250px' }}>
                             <h2>Email Address</h2>
                             <p>georgeeagai@gmail.com</p>
                         </section>
                     </div>
                     <div className='flex-align-center-justify-center'>
-                        <FaPhoneAlt style={{ color: '#FF6310' }} className='contact-us-icons'/>
+                        <FaPhoneAlt style={{ color: '#FF6310' }} className='contact-us-icons' />
                         <section className='flex-column-justify-flex-start' style={{ marginLeft: '30px', width: '250px' }}>
                             <h2>Phone Number</h2>
                             <p>+2547 922 71915</p>
@@ -116,9 +115,10 @@ function Contact() {
                     <div className='flex-column-align-center contact-us-email-div' style={{ padding: '50px 10px', width: '80%' }}>
                         <h1 className='font-merriweather' style={{ color: 'RGB(17, 21, 24)' }}>Send us a message</h1>
                         <input type='text' placeholder='Name' required={true} value={name} onChange={(e) => setName(e.target.value)}></input>
+                        {!isValidEmail && <p style={{ color: 'red' }}>Please enter a valid email address.</p>}
                         <input type='email' placeholder='Email Address' required={true} value={emailAddress} onChange={(e) => setEmailAddress(e.target.value)}></input>
                         <input type='text' placeholder='Subject' required={true} value={subject} onChange={(e) => setSubject(e.target.value)}></input>
-                        <input type='textarea' placeholder='Comment or Message' style={{height: '90px'}} required={true} value={message} onChange={(e) => setMessage(e.target.value)}></input>
+                        <input type='textarea' placeholder='Comment or Message' style={{ height: '90px' }} required={true} value={message} onChange={(e) => setMessage(e.target.value)}></input>
                         <button className='cta-button' style={{ marginTop: '30px' }} onClick={handleSendMessage}>{emailSent ? "Message sent" : "Send Message"}</button>
                     </div>
                 </div>

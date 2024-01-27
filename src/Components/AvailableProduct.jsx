@@ -1,4 +1,3 @@
-//import React from 'react'
 import { AiFillDelete } from "react-icons/ai";
 
 function AvailableProduct({ AllProducts }) {

@@ -10,7 +10,7 @@ function Grid({ Page }) {
     const [AllProducts, setAllProducts] = useState(null);
 
     useEffect(() => {
-        axios.get('http://192.168.100.9:3000/get-image')
+        axios.get('http://192.168.100.9:3000/getProduct')
             .then((res) => {
                 if (Page === 'Landing') {
                     setAllProducts(res.data.slice(0, 4));
@@ -30,18 +30,18 @@ function Grid({ Page }) {
             productName: item.productName,
             price: item.price
         }
-        if(inCart(updatedProducts.id)){
+        if (inCart(updatedProducts.id)) {
             alert("Item is already in the cart")
         }
         else addItem(updatedProducts)
     }
 
-    const handleProductSelected =(data) =>{
-        navigate(`/product?id=${data._id}`, {state: { data }})
+    const handleProductSelected = (data) => {
+        navigate(`/product?id=${data._id}`, { state: { data } })
     }
 
-    const handleAddToCart =(data)=>{
-        if(data.status){
+    const handleAddToCart = (data) => {
+        if (data.status) {
             handleAddItemToCart(data)
         }
         else console.log("Item has been sold")
@@ -61,7 +61,7 @@ function Grid({ Page }) {
                                     <div className="card__content flex-column-align-center">
                                         <h2 className="card__title">{data.productName}</h2>
                                         <p className="card__price">KSh{data.price}.00</p>
-                                        <button className={data.status ? 'cta-button' : 'cta-locked-button'} style={{ padding: '15px 20px' }} onClick={() => handleAddToCart(data)}>{data.status ? "Add to cart" : <span className="flex-align-center-justify-center">Sold <AiFillLock/></span>}</button>
+                                        <button className={data.status ? 'cta-button' : 'cta-locked-button'} style={{ padding: '15px 20px' }} onClick={() => handleAddToCart(data)}>{data.status ? "Add to cart" : <span className="flex-align-center-justify-center">Sold <AiFillLock /></span>}</button>
                                     </div>
                                 </div>
                             ))}

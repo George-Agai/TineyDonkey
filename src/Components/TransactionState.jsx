@@ -1,4 +1,3 @@
-// import React from 'react'
 import spinner from '../TineyDonkeyAssets/spinner.png'
 
 function TransactionState({ text }) {

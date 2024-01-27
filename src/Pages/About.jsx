@@ -18,7 +18,7 @@ function About() {
                 setScrolling(false);
             }
         };
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
 
         window.addEventListener('scroll', handleScroll);
 
@@ -26,16 +26,16 @@ function About() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
-        <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
+            <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p onClick={() => navigate('/')}>TineyDonkey</p>
                     <ul>
-                        <li style={{ color: 'grey' }} onClick={()=>navigate('/')}>Home</li>
-                        <li style={{ color: 'grey' }} onClick={()=>navigate('/products')}>Products</li>
-                        <li style={{ color: 'grey' }}  onClick={()=>navigate('/contact')}>Contact</li>
-                        <li style={{  color: '#FF6310', borderBottom: '2px solid #FF6310'  }} onClick={()=>navigate('/about')}>About</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>Products</li>
+                        <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
+                        <li style={{ color: '#FF6310', borderBottom: '2px solid #FF6310' }} onClick={() => navigate('/about')}>About</li>
                     </ul>
                     <div className=' navbar-icon-div'>
                         <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
@@ -46,22 +46,22 @@ function About() {
                 </section>
             </nav>
             <div className='flex-column-align-center  page-header'>
-                <p style={{ fontSize: '12px' }}><span style={{ color: '#FF6310', cursor: 'pointer' }} onClick={()=>navigate('/')}>HOME /</span><span style={{color: '#687279'}}> ABOUT</span></p>
-                <h1 className='font-merriweather' style={{fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px'}}>About</h1>
+                <p style={{ fontSize: '12px' }}><span style={{ color: '#FF6310', cursor: 'pointer' }} onClick={() => navigate('/')}>HOME /</span><span style={{ color: '#687279' }}> ABOUT</span></p>
+                <h1 className='font-merriweather' style={{ fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px' }}>About</h1>
             </div>
 
-            <div className='flex-justify-content-space-around  flex-column-container' style={{ marginBottom: '80px', marginTop: '50px'}}>
-                <img src={TineyDonkey} alt='TineyDonkey' style={{ height: 'auto'}} className='about-image'/>
+            <div className='flex-justify-content-space-around  flex-column-container' style={{ marginBottom: '80px', marginTop: '50px' }}>
+                <img src={TineyDonkey} alt='TineyDonkey' style={{ height: 'auto' }} className='about-image' />
                 <div className='flex-column-align-center'>
-                    <h1 className='font-merriweather' style={{ color: 'RGB(17, 21, 24)', textAlign: 'center'}}>About TineyDonkey</h1>
-                    <p style={{color: '#687279', fontSize: '16px', lineHeight: '26.4px'}}>Welcome to TineyDonkey, where creativity meets code! We’re not just selling figurines; we’re crafting companions for your workspace, miniature muses that turn your desk into a coding sanctuary. Each figurine tells a story – a pixelated tale of dedication, passion, and the thrill of problem-solving.  So, dive into our collection, embrace the pixelated magic, and let your workstation become a haven where imagination and innovation collide. Your code, your space, your story – told in every intricately designed figurine we offer. Welcome to a desk adorned with inspiration!</p>
-                    <button className='cta-button' style={{ marginTop: '30px' }}><a href='tel:+254792271915' style={{textDecoration: 'none', color: 'white'}}>Contact Us</a></button>
+                    <h1 className='font-merriweather' style={{ color: 'RGB(17, 21, 24)', textAlign: 'center' }}>About TineyDonkey</h1>
+                    <p style={{ color: '#687279', fontSize: '16px', lineHeight: '26.4px' }}>Welcome to TineyDonkey, where creativity meets code! We’re not just selling figurines; we’re crafting companions for your workspace, miniature muses that turn your desk into a coding sanctuary. Each figurine tells a story – a pixelated tale of dedication, passion, and the thrill of problem-solving.  So, dive into our collection, embrace the pixelated magic, and let your workstation become a haven where imagination and innovation collide. Your code, your space, your story – told in every intricately designed figurine we offer. Welcome to a desk adorned with inspiration!</p>
+                    <button className='cta-button' style={{ marginTop: '30px' }}><a href='tel:+254792271915' style={{ textDecoration: 'none', color: 'white' }}>Contact Us</a></button>
                 </div>
             </div>
 
-            <Footer/>
-    </div>
-  )
+            <Footer />
+        </div>
+    )
 }
 
 export default About

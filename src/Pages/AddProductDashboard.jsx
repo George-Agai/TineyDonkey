@@ -35,6 +35,7 @@ const AddProductDashboard = () => {
     const [Name, setName] = useState();
     const [Price, setPrice] = useState();
     const [token, setToken] = useState(readFromLocalStorage('token'))
+    const [imageUploaded, setImageUploaded] = useState(false)
 
     // const handleUpload = (e) => {
     //     e.preventDefault()
@@ -78,20 +79,22 @@ const AddProductDashboard = () => {
         formData.append('productName', Name);
         formData.append('price', priceInteger);
 
-        axios.post('http://192.168.100.9:3000/upload-product', formData, {
+        axios.post('http://192.168.100.9:3000/uploadProduct', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         })
             .then((res) => {
                 if (res.data.message === "Upload successful") {
-                    console.log("Upload successful");
                     setAllProducts(res.data.data);
                     setName("");
                     setPrice("");
                     setFile("");
+                    setImageUploaded(true)
+                    setTimeout(() => {
+                        setImageUploaded(false)
+                    }, 3000)
                 } else {
-                    console.log("Upload failed");
                     alert("Upload failed");
                 }
             })
@@ -112,7 +115,7 @@ const AddProductDashboard = () => {
                             navigate('/admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('http://192.168.100.9:3000/get-image')
+                            axios.get('http://192.168.100.9:3000/getProduct')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })
@@ -120,7 +123,6 @@ const AddProductDashboard = () => {
                         }
                     })
                     .catch(error => console.log(error))
-
             }
             catch (error) {
                 console.error(error);
@@ -166,7 +168,7 @@ const AddProductDashboard = () => {
                         <label htmlFor='price'>Price *</label>
                         <input placeholder='Amount' type='number' required='true' id='price' value={Price} onChange={e => setPrice(e.target.value)} />
 
-                        <button type='submit' className='cta-button width100'>Upload</button>
+                        <button type='submit' className='cta-button width100'>{imageUploaded ? "Uploaded" : "Upload"}</button>
                     </form>
                 </div>
 

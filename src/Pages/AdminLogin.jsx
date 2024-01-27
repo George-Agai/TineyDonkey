@@ -33,7 +33,7 @@ function AdminLogin() {
         };
     }, []);
 
-    const handleLogin = async(e)=>{
+    const handleLogin = async (e) => {
         e.preventDefault()
         try {
             const userLoginObject = {
@@ -68,7 +68,7 @@ function AdminLogin() {
                     console.log('Nothing')
                 }
             }
-            else if(!response){
+            else if (!response) {
                 // setLoadingFlag(false)
                 console.log('No response')
             }
@@ -78,11 +78,11 @@ function AdminLogin() {
     }
 
 
-    const handleUsernameChange =(e)=>{
+    const handleUsernameChange = (e) => {
         setUsername(e.target.value)
         setWrongPassword(false)
     }
-    const handlePasswordChange =(e)=>{
+    const handlePasswordChange = (e) => {
         setPassword(e.target.value)
         setWrongPassword(false)
     }
@@ -103,12 +103,12 @@ function AdminLogin() {
                 </section>
             </nav>
             <div className='flex-column-align-center login-form-div box-shadow'>
-                <form onSubmit={(e)=>handleLogin(e)} className='flex-column-align-center'>
+                <form onSubmit={(e) => handleLogin(e)} className='flex-column-align-center'>
                     <label htmlFor='username'>Username</label>
-                    <input type="text" required='true' id='username' placeholder='Your username' value={username} onChange={(e)=>handleUsernameChange(e)}/>
-                    {wrongPassword ? <Notification text={notificationText}/> : null}
+                    <input type="text" required='true' id='username' placeholder='Your username' value={username} onChange={(e) => handleUsernameChange(e)} />
+                    {wrongPassword ? <Notification text={notificationText} /> : null}
                     <label htmlFor='password'>Password</label>
-                    <input type="password" required='true' id='passsword' placeholder='Password' value={password} onChange={(e)=>handlePasswordChange(e)}/>
+                    <input type="password" required='true' id='passsword' placeholder='Password' value={password} onChange={(e) => handlePasswordChange(e)} />
                     <button className='cta-button width100' type='submit'>Login</button>
                 </form>
             </div>

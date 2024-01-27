@@ -32,7 +32,6 @@ function TransactionResponses() {
         await axios.post('http://192.168.100.9:3000/checkProduct', idArray)
             .then((res) => {
                 if (res.data.message === "Found products") {
-                    console.log('checkProduct result', res.data.productStatusResults);
                     const productsWithFalseStatus = findProductWithFalseStatus(res.data.productStatusResults)
                     setUnavailableProductsArray(productsWithFalseStatus)
                     if (productsWithFalseStatus.length > 0) {
