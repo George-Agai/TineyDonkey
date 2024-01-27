@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { MdOutlineShoppingBag } from "react-icons/md";
-// import { FaRegUserCircle } from "react-icons/fa";
 import tick from '../TineyDonkeyAssets/icon-quality.svg'
 import delivery from '../TineyDonkeyAssets/icon-delivery.svg'
 import warranty from '../TineyDonkeyAssets/icon-warranty.svg'
@@ -71,7 +70,7 @@ function LandingPage() {
         <div className="banner-div flex-column-align-center">
           <img src={tick} alt='tick' className="banner-icons" />
           <h5>Best Prices</h5>
-          <p className="text-align-center">Our prices are literally the best out here</p>
+          <p className="text-align-center">Prices are undoubtedly the best out here</p>
         </div>
         <div className="banner-div flex-column-align-center">
           <img src={delivery} alt='delivery' className="banner-icons" />

@@ -1,10 +1,34 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
+import axios from "axios"
 
 function Footer() {
 
     const navigate = useNavigate()
     const [Email, setEmail] = useState()
+    const [isValidEmail, setIsValidEmail] = useState(true);
+    const [emailSent, setEmailSent] = useState(false)
+
+    const handleSubscribe = async()=> {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValid = emailPattern.test(Email);
+        setIsValidEmail(isValid);
+
+        if(isValid){
+            const emailAddress = {
+                emailAddress: Email
+            }
+            await axios.post('http://192.168.100.9:3000/subscribe', emailAddress)
+            .then((res) => {
+                if(res.data.message === "Email address saved successfully"){
+                    setEmailSent(true)
+                    setEmail("")
+                }
+            })
+            .catch(err => console.log(err))
+        }
+        else console.log("Email is not valid")
+    }
     return (
         <div className="footer-container flex-column-align-center">
             <div className="footer-container-main-div flex-justify-space-between" style={{width: '94%', borderBottom: '0.3px solid grey'}}>
@@ -21,8 +45,9 @@ function Footer() {
                 <div className="newsletter-div flex-column-justify-flex-start">
                     <h1>Email Newsletter</h1>
                     <p>Subscribe to our newsletter and get 10% off your first purchase</p>
+                    {!isValidEmail && <p style={{ color: 'red' }}>Please enter a valid email address.</p>}
                     <input type="email" placeholder="Your email address" value={Email} onChange={(e)=>setEmail(e.target.value)}></input>
-                    <button className="cta-button" style={{padding: '10px 30px', marginBottom: '30px'}}>Subscribe</button>
+                    <button className="cta-button" style={{padding: '10px 30px', marginBottom: '30px'}} onClick={handleSubscribe}>{emailSent ? "Subscribed" : "Subscribe"}</button>
                 </div>
             </div>
             <div>

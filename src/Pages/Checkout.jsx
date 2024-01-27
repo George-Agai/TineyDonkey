@@ -147,7 +147,7 @@ function Checkout() {
                         </table>
                         <div className='flex-align-center-justify-center mpesa-notification-div' style={{ width: '92%', marginTop: '15px' }}>
                             {/* <img src={mpesa} alt='mpesa-icon' loading='lazy' /> */}
-                            <p className='text-align-left'>Payment will be made upon delivery of the figurines with no extra charges😌</p>
+                            <p className='text-align-left'>Payment will be made upon delivery of the products with no extra charges😌</p>
                         </div>
                         <div style={{ width: '100%', marginBottom: '15px' }}>
                             <p className='text-align-left' style={{ color: 'RGB(104, 114, 121)', fontSize: '13px', fontWeight: '400', width: '100%' }}>Your personal data will only be used to process your order and to support your experience throughout this website.</p>
