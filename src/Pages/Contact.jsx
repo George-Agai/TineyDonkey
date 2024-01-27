@@ -6,11 +6,18 @@ import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import Footer from '../Components/Footer';
 import { useCart } from 'react-use-cart';
+import axios from 'axios';
 
 function Contact() {
 
     const { isEmpty, totalItems } = useCart()
     const [scrolling, setScrolling] = useState(false);
+    const [name, setName] = useState()
+    const [subject, setSubject] = useState()
+    const [message, setMessage] = useState()
+    const [emailAddress, setEmailAddress] = useState()
+    const [isValidEmail, setIsValidEmail] = useState(true);
+    const [emailSent, setEmailSent] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -30,6 +37,33 @@ function Contact() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    const handleSendMessage = async()=> {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValid = emailPattern.test(emailAddress);
+        setIsValidEmail(isValid);
+        if(isValid){
+            const newMessage = {
+                emailAddress: emailAddress,
+                name: name,
+                about: subject,
+                message: message
+            }
+            await axios.post('http://192.168.100.9:3000/sendMessage', newMessage)
+            .then((res) => {
+                console.log(res);
+                if(res.data.message === "Message saved successfully"){
+                    setEmailSent(true)
+                    setEmailAddress("")
+                    setMessage("")
+                    setSubject("")
+                    setName("")
+                }
+            })
+            .catch(err => console.log(err))
+        }
+        else console.log("Email is not valid")
+    }
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
@@ -81,11 +115,11 @@ function Contact() {
                 <div className='flex-align-center-justify-center email-container'>
                     <div className='flex-column-align-center contact-us-email-div' style={{ padding: '50px 10px', width: '80%' }}>
                         <h1 className='font-merriweather' style={{ color: 'RGB(17, 21, 24)' }}>Send us a message</h1>
-                        <input type='text' placeholder='Name'></input>
-                        <input type='email' placeholder='Email Address'></input>
-                        <input type='text' placeholder='Subject'></input>
-                        <input type='textarea' placeholder='Comment or Message' style={{height: '90px'}}></input>
-                        <button className='cta-button' style={{ marginTop: '30px' }}>Send Message</button>
+                        <input type='text' placeholder='Name' required={true} value={name} onChange={(e) => setName(e.target.value)}></input>
+                        <input type='email' placeholder='Email Address' required={true} value={emailAddress} onChange={(e) => setEmailAddress(e.target.value)}></input>
+                        <input type='text' placeholder='Subject' required={true} value={subject} onChange={(e) => setSubject(e.target.value)}></input>
+                        <input type='textarea' placeholder='Comment or Message' style={{height: '90px'}} required={true} value={message} onChange={(e) => setMessage(e.target.value)}></input>
+                        <button className='cta-button' style={{ marginTop: '30px' }} onClick={handleSendMessage}>{emailSent ? "Message sent" : "Send Message"}</button>
                     </div>
                 </div>
             </div>
