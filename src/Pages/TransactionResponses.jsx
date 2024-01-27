@@ -29,7 +29,7 @@ function TransactionResponses() {
     }
     const checkProductAvailability = async () => {
         const idArray = items.map(item => item.id)
-        await axios.post('http://192.168.100.9:3000/checkProduct', idArray)
+        await axios.post('https://ruby-uninterested-antelope.cyclic.app/checkProduct', idArray)
             .then((res) => {
                 if (res.data.message === "Found products") {
                     const productsWithFalseStatus = findProductWithFalseStatus(res.data.productStatusResults)
@@ -83,7 +83,7 @@ function TransactionResponses() {
     }, [unavailableProductsArray])
 
     const sendOrderToDatabase = async (order) => {
-        await axios.post('http://192.168.100.9:3000/saveOrder', order)
+        await axios.post('https://ruby-uninterested-antelope.cyclic.app/saveOrder', order)
             .then((res) => {
                 if (res.data.message === "Sale saved successfully") {
                     setTimeout(() => {

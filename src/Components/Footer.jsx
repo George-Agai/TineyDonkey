@@ -18,7 +18,7 @@ function Footer() {
             const emailAddress = {
                 emailAddress: Email
             }
-            await axios.post('http://192.168.100.9:3000/subscribe', emailAddress)
+            await axios.post('https://ruby-uninterested-antelope.cyclic.app/subscribe', emailAddress)
                 .then((res) => {
                     if (res.data.message === "Email address saved successfully") {
                         setEmailSent(true)

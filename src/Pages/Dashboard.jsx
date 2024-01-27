@@ -46,7 +46,7 @@ function Dashboard() {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('http://192.168.100.9:3000/getProduct')
+                            axios.get('https://ruby-uninterested-antelope.cyclic.app/getProduct')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })

@@ -49,7 +49,7 @@ function Contact() {
                 about: subject,
                 message: message
             }
-            await axios.post('http://192.168.100.9:3000/sendMessage', newMessage)
+            await axios.post('https://ruby-uninterested-antelope.cyclic.app/sendMessage', newMessage)
                 .then((res) => {
                     if (res.data.message === "Message saved successfully") {
                         setEmailSent(true)

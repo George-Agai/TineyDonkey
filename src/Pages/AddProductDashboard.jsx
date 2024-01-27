@@ -44,7 +44,7 @@ const AddProductDashboard = () => {
     //     formData.append('image', file);
     //     formData.append('productName', Name);
     //     formData.append('price', priceInteger);
-    //     axios.post('http://192.168.100.9:3000/upload-image', formData, {
+    //     axios.post('https://ruby-uninterested-antelope.cyclic.app/upload-image', formData, {
     //         headers: {
     //             'Content-Type': 'multipart/form-data',
     //         },
@@ -79,7 +79,7 @@ const AddProductDashboard = () => {
         formData.append('productName', Name);
         formData.append('price', priceInteger);
 
-        axios.post('http://192.168.100.9:3000/uploadProduct', formData, {
+        axios.post('https://ruby-uninterested-antelope.cyclic.app/uploadProduct', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -115,7 +115,7 @@ const AddProductDashboard = () => {
                             navigate('/admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('http://192.168.100.9:3000/getProduct')
+                            axios.get('https://ruby-uninterested-antelope.cyclic.app/getProduct')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })

@@ -51,7 +51,7 @@ function ExpandedProduct() {
         const searchParams = new URLSearchParams(location.search);
         const idFromQuery = searchParams.get('id');
         const fetchData = async () => {
-            await axios.get(`http://192.168.100.9:3000/fetchProduct?id=${idFromQuery}`)
+            await axios.get(`https://ruby-uninterested-antelope.cyclic.app/fetchProduct?id=${idFromQuery}`)
                 .then((prod) => {
                     setProduct(prod.data)
                 })
@@ -107,7 +107,7 @@ function ExpandedProduct() {
                     </div>
                     <div style={{ overflow: 'hidden' }}>
                         <img
-                            src={`http://192.168.100.9:3000/Images/${product && product.image[activeThumbnailIndex]}`}
+                            src={`https://ruby-uninterested-antelope.cyclic.app/Images/${product && product.image[activeThumbnailIndex]}`}
                             alt="Main Product"
                             loading='lazy'
                             style={{
@@ -125,7 +125,7 @@ function ExpandedProduct() {
                                 key={index}
                                 loading='lazy'
                                 className='expanded-image-thumbnail'
-                                src={`http://192.168.100.9:3000/Images/${product && imageName}`}
+                                src={`https://ruby-uninterested-antelope.cyclic.app/Images/${product && imageName}`}
                                 alt={`Thumbnail ${index + 1}`}
                                 style={{
                                     maxWidth: "100px",
