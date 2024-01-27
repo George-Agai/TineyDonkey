@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { useCart } from 'react-use-cart';
-import mpesa from '../TineyDonkeyAssets/mpesa.png'
+// import mpesa from '../TineyDonkeyAssets/mpesa.png'
 import Footer from '../Components/Footer';
 
 function Checkout() {
@@ -45,22 +45,27 @@ function Checkout() {
         };
     }, []);
 
-    const handlePlaceOrder = async (e)=> {
+    const handlePlaceOrder = async (e) => {
         e.preventDefault()
-        const fullName = firstName +" "+ lastName
-        let newContact = contact
-        if(newContact.startsWith("07")){
-            newContact = "254" + newContact.slice(1)
+        if (isEmpty) {
+            alert("Theres nothing to checkout😏")
         }
-        const formData = {
-            boughtBy: fullName,
-            town: town,
-            orderNotes: orderNotes && orderNotes.length > 3 ? orderNotes : "empty",
-            orderStatus: "pending",
-            country: country && country.length > 1 ? country : "empty",
-            contact: newContact
+        else {
+            const fullName = firstName + " " + lastName
+            let newContact = contact
+            if (newContact.startsWith("07")) {
+                newContact = "254" + newContact.slice(1)
+            }
+            const formData = {
+                boughtBy: fullName,
+                town: town,
+                orderNotes: orderNotes && orderNotes.length > 3 ? orderNotes : "empty",
+                orderStatus: "pending",
+                country: country && country.length > 1 ? country : "empty",
+                contact: newContact
+            }
+            navigate('/transaction', { state: { formData } })
         }
-        navigate('/transaction', {state: { formData }})
     }
 
     return (
@@ -95,25 +100,25 @@ function Checkout() {
                         <div className='flex-justify-content-space-between' style={{ width: '100%' }}>
                             <div className='flex-column-justify-flex-start'>
                                 <label htmlFor="name">First name *</label>
-                                <input type="text" id="name" name="FirstName" required="true" onChange={(e)=> setFirstName(e.target.value)} value={firstName}/>
+                                <input type="text" id="name" name="FirstName" required="true" onChange={(e) => setFirstName(e.target.value)} value={firstName} />
                             </div>
                             <div className='flex-column-justify-flex-start' style={{ marginLeft: '30px' }}>
                                 <label htmlFor="LastName">Last name *</label>
-                                <input type="text" id="LastName" name="LastName" required="true" onChange={(e)=> setLastName(e.target.value)} value={lastName} />
+                                <input type="text" id="LastName" name="LastName" required="true" onChange={(e) => setLastName(e.target.value)} value={lastName} />
                             </div>
                         </div>
                         <label htmlFor="Country">Country / Region (optional)</label>
-                        <input type="text" id="Country" name="Country" placeholder='Kenya' onChange={(e)=> setCountry(e.target.value)} value={country} />
+                        <input type="text" id="Country" name="Country" placeholder='Kenya' onChange={(e) => setCountry(e.target.value)} value={country} />
 
                         <label htmlFor="Town">Town / City *</label>
-                        <input type="text" id="Town" name="Town" required="true" placeholder='Nairobi' onChange={(e)=> setTown(e.target.value)} value={town} />
+                        <input type="text" id="Town" name="Town" required="true" placeholder='Nairobi' onChange={(e) => setTown(e.target.value)} value={town} />
 
                         <label htmlFor="Phonenumber">Phone number *</label>
-                        <input type="text" id="Phonenumber" name="Phonenumber" required="true" minLength={10} placeholder='0712345678' onChange={(e)=> setContact(e.target.value)} value={contact} />
+                        <input type="text" id="Phonenumber" name="Phonenumber" required="true" minLength={10} placeholder='0712345678' onChange={(e) => setContact(e.target.value)} value={contact} />
                         <div className='flex-column-justify-flex-start' style={{ width: '100%' }}>
                             <h3>Additional information</h3>
                             <label htmlFor="order_comments">Order notes (optional)</label>
-                            <textarea onChange={(e)=> setOrderNotes(e.target.value)} value={orderNotes} name="orderComments" className="input-text " id="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5" style={{ height: '150px', width: '100%' }}></textarea>
+                            <textarea onChange={(e) => setOrderNotes(e.target.value)} value={orderNotes} name="orderComments" className="input-text " id="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5" style={{ height: '150px', width: '100%' }}></textarea>
                         </div>
                     </div>
 
@@ -127,8 +132,8 @@ function Checkout() {
                                 </tr>
 
                                 {isEmpty ?
-                                    <div className="width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
-                                        <p>Nothing to checkout☹️</p>
+                                    <div className="width100 flex-align-center-justify-center" style={{ marginTop: '30px', marginBottom: '10px' }}>
+                                        <p>Nothing to checkout😕</p>
                                     </div> :
                                     items.map((product) => {
                                         return (

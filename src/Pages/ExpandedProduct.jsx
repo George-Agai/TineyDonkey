@@ -51,7 +51,7 @@ function ExpandedProduct() {
         const searchParams = new URLSearchParams(location.search);
         const idFromQuery = searchParams.get('id');
         const fetchData = async () => {
-            await axios.get(`http://192.168.100.9:3000/fetchProduct?id=${idFromQuery}`)
+            await axios.get(`https://ruby-uninterested-antelope.cyclic.app/fetchProduct?id=${idFromQuery}`)
                 .then((prod) => {
                     setProduct(prod.data)
                 })
@@ -72,7 +72,7 @@ function ExpandedProduct() {
                     productName: product.productName,
                     price: product.price
                 }
-                if(inCart(updatedProducts.id)){
+                if (inCart(updatedProducts.id)) {
                     alert("Item is already in the cart")
                 }
                 else addItem(updatedProducts)
@@ -107,7 +107,7 @@ function ExpandedProduct() {
                     </div>
                     <div style={{ overflow: 'hidden' }}>
                         <img
-                            src={`http://192.168.100.9:3000/Images/${product && product.image[activeThumbnailIndex]}`}
+                            src={`https://ruby-uninterested-antelope.cyclic.app/Images/${product && product.image[activeThumbnailIndex]}`}
                             alt="Main Product"
                             loading='lazy'
                             style={{
@@ -125,7 +125,7 @@ function ExpandedProduct() {
                                 key={index}
                                 loading='lazy'
                                 className='expanded-image-thumbnail'
-                                src={`http://192.168.100.9:3000/Images/${product && imageName}`}
+                                src={`https://ruby-uninterested-antelope.cyclic.app/Images/${product && imageName}`}
                                 alt={`Thumbnail ${index + 1}`}
                                 style={{
                                     maxWidth: "100px",
@@ -145,7 +145,7 @@ function ExpandedProduct() {
                     <p id='stock'>{product.status ? "1 in stock" : `Oops, somebody already bought ${product.productName}😔`}</p>
                     <div className='flex-column-align-center width100'>
                         <button className={product && product.status ? 'cta-button width100' : 'cta-locked-button width100'} onClick={handleAddProductToCart}>{product && product.status ? "Add to cart" : <span className="flex-align-center-justify-center">Sold <AiFillLock /></span>}</button>
-                        { inCart(product._id) ? <button className='cta-button width100' style={{marginTop: '10px'}} onClick={() => navigate('/checkout')}>Checkout</button> : null}
+                        {inCart(product._id) ? <button className='cta-button width100' style={{ marginTop: '10px' }} onClick={() => navigate('/checkout')}>Checkout</button> : null}
                     </div>
                     <p style={{ color: '#687279', fontSize: '13px', fontWeight: '700', marginTop: '30px' }}>CATEGORY:<span style={{ color: '#687279', fontSize: '13px', fontWeight: '500' }}> FIGURINES</span></p>
                 </div>
