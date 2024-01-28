@@ -61,7 +61,7 @@ function Checkout() {
                 town: town,
                 orderNotes: orderNotes && orderNotes.length > 3 ? orderNotes : "empty",
                 orderStatus: "pending",
-                country: country && country.length > 1 ? country : "empty",
+                country: country && country.length > 2 ? country : "empty",
                 contact: newContact
             }
             navigate('/transaction', { state: { formData } })
@@ -69,7 +69,7 @@ function Checkout() {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
+        <div className='transition-div' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p onClick={() => navigate('/')}>TineyDonkey</p>

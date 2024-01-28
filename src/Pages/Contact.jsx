@@ -64,7 +64,7 @@ function Contact() {
         else console.log("Email is not valid")
     }
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
+        <div className='transition-div' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100vw' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p onClick={() => navigate('/')}>TineyDonkey</p>

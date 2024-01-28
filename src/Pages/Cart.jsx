@@ -62,16 +62,16 @@ function Cart() {
                 </section>
             </nav>
 
-            <div className='flex-column-align-center  page-header'>
+            <div className='transition-div flex-column-align-center  page-header'>
                 <p style={{ fontSize: '12px' }}><span style={{ color: '#FF6310', cursor: 'pointer' }} onClick={() => navigate('/')}>HOME /</span><span style={{ color: '#687279' }}> CART</span></p>
                 <h1 className='font-merriweather' style={{ fontSize: '50px', color: 'RGB(17, 21, 24)', marginTop: '10px' }}>Cart</h1>
             </div>
 
             {isEmpty ?
-                <div className="width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
+                <div className="transition-div width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
                     <p>Cart is empty☹️</p>
                 </div> :
-                <div className='flex-justify-content-space-around  flex-column-container ' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
+                <div className='transition-div flex-justify-content-space-around  flex-column-container ' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
                     <table className='cart-table'>
                         <thead>
                             <tr>
@@ -85,7 +85,7 @@ function Cart() {
                                 return (
                                     <tr key={item.id}>
                                         <td className='' style={{ display: 'flex', alignItems: 'center' }}>
-                                            <img src={`https://ruby-uninterested-antelope.cyclic.app/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
+                                            <img src={`http://192.168.100.9:3000/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
                                             <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>{item.productName}<span className='quantity'> × 1</span></p>
                                         </td>
                                         <td className='text-align-center quantity-th'>{item.quantity}</td>
@@ -98,7 +98,7 @@ function Cart() {
 
                         </tbody>
                     </table>
-                    <div className='flex-column-align-center cart-totals-div'>
+                    <div className='transition-div flex-column-align-center cart-totals-div'>
                         <h2 style={{ width: '100%', fontSize: '15px', fontWeight: '700', color: 'RGB(17, 21, 24)' }}>Cart totals</h2>
                         <table style={{ width: '100%', fontSize: '15px' }}>
                             <tbody>
