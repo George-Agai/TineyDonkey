@@ -51,7 +51,7 @@ function ExpandedProduct() {
         const searchParams = new URLSearchParams(location.search);
         const idFromQuery = searchParams.get('id');
         const fetchData = async () => {
-            await axios.get(`https://ruby-uninterested-antelope.cyclic.app/fetchProduct?id=${idFromQuery}`)
+            await axios.get(`http://192.168.100.9:3000/fetchProduct?id=${idFromQuery}`)
                 .then((prod) => {
                     setProduct(prod.data)
                 })
@@ -81,7 +81,7 @@ function ExpandedProduct() {
         }
     }
     return (
-        <div className={product ? 'expanded-product-container flex-column-align-center ' : 'height100vh expanded-product-container flex-column-justify-content-space-between'}>
+        <div className={product ? 'transition-div expanded-product-container flex-column-align-center ' : 'height100vh expanded-product-container flex-column-justify-content-space-between'}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p onClick={() => navigate('/')}>TineyDonkey</p>
@@ -107,7 +107,7 @@ function ExpandedProduct() {
                     </div>
                     <div style={{ overflow: 'hidden' }}>
                         <img
-                            src={`https://ruby-uninterested-antelope.cyclic.app/Images/${product && product.image[activeThumbnailIndex]}`}
+                            src={`http://192.168.100.9:3000/Images/${product && product.image[activeThumbnailIndex]}`}
                             alt="Main Product"
                             loading='lazy'
                             style={{
@@ -125,7 +125,7 @@ function ExpandedProduct() {
                                 key={index}
                                 loading='lazy'
                                 className='expanded-image-thumbnail'
-                                src={`https://ruby-uninterested-antelope.cyclic.app/Images/${product && imageName}`}
+                                src={`http://192.168.100.9:3000/Images/${product && imageName}`}
                                 alt={`Thumbnail ${index + 1}`}
                                 style={{
                                     maxWidth: "100px",

@@ -36,7 +36,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await axios.get('https://ruby-uninterested-antelope.cyclic.app/business/protected', {
+                await axios.get('http://192.168.100.9:3000/business/protected', {
                     headers: {
                         'Authorization': `${token}`,
                     },
@@ -46,7 +46,7 @@ function Dashboard() {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('https://ruby-uninterested-antelope.cyclic.app/getProduct')
+                            axios.get('http://192.168.100.9:3000/getProduct')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })
@@ -71,7 +71,7 @@ function Dashboard() {
 
 
     return (
-        <div className='dashboard-container' style={{ paddingBottom: '40px' }}>
+        <div className='transition-div dashboard-container' style={{ paddingBottom: '40px' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p onClick={() => navigate('/')}>TineyDonkey</p>

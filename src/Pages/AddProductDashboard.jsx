@@ -44,7 +44,7 @@ const AddProductDashboard = () => {
     //     formData.append('image', file);
     //     formData.append('productName', Name);
     //     formData.append('price', priceInteger);
-    //     axios.post('https://ruby-uninterested-antelope.cyclic.app/upload-image', formData, {
+    //     axios.post('http://192.168.100.9:3000/upload-image', formData, {
     //         headers: {
     //             'Content-Type': 'multipart/form-data',
     //         },
@@ -79,12 +79,18 @@ const AddProductDashboard = () => {
         formData.append('productName', Name);
         formData.append('price', priceInteger);
 
-        axios.post('https://ruby-uninterested-antelope.cyclic.app/uploadProduct', formData, {
+        axios.post('http://192.168.100.9:3000/uploadProduct', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         })
+        // axios.post('http://192.168.100.9:3000/uploadProduct', formData, {
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data',
+        //     },
+        // })
             .then((res) => {
+                console.log(res)
                 if (res.data.message === "Upload successful") {
                     setAllProducts(res.data.data);
                     setName("");
@@ -105,7 +111,7 @@ const AddProductDashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await axios.get('https://ruby-uninterested-antelope.cyclic.app/business/protected', {
+                await axios.get('http://192.168.100.9:3000/business/protected', {
                     headers: {
                         'Authorization': `${token}`,
                     },
@@ -115,7 +121,7 @@ const AddProductDashboard = () => {
                             navigate('/admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('https://ruby-uninterested-antelope.cyclic.app/getProduct')
+                            axios.get('http://192.168.100.9:3000/getProduct')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })
@@ -140,7 +146,7 @@ const AddProductDashboard = () => {
 
 
     return (
-        <div className='dashboard-container' style={{ paddingBottom: '40px' }}>
+        <div className='dashboard-container transition-div' style={{ paddingBottom: '40px' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p onClick={() => navigate('/')}>TineyDonkey</p>

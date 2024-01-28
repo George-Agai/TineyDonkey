@@ -10,7 +10,7 @@ function Grid({ Page }) {
     const [AllProducts, setAllProducts] = useState(null);
 
     useEffect(() => {
-        axios.get('https://ruby-uninterested-antelope.cyclic.app/getProduct')
+        axios.get('http://192.168.100.9:3000/getProduct')
             .then((res) => {
                 if (Page === 'Landing') {
                     setAllProducts(res.data.slice(0, 4));
@@ -57,7 +57,7 @@ function Grid({ Page }) {
                             </div>
                             : AllProducts.map((data) => (
                                 <div className="card stacked" key={data._id}>
-                                    <img onClick={() => handleProductSelected(data)} src={`https://ruby-uninterested-antelope.cyclic.app/Images/` + data.image[0]} alt="Teeny" className="card__img" loading="lazy" />
+                                    <img onClick={() => handleProductSelected(data)} src={`http://192.168.100.9:3000/Images/` + data.image[0]} alt="Teeny" className="card__img" loading="lazy" />
                                     <div className="card__content flex-column-align-center">
                                         <h2 className="card__title">{data.productName}</h2>
                                         <p className="card__price">KSh{data.price}.00</p>
