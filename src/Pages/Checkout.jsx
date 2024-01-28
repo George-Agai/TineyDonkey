@@ -45,27 +45,32 @@ function Checkout() {
         };
     }, []);
 
+    const locked = true
+
     const handlePlaceOrder = async (e) => {
         e.preventDefault()
-        if (isEmpty) {
-            alert("Theres nothing to checkout😏")
+        if(locked){
+            alert("Sales begin in 3 days")
         }
-        else {
-            const fullName = firstName + " " + lastName
-            let newContact = contact
-            if (newContact.startsWith("07")) {
-                newContact = "254" + newContact.slice(1)
-            }
-            const formData = {
-                boughtBy: fullName,
-                town: town,
-                orderNotes: orderNotes && orderNotes.length > 3 ? orderNotes : "empty",
-                orderStatus: "pending",
-                country: country && country.length > 2 ? country : "empty",
-                contact: newContact
-            }
-            navigate('/transaction', { state: { formData } })
-        }
+        // if (isEmpty) {
+        //     alert("Theres nothing to checkout😏")
+        // }
+        // else {
+        //     const fullName = firstName + " " + lastName
+        //     let newContact = contact
+        //     if (newContact.startsWith("07")) {
+        //         newContact = "254" + newContact.slice(1)
+        //     }
+        //     const formData = {
+        //         boughtBy: fullName,
+        //         town: town,
+        //         orderNotes: orderNotes && orderNotes.length > 3 ? orderNotes : "empty",
+        //         orderStatus: "pending",
+        //         country: country && country.length > 2 ? country : "empty",
+        //         contact: newContact
+        //     }
+        //     navigate('/transaction', { state: { formData } })
+        // }
     }
 
     return (
