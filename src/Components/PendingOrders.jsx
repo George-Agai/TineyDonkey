@@ -25,7 +25,7 @@ function PendingOrders({ AllProducts }) {
                                 <td className='text-align-center'>John Doe</td>
                                 <td className='text-align-center quantity-th'>{data.price}</td>
                                 <td className='text-align-center'>2hrs ago</td>
-                                <td className='text-align-center'>{data.status ? <span>Pending</span> :<span>Delivered</span>}</td>
+                                <td className='text-align-center'>{data.status ? <span>Pending</span> : <span>Delivered</span>}</td>
                                 <td className='text-align-center'><AiFillDelete id='delete-icon' style={{ color: 'grey' }} /></td>
                             </tr>
                         ))}

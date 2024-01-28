@@ -36,7 +36,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await axios.get('http://192.168.100.9:3000/business/protected', {
+                await axios.get('https://ruby-uninterested-antelope.cyclic.app/business/protected', {
                     headers: {
                         'Authorization': `${token}`,
                     },
@@ -46,7 +46,7 @@ function Dashboard() {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('http://192.168.100.9:3000/getProduct')
+                            axios.get('https://ruby-uninterested-antelope.cyclic.app/getProduct')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })
