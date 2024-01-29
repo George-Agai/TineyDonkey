@@ -37,33 +37,6 @@ const AddProductDashboard = () => {
     const [token, setToken] = useState(readFromLocalStorage('token'))
     const [imageUploaded, setImageUploaded] = useState(false)
 
-    // const handleUpload = (e) => {
-    //     e.preventDefault()
-    //     const priceInteger = parseInt(Price, 10);
-    //     const formData = new FormData();
-    //     formData.append('image', file);
-    //     formData.append('productName', Name);
-    //     formData.append('price', priceInteger);
-    //     axios.post('https://ruby-uninterested-antelope.cyclic.app/upload-image', formData, {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data',
-    //         },
-    //     })
-    //         .then((res) => {
-    //             if (res.data.message === "Upload successful") {
-    //                 console.log("Upload successful")
-    //                 setAllProducts(res.data.data)
-    //                 setName("")
-    //                 setPrice("")
-    //                 setFile("")
-    //             }
-    //             else {
-    //                 console.log("Upload failed")
-    //                 alert("Upload failed")
-    //             }
-    //         })
-    //         .catch(error => console.log(error))
-    // }
 
     const handleUpload = (e) => {
         e.preventDefault();
@@ -84,11 +57,6 @@ const AddProductDashboard = () => {
                 'Content-Type': 'multipart/form-data',
             },
         })
-        // axios.post('https://ruby-uninterested-antelope.cyclic.app/uploadProduct', formData, {
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data',
-        //     },
-        // })
             .then((res) => {
                 console.log(res)
                 if (res.data.message === "Upload successful") {
