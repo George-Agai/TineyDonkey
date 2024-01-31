@@ -23,15 +23,20 @@ function TransactionResponses() {
     const [sendingOrder, setSendingOrder] = useState(false)
 
 
-    //const 
     const findProductWithFalseStatus = (array) => {
         return array.filter(product => !product.status)
     }
+
+    let index = 1
+
     const checkProductAvailability = async () => {
+        console.log("Check product availability function call")
         const idArray = items.map(item => item.id)
         await axios.post('https://ruby-uninterested-antelope.cyclic.app/checkProduct', idArray)
             .then((res) => {
+                console.log("Response for check availability");
                 if (res.data.message === "Found products") {
+                    index++
                     const productsWithFalseStatus = findProductWithFalseStatus(res.data.productStatusResults)
                     setUnavailableProductsArray(productsWithFalseStatus)
                     if (productsWithFalseStatus.length > 0) {
@@ -61,15 +66,22 @@ function TransactionResponses() {
                             ...formData
                         }
                         sendOrderToDatabase(order)
+                        console.log('order', order)
                     }
                 }
                 else console.log("No product found");
 
             })
             .catch(err => console.log(err))
+
     }
     useEffect(() => {
-        checkProductAvailability()
+        if (index == 1) {
+            checkProductAvailability()
+            index++
+        } else {
+            console.log('index more than one')
+        }
     }, [])
 
     useEffect(() => {
@@ -82,29 +94,31 @@ function TransactionResponses() {
         }
     }, [unavailableProductsArray])
 
+
     const sendOrderToDatabase = async (order) => {
-        await axios.post('https://ruby-uninterested-antelope.cyclic.app/saveOrder', order)
-            .then((res) => {
-                if (res.data.message === "Sale saved successfully") {
-                    setTimeout(() => {
-                        setOrderSuccessful(true)
-                        setSendingOrder(false)
-                        setAvailableFlag(false)
-                        setUnavailableFlag(false)
-                        emptyCart()
-                    }, 7000)
-                }
-                else {
-                    setTimeout(() => {
-                        setSomethingWentWrong(true)
-                        setSendingOrder(false)
-                        setAvailableFlag(false)
-                        setUnavailableFlag(false)
-                    }, 4000)
-                }
-            })
-            .catch(err => console.log(err))
+            await axios.post('https://ruby-uninterested-antelope.cyclic.app/saveOrder', order)
+                .then((res) => {
+                    if (res.data.message === "Sale saved successfully") {
+                        setTimeout(() => {
+                            setOrderSuccessful(true)
+                            setSendingOrder(false)
+                            setAvailableFlag(false)
+                            setUnavailableFlag(false)
+                            // emptyCart()
+                        }, 7000)
+                    }
+                    else {
+                        setTimeout(() => {
+                            setSomethingWentWrong(true)
+                            setSendingOrder(false)
+                            setAvailableFlag(false)
+                            setUnavailableFlag(false)
+                        }, 4000)
+                    }
+                })
+                .catch(err => console.log(err))
     }
+
 
     const handleProceedWithoutItem = () => {
         if (isEmpty) {

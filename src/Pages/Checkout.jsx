@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { useCart } from 'react-use-cart';
-// import mpesa from '../TineyDonkeyAssets/mpesa.png'
 import Footer from '../Components/Footer';
 
 function Checkout() {
@@ -50,7 +49,7 @@ function Checkout() {
     const handlePlaceOrder = async (e) => {
         e.preventDefault()
         if(locked){
-            alert("Sales begin in 3 days")
+            alert("Sales begin in 1 day(s)")
         }
         // if (isEmpty) {
         //     alert("Theres nothing to checkout😏")
