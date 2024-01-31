@@ -46,9 +46,11 @@ function Dashboard() {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('https://ruby-uninterested-antelope.cyclic.app/getProduct')
+                            // axios.get('https://ruby-uninterested-antelope.cyclic.app/getPendingOrders')
+                            axios.get('https://ruby-uninterested-antelope.cyclic.app/getPendingOrders')
                                 .then((res) => {
                                     setAllProducts(res.data);
+                                    console.log(res.data)
                                 })
                                 .catch(error => console.log(error))
                         }
