@@ -5,7 +5,6 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
     const [delivered, setDelivered] = useState(false)
     const [rejected, setRejected] = useState(false)
     const formattedNumber = `+${data.contact}`
-    const orderNotes = "Get me the products by tomorrow because I wont be in town for the rest of the week, okay sir?"
 
     const handleDelivered = async() =>{
         try{
@@ -75,7 +74,7 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
             <div>
                 <p>Country: {data.country}</p>
                 <p>Town: {data.town}</p>
-                <p>Order notes: {orderNotes}</p>
+                <p>Order notes: {data.orderNotes}</p>
             </div>
             <div className="flex-column-align-center width100">
                 <span className="flex-justify-content-space-between width100">
