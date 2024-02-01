@@ -25,16 +25,6 @@ function Checkout() {
                 setScrolling(false);
             }
         };
-
-        // const hoverElement = document.getElementById('delete-icon');
-
-        // hoverElement.addEventListener('mouseover', () => {
-        //   hoverElement.style.color = 'red';
-        // });
-
-        // hoverElement.addEventListener('mouseout', () => {
-        //   hoverElement.style.color = 'grey';
-        // });
         window.scrollTo(0, 0)
 
         window.addEventListener('scroll', handleScroll);
@@ -49,7 +39,7 @@ function Checkout() {
     const handlePlaceOrder = async (e) => {
         e.preventDefault()
         if(locked){
-            alert("Sales begin in 1 day(s)")
+            alert("Sales begin tommorrow at 1pm")
         }
         // if (isEmpty) {
         //     alert("Theres nothing to checkout😏")
