@@ -46,7 +46,7 @@ function ExpandedProduct() {
     }, [location.state])
 
 
-
+    let index = 1
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const idFromQuery = searchParams.get('id');
@@ -59,7 +59,12 @@ function ExpandedProduct() {
                 .catch(err => console.log(err))
         }
         if (product === null || product === undefined) {
-            fetchData()
+            if (index == 1) {
+                fetchData()
+                index++
+            } else {
+                console.log('index more than one')
+            }
         }
 
     }, [location.search, product])
