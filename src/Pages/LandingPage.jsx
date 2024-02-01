@@ -57,7 +57,7 @@ function LandingPage() {
           </section>
         </nav>
 
-        <div className=" main-container">
+        <div className=" main-container" loading='lazy'>
           <div className="transition-div flex-column-justify-flex-start main-container-content">
             <h1 className="font-merriweather">We sell cool, tiny stuff⚡️</h1>
             <p>Unleash your creativity with developer-inspired figurines</p>
