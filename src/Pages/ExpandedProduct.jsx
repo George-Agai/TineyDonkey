@@ -50,8 +50,9 @@ function ExpandedProduct() {
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const idFromQuery = searchParams.get('id');
+        const sanitizedId = encodeURIComponent(idFromQuery);
         const fetchData = async () => {
-            await axios.get(`https://ruby-uninterested-antelope.cyclic.app/fetchProduct?id=${idFromQuery}`)
+            await axios.get(`https://ruby-uninterested-antelope.cyclic.app/fetchProduct?id=${sanitizedId}`)
                 .then((prod) => {
                     setProduct(prod.data)
                 })
