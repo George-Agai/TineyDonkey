@@ -39,7 +39,7 @@ function Checkout() {
     const handlePlaceOrder = async (e) => {
         e.preventDefault()
         if(locked){
-            alert("Sales begin tommorrow at 1pm")
+            alert("Sales begin at 1pm")
         }
         // if (isEmpty) {
         //     alert("Theres nothing to checkout😏")
