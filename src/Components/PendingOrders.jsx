@@ -53,7 +53,7 @@ function PendingOrders({ AllProducts }) {
                                 <td className='text-align-center quantity-th'>{data.totalAmount}</td>
                                 <td className='text-align-center'>{data.products.length}</td>
                                 <td className='text-align-center'>{calculateTimeDifference(data.time)}</td>
-                                <td className='text-align-center'>{data.orderStatus === "pending" ? <span style={{color: 'green'}}>Pending</span> : <span>Delivered</span>}</td>
+                                <td className='text-align-center'>{data.orderStatus === "pending" ? <span style={{color: 'green'}}>Pending</span> : data.orderStatus === "delivered" ? <span>Delivered</span> : <span style={{color: 'red'}}>Rejected</span>}</td>
                             </tr>
                         ))}
                 </tbody>

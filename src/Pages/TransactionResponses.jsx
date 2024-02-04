@@ -152,7 +152,7 @@ function TransactionResponses() {
                             : initiatingTransaction ?
                                 <TransactionState text={'Initiating transaction...'} />
                                 : orderSuccessful ?
-                                    <TransactionResponse image={tick} text={'Order placed successfully'} />
+                                    <TransactionResponse image={tick} text={'Order placed successfully'}/>
                                     : somethingWentWrong ?
                                         <TransactionResponse image={x} text={'Oops, something went wrong'} />
                                         : sendingOrder ?
