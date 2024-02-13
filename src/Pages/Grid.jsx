@@ -13,7 +13,18 @@ function Grid({ Page }) {
         axios.get('https://ruby-uninterested-antelope.cyclic.app/getProduct')
             .then((res) => {
                 if (Page === 'Landing') {
-                    setAllProducts(res.data.slice(0, 4));
+                    const productsArray = res.data
+                    productsArray.sort((a, b) => {
+                        // Objects with status: true come before those with status: false
+                        if (a.status === true && b.status === false) {
+                            return -1; // a comes before b
+                        } else if (a.status === false && b.status === true) {
+                            return 1; // b comes before a
+                        } else {
+                            return 0; // no change in order
+                        }
+                    });
+                    setAllProducts(productsArray.slice(0, 4));
                 }
                 else {
                     setAllProducts(res.data);
