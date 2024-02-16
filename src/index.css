@@ -482,7 +482,8 @@ body {
 .contact-us-email-div input:focus,
 .add-product-form input:focus,
 .payment-details-form input:focus,
-.login-form-div form input:focus {
+.login-form-div form input:focus,
+.finances-main-div input:focus {
   outline: none;
   font-size: 15px;
 }
@@ -611,7 +612,8 @@ textarea {
 
 .payment-details-form input,
 .add-product-form input,
-.login-form-div form input {
+.login-form-div form input,
+.finances-main-div select{
   height: 30px;
   padding: 5px 10px;
   font-size: 15px;
@@ -620,9 +622,20 @@ textarea {
   margin-bottom: 20px;
 }
 
+.finances-main-div input{
+  height: 35px;
+  padding: 5px 10px;
+  font-size: 15px;
+  color: #687279;
+  border: 1px solid #dbdde0;
+  margin-bottom: 20px;
+  width: 20vw;
+}
+
 .payment-details-form label,
 .add-product-form label,
-.login-form-div form label {
+.login-form-div form label,
+.finances-main-div label {
   margin-bottom: 10px;
   color: RGB(104, 114, 121);
   font-weight: 700;

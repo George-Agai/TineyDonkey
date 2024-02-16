@@ -91,8 +91,9 @@ function Dashboard() {
 
             <div className='width100 flex-justify-content-space-between dashboard-total-sales-div'>
                 <div style={{ border: '2px solid rgb(231, 230, 230)', padding: '15px 25px', minWidth: '200px' }}>
-                    <h3 className=''>Total sales</h3>
+                    <h3 className=''>Available profit</h3>
                     <h1>Ksh850</h1>
+                    <a onClick={()=> navigate('/finances')}>Manage Finances</a>
                 </div>
                 <button className='cta-button' onClick={() => navigate('/addProductDashboard')}>Add product</button>
             </div>

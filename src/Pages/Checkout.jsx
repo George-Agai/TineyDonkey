@@ -34,13 +34,8 @@ function Checkout() {
         };
     }, []);
 
-    const locked = true
-
     const handlePlaceOrder = async (e) => {
         e.preventDefault()
-        // if(locked){
-        //     alert("Sales begin at 1pm")
-        // }
         if (isEmpty) {
             alert("Theres nothing to checkout😏")
         }
