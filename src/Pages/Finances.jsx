@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
+import axios from 'axios';
 
 function Finances() {
   const navigate = useNavigate()
   const [scrolling, setScrolling] = useState(false);
-  const [transactionType, setTransactionType] = useState('expense');
+  const [transactionType, setTransactionType] = useState('Expense');
   const [description, setDescription] = useState()
   const [amount, setAmount] = useState()
+  const [AllCashflow, setAllCashflow] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,9 +37,63 @@ function Finances() {
 
   const handleTransactionTypeChange = (event) => {
     setTransactionType(event.target.value);
-
   };
-  console.log(transactionType);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        axios.get('https://ruby-uninterested-antelope.cyclic.app/getAllCashflow')
+          .then((res) => {
+            setAllCashflow(res.data.payload);
+          })
+          .catch(error => console.log(error))
+      }
+      catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [])
+
+
+  const handleSave = async (e) => {
+    e.preventDefault()
+    const newAmount = parseInt(amount, 10)
+
+    try {
+      const cashflowObject = {
+        description: description,
+        amount: newAmount,
+        transactionType
+      }
+      await axios.post('https://ruby-uninterested-antelope.cyclic.app/cashflow', cashflowObject)
+        .then((res) => {
+          console.log(res)
+        })
+        .catch(error => console.log(error))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    const options = {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+      timeZone: 'UTC'
+    };
+
+    const formattedDate = date.toLocaleString('en-US', options);
+    return formattedDate;
+  }
   return (
     <div className='transition-div dashboard-container' style={{ paddingBottom: '40px' }}>
       <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
@@ -55,27 +111,27 @@ function Finances() {
         </section>
       </nav>
 
-      <div className='finances-main-div' style={{ border: '1px solid black' }}>
+      <div className='finances-main-div'>
         <div>
           <select id="transactionType" value={transactionType} onChange={handleTransactionTypeChange}>
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
+            <option value="Expense">Expense</option>
+            <option value="Income">Income</option>
           </select>
         </div>
 
         <div className='flex-justify-content-space-between' style={{ width: '70%' }}>
           <div className='flex-column-justify-flex-start'>
             <label htmlFor="Description">Description *</label>
-            <input type="text" id="Description" placeholder="Description" required="true" onChange={(e) => setDescription(e.target.value)} value={description} />
+            <input type="text" id="Description" placeholder="Description" required={true} onChange={(e) => setDescription(e.target.value)} value={description} />
           </div>
           <div className='flex-column-justify-flex-start' style={{ marginLeft: '30px' }}>
             <label htmlFor="Amount">Amount *</label>
-            <input type="text" id="Amount" placeholder="Amount" required="true" onChange={(e) => setAmount(e.target.value)} value={amount} />
+            <input type="text" id="Amount" placeholder="Amount" required={true} onChange={(e) => setAmount(e.target.value)} value={amount} />
           </div>
-          <button className='cta-button'>Save</button>
+          <button className='cta-button' onClick={(e) => handleSave(e)}>Save</button>
         </div>
 
-        <div className='flex-align-center-justify-center' style={{ border: '1px solid black' }}>
+        <div className='flex-align-center-justify-center'>
           <div>
             <p>Total sales</p>
             <h2>3,214</h2>
@@ -88,6 +144,34 @@ function Finances() {
             <p>Profit</p>
             <h2>214</h2>
           </div>
+        </div>
+
+        <div style={{ width: '100%' }} className="available-product-div">
+          <h3>Statement</h3>
+          <table style={{ width: '100%' }}>
+            <thead>
+              <tr style={{ borderTop: '2px solid rgb(231, 230, 230)' }}>
+                <td className='text-align-left'>No</td>
+                <td className='text-align-center'>Description</td>
+                <td className='text-align-center quantity-th'>Amount</td>
+                <td className='text-align-center'>Date</td>
+                <td className='text-align-center'>Type</td>
+              </tr>
+            </thead>
+            <tbody>
+              {AllCashflow == null
+                ? "Please wait..."
+                : AllCashflow.length == 0 ? "No transactions" : AllCashflow.map((data, index) => (
+                  <tr key={data._id}>
+                    <td className='text-align-left'>{index + 1}</td>
+                    <td className='text-align-center'>{data.description}</td>
+                    <td className='text-align-center quantity-th'>{data.amount}</td>
+                    <td className='text-align-center'>{formatDate(data.time)}</td>
+                    <td className='text-align-center'>{data.type}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
