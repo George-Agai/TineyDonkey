@@ -100,7 +100,7 @@ function Contact() {
                         <MdEmail style={{ color: '#FF6310' }} className='contact-us-icons' />
                         <section className='flex-column-justify-flex-start' style={{ marginLeft: '30px', width: '250px' }}>
                             <h2>Email Address</h2>
-                            <p>georgeeagai@gmail.com</p>
+                            <p>george@tineydonkey.shop</p>
                         </section>
                     </div>
                     <div className='flex-align-center-justify-center'>

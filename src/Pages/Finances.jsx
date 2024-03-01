@@ -10,6 +10,9 @@ function Finances() {
   const [description, setDescription] = useState()
   const [amount, setAmount] = useState()
   const [AllCashflow, setAllCashflow] = useState(null);
+  const [totalIncome, setTotalIncome] = useState()
+  const [totalExpenses, setTotalExpenses] = useState()
+  const [profit, setProfit] = useState()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +49,23 @@ function Finances() {
         axios.get('https://ruby-uninterested-antelope.cyclic.app/getAllCashflow')
           .then((res) => {
             setAllCashflow(res.data.payload);
+
+
+            let income = 0;
+            let expense = 0;
+
+            res.data.payload.forEach(item => {
+              if (item.type === 'Income') {
+                income += item.amount;
+              } else if (item.type === 'Expense') {
+                expense += item.amount;
+              }
+            });
+
+            setTotalIncome(income)
+            setTotalExpenses(expense)
+            setProfit(income - expense)
+
           })
           .catch(error => console.log(error))
       }
@@ -55,7 +75,6 @@ function Finances() {
     };
     fetchData();
   }, [])
-
 
   const handleSave = async (e) => {
     e.preventDefault()
@@ -69,7 +88,22 @@ function Finances() {
       }
       await axios.post('https://ruby-uninterested-antelope.cyclic.app/cashflow', cashflowObject)
         .then((res) => {
-          console.log(res)
+          setAllCashflow(res.data.payload);
+
+          let income = 0;
+          let expense = 0;
+
+          res.data.payload.forEach(item => {
+            if (item.type === 'Income') {
+              income += item.amount;
+            } else if (item.type === 'Expense') {
+              expense += item.amount;
+            }
+          });
+
+          setTotalIncome(income)
+          setTotalExpenses(expense)
+          setProfit(income - expense)
         })
         .catch(error => console.log(error))
     } catch (error) {
@@ -88,7 +122,7 @@ function Finances() {
       minute: '2-digit',
       second: '2-digit',
       hour12: false,
-      timeZone: 'UTC'
+      timeZone: 'EAT'
     };
 
     const formattedDate = date.toLocaleString('en-US', options);
@@ -131,18 +165,18 @@ function Finances() {
           <button className='cta-button' onClick={(e) => handleSave(e)}>Save</button>
         </div>
 
-        <div className='flex-align-center-justify-center'>
+        <div className='flex-align-flex-start finances-overview-container'>
           <div>
             <p>Total sales</p>
-            <h2>3,214</h2>
+            <h2>{totalIncome}</h2>
           </div>
           <div>
             <p>Expenses</p>
-            <h2>3,000</h2>
+            <h2>{totalExpenses}</h2>
           </div>
           <div>
             <p>Profit</p>
-            <h2>214</h2>
+            <h2>{profit}</h2>
           </div>
         </div>
 
