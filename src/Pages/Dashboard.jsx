@@ -13,6 +13,9 @@ function Dashboard() {
     const [scrolling, setScrolling] = useState(false);
     const [AllProducts, setAllProducts] = useState(null);
     const [token, setToken] = useState(readFromLocalStorage('token'))
+    const [totalIncome, setTotalIncome] = useState()
+    const [totalExpenses, setTotalExpenses] = useState()
+    const [profit, setProfit] = useState()
     const navigate = useNavigate()
 
     // localStorage.removeItem('token')
@@ -46,7 +49,6 @@ function Dashboard() {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            // axios.get('https://ruby-uninterested-antelope.cyclic.app/getPendingOrders')
                             axios.get('https://ruby-uninterested-antelope.cyclic.app/getPendingOrders')
                                 .then((res) => {
                                     setAllProducts(res.data);
@@ -63,6 +65,35 @@ function Dashboard() {
         };
         fetchData();
     }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            axios.get('https://ruby-uninterested-antelope.cyclic.app/getAllCashflow')
+              .then((res) => {
+                let income = 0;
+                let expense = 0;
+    
+                res.data.payload.forEach(item => {
+                  if (item.type === 'Income') {
+                    income += item.amount;
+                  } else if (item.type === 'Expense') {
+                    expense += item.amount;
+                  }
+                });
+    
+                setTotalIncome(income)
+                setTotalExpenses(expense)
+                setProfit(income - expense)
+              })
+              .catch(error => console.log(error))
+          }
+          catch (error) {
+            console.error(error);
+          }
+        };
+        fetchData();
+      }, [])
 
     const handleLogout = () => {
         localStorage.removeItem('token')
@@ -92,8 +123,8 @@ function Dashboard() {
             <div className='width100 flex-justify-content-space-between dashboard-total-sales-div'>
                 <div style={{ border: '2px solid rgb(231, 230, 230)', padding: '15px 25px', minWidth: '200px' }}>
                     <h3 className=''>Available profit</h3>
-                    <h1>Ksh850</h1>
-                    <a onClick={()=> navigate('/finances')}>Manage Finances</a>
+                    <h1>Ksh{profit}</h1>
+                    <a onClick={() => navigate('/finances')}>Manage Finances</a>
                 </div>
                 <button className='cta-button' onClick={() => navigate('/addProductDashboard')}>Add product</button>
             </div>

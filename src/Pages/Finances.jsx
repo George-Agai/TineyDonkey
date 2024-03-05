@@ -49,8 +49,6 @@ function Finances() {
         axios.get('https://ruby-uninterested-antelope.cyclic.app/getAllCashflow')
           .then((res) => {
             setAllCashflow(res.data.payload);
-
-
             let income = 0;
             let expense = 0;
 
