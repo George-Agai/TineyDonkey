@@ -12,7 +12,6 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
             await axios.post(`https://ruby-uninterested-antelope.cyclic.app/orderDelivered?id=${saleId}`)
             .then((res) => {
                 if(res.data.message == 'success'){
-                    console.log('Delivered response -->', res.data)
                     setDelivered(true)
                     setTimeout(() => {
                         onClose()
@@ -40,7 +39,6 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
             await axios.post('https://ruby-uninterested-antelope.cyclic.app/rejectOrder', requestObject)
             .then((res) => {
                 if(res.data.message == 'success'){
-                    console.log('Rejected response -->', res.data)
                     setRejected(true)
                     setTimeout(() => {
                         onClose()
@@ -50,7 +48,7 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
             })
             .catch(err => console.log(err))
         } catch (error) {
-            console.log(error)
+            alert("Something went wrong")
         }
     }
     return (
