@@ -9,7 +9,7 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
     const handleDelivered = async() =>{
         try{
             const saleId = data._id
-            await axios.post(`https://ruby-uninterested-antelope.cyclic.app/orderDelivered?id=${saleId}`)
+            await axios.post(`https://uninterested-antelope.onrender.com/orderDelivered?id=${saleId}`)
             .then((res) => {
                 if(res.data.message == 'success'){
                     setDelivered(true)
@@ -36,7 +36,7 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
                 saleId,
                 productIds
             }
-            await axios.post('https://ruby-uninterested-antelope.cyclic.app/rejectOrder', requestObject)
+            await axios.post('https://uninterested-antelope.onrender.com/rejectOrder', requestObject)
             .then((res) => {
                 if(res.data.message == 'success'){
                     setRejected(true)
@@ -62,7 +62,7 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
                 {data.products.map((product) => (
                     <tr key={product._id}>
                         <td className='' style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={`https://ruby-uninterested-antelope.cyclic.app/Images/` + product.image[0]} alt='Product' style={{ width: '60px' }} />
+                            <img src={`https://uninterested-antelope.onrender.com/Images/` + product.image[0]} alt='Product' style={{ width: '60px' }} />
                             <p style={{ marginLeft: '20px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px', marginRight: '15px' }} className='font-merriweather'>{product.productName}</p>
                         </td>
                         <td className="text-align-center">{product.itemTotal}</td>

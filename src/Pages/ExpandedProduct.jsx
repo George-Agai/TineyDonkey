@@ -52,7 +52,7 @@ function ExpandedProduct() {
         const idFromQuery = searchParams.get('id');
         const sanitizedId = encodeURIComponent(idFromQuery);
         const fetchData = async () => {
-            await axios.get(`https://ruby-uninterested-antelope.cyclic.app/fetchProduct?id=${sanitizedId}`)
+            await axios.get(`https://uninterested-antelope.onrender.com/fetchProduct?id=${sanitizedId}`)
                 .then((prod) => {
                     setProduct(prod.data)
                 })
@@ -113,7 +113,7 @@ function ExpandedProduct() {
                     </div>
                     <div style={{ overflow: 'hidden' }}>
                         <img
-                            src={`https://ruby-uninterested-antelope.cyclic.app/Images/${product && product.image[activeThumbnailIndex]}`}
+                            src={`https://uninterested-antelope.onrender.com/Images/${product && product.image[activeThumbnailIndex]}`}
                             alt="Main Product"
                             loading='lazy'
                             style={{
@@ -131,7 +131,7 @@ function ExpandedProduct() {
                                 key={index}
                                 loading='lazy'
                                 className='expanded-image-thumbnail'
-                                src={`https://ruby-uninterested-antelope.cyclic.app/Images/${product && imageName}`}
+                                src={`https://uninterested-antelope.onrender.com/Images/${product && imageName}`}
                                 alt={`Thumbnail ${index + 1}`}
                                 style={{
                                     maxWidth: "100px",
