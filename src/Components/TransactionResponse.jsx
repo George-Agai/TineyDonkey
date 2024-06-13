@@ -16,7 +16,7 @@ function TransactionResponse({ image, text }) {
 //             saleId,
 //             productIds
 //         }
-//         await axios.post('https://ruby-uninterested-antelope.cyclic.app/rejectOrder', requestObject)
+//         await axios.post('https://uninterested-antelope.onrender.com/rejectOrder', requestObject)
 //         .then((res) => {
 //             if(res.data.message == 'success'){
 //                 console.log('Rejected response -->', res.data)

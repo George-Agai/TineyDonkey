@@ -46,7 +46,7 @@ function Finances() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        axios.get('https://ruby-uninterested-antelope.cyclic.app/getAllCashflow')
+        axios.get('https://uninterested-antelope.onrender.com/getAllCashflow')
           .then((res) => {
             setAllCashflow(res.data.payload);
             let income = 0;
@@ -84,7 +84,7 @@ function Finances() {
         amount: newAmount,
         transactionType
       }
-      await axios.post('https://ruby-uninterested-antelope.cyclic.app/cashflow', cashflowObject)
+      await axios.post('https://uninterested-antelope.onrender.com/cashflow', cashflowObject)
         .then((res) => {
           setAllCashflow(res.data.payload);
 

@@ -52,7 +52,7 @@ const AddProductDashboard = () => {
         formData.append('productName', Name);
         formData.append('price', priceInteger);
 
-        axios.post('https://ruby-uninterested-antelope.cyclic.app/uploadProduct', formData, {
+        axios.post('https://uninterested-antelope.onrender.com/uploadProduct', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -79,7 +79,7 @@ const AddProductDashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await axios.get('https://ruby-uninterested-antelope.cyclic.app/business/protected', {
+                await axios.get('https://uninterested-antelope.onrender.com/business/protected', {
                     headers: {
                         'Authorization': `${token}`,
                     },
@@ -89,7 +89,7 @@ const AddProductDashboard = () => {
                             navigate('/admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('https://ruby-uninterested-antelope.cyclic.app/getProduct')
+                            axios.get('https://uninterested-antelope.onrender.com/getProduct')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })

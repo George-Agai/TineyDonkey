@@ -39,7 +39,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await axios.get('https://ruby-uninterested-antelope.cyclic.app/business/protected', {
+                await axios.get('https://uninterested-antelope.onrender.com/business/protected', {
                     headers: {
                         'Authorization': `${token}`,
                     },
@@ -49,7 +49,7 @@ function Dashboard() {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('https://ruby-uninterested-antelope.cyclic.app/getPendingOrders')
+                            axios.get('https://uninterested-antelope.onrender.com/getPendingOrders')
                                 .then((res) => {
                                     setAllProducts(res.data);
                                     console.log(res.data)
@@ -69,7 +69,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            axios.get('https://ruby-uninterested-antelope.cyclic.app/getAllCashflow')
+            axios.get('https://uninterested-antelope.onrender.com/getAllCashflow')
               .then((res) => {
                 let income = 0;
                 let expense = 0;
