@@ -36,9 +36,9 @@ function LandingPage() {
     navigate('/products')
   }
 
-  const handleRedirect = () => {
-      window.open('https://twitter.com/TineyDonkey', '_blank');
-  };
+  // const handleRedirect = () => {
+  //     window.open('https://twitter.com/TineyDonkey', '_blank');
+  // };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -63,7 +63,7 @@ function LandingPage() {
 
         <div className=" main-container" loading='lazy'>
           <div className="transition-div flex-column-align-center main-container-content">
-            <p onClick={handleRedirect} className="sold-out flex-align-center-justify-center">We're sold out, follow on X to get updates on next sale</p>
+            {/* <p onClick={handleRedirect} className="sold-out flex-align-center-justify-center">We're sold out, follow on X to get updates on next sale</p> */}
             
             <h1 className="font-merriweather">We sell cool, tiny stuff⚡️</h1>
             <p>Unleash your creativity with developer-inspired figurines</p>
