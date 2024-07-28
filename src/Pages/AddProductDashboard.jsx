@@ -79,7 +79,7 @@ const AddProductDashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await axios.get('https://uninterested-antelope.onrender.com/business/protected', {
+                await axios.get('https://uninterested-antelope.onrender.com/authentication', {
                     headers: {
                         'Authorization': `${token}`,
                     },
