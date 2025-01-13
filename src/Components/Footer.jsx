@@ -51,7 +51,7 @@ function Footer() {
                 </div>
             </div>
             <div>
-                <p style={{ color: 'white', fontSize: '13px' }}>Copyright © 2024 - <a style={{ color: '#FF6310', cursor: 'pointer' }} href="https://twitter.com/george__agai" target="new">Agai</a>⚡️</p>
+                <p style={{ color: 'white', fontSize: '13px' }}>Copyright © { new Date().getFullYear()} - <a style={{ color: '#FF6310', cursor: 'pointer' }} href="https://twitter.com/george__agai" target="new">Agai</a>⚡️</p>
             </div>
         </div>
     )
