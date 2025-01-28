@@ -31,8 +31,6 @@ function LandingPage() {
   }, []);
 
   function HandleViewAllButton() {
-    // var targetDiv = document.getElementById('landing');
-    // targetDiv.scrollIntoView({ behavior: 'smooth' });
     navigate('/products')
   }
 

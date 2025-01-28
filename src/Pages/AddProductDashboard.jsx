@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import AvailableProduct from '../Components/AvailableProduct';
+import imageCompression from 'browser-image-compression';
 import axios from 'axios';
+
 
 const AddProductDashboard = () => {
 
@@ -24,6 +26,7 @@ const AddProductDashboard = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
     const readFromLocalStorage = (key) => {
         const value = localStorage.getItem(key);
         return JSON.parse(value);
@@ -37,43 +40,85 @@ const AddProductDashboard = () => {
     const [token, setToken] = useState(readFromLocalStorage('token'))
     const [imageUploaded, setImageUploaded] = useState(false)
 
-
-    const handleUpload = (e) => {
+    const handleUpload = async (e) => {
         e.preventDefault();
 
         const priceInteger = parseInt(Price, 10);
         const formData = new FormData();
 
-        // Append each selected file to the FormData
-        for (let i = 0; i < file.length; i++) {
-            formData.append('image', file[i]);
+        try {
+            // Compress each selected file
+            const compressedFiles = await Promise.all(
+                Array.from(file).map(async (file) => {
+                    const options = {
+                        maxSizeMB: 0.2, // Max size in MB
+                        // maxWidthOrHeight: 800, // Resize to this width/height (maintains aspect ratio)
+                        useWebWorker: true,
+                        fileType: 'image/webp', // Convert to webp format
+                    };
+                    return await imageCompression(file, options);
+                })
+            );
+
+            // Append each compressed file to FormData
+            compressedFiles.forEach((compressedFile) => {
+                formData.append('image', compressedFile);
+            });
+
+            formData.append('productName', Name);
+            formData.append('price', priceInteger);
+
+            // Log FormData contents
+            // for (const [key, value] of formData.entries()) {
+            //     if (key === 'image' && value instanceof File) {
+            //         console.log(`Key: ${key}`);
+            //         console.log(`File Name: ${value.name}`);
+            //         console.log(`File Type: ${value.type}`);
+            //         console.log(`File Size: ${value.size / 1024} KB`); // Convert size to KB
+            //     } else {
+            //         console.log(`Key: ${key}, Value: ${value}`);
+            //     }
+            // }
+
+            // Check the image format and sizes
+            // for (let i = 0; i < file.length; i++) {
+            //     const image = file[i];
+            //     const validFormats = ['image/jpeg', 'image/png', 'image/gif']; // Allowed formats
+            //     const maxSize = 7 * 1024 * 1024; // 2 MB in bytes
+
+            //     if (!validFormats.includes(image.type)) {
+            //         console.error(`Invalid file format: ${image.name}`);
+            //     }
+
+            //     if (image.size > maxSize) {
+            //         console.error(`File too large: ${image.name}, Size: ${image.size / 1024} KB`);
+            //     }
+            // }
+
+            // Make the API call
+            const res = await axios.post('https://uninterested-antelope.onrender.com/uploadProduct', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+
+            // const res = await axios.post('http://192.168.0.104:3000/uploadProduct', formData, {
+            //     headers: { 'Content-Type': 'multipart/form-data' },
+            // });
+
+            console.log(res);
+            if (res.data.message === "Upload successful") {
+                setAllProducts(res.data.data);
+                setName("");
+                setPrice("");
+                setFile("");
+                setImageUploaded(true);
+                setTimeout(() => setImageUploaded(false), 3000);
+            } else {
+                alert("Upload failed");
+            }
+        } catch (error) {
+            console.error("Error during upload:", error);
         }
-
-        formData.append('productName', Name);
-        formData.append('price', priceInteger);
-
-        axios.post('https://uninterested-antelope.onrender.com/uploadProduct', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        })
-            .then((res) => {
-                console.log(res)
-                if (res.data.message === "Upload successful") {
-                    setAllProducts(res.data.data);
-                    setName("");
-                    setPrice("");
-                    setFile("");
-                    setImageUploaded(true)
-                    setTimeout(() => {
-                        setImageUploaded(false)
-                    }, 3000)
-                } else {
-                    alert("Upload failed");
-                }
-            })
-            .catch(error => console.log(error));
-    }
+    };
 
 
     useEffect(() => {
@@ -145,6 +190,8 @@ const AddProductDashboard = () => {
                         <button type='submit' className='cta-button width100'>{imageUploaded ? "Uploaded" : "Upload"}</button>
                     </form>
                 </div>
+
+                <div id="image-preview"></div>
 
                 <div style={{ overflowY: 'auto' }} className='flex-column-align-center products-scrollbar'>
                     <h3>All figurines</h3>
