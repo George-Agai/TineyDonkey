@@ -32,7 +32,7 @@ function TransactionResponses() {
     const checkProductAvailability = async () => {
         console.log("Check product availability function call")
         const idArray = items.map(item => item.id)
-        await axios.post('https://ruby-uninterested-antelope.cyclic.app/checkProduct', idArray)
+        await axios.post('https://uninterested-antelope.onrender.com/checkProduct', idArray)
             .then((res) => {
                 console.log("Response for check availability");
                 if (res.data.message === "Found products") {
@@ -96,7 +96,7 @@ function TransactionResponses() {
 
 
     const sendOrderToDatabase = async (order) => {
-            await axios.post('https://ruby-uninterested-antelope.cyclic.app/saveOrder', order)
+            await axios.post('https://uninterested-antelope.onrender.com/saveOrder', order)
                 .then((res) => {
                     if (res.data.message === "Sale saved successfully") {
                         setTimeout(() => {

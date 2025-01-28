@@ -85,7 +85,7 @@ function Cart() {
                                 return (
                                     <tr key={item.id}>
                                         <td className='' style={{ display: 'flex', alignItems: 'center' }}>
-                                            <img src={`https://ruby-uninterested-antelope.cyclic.app/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
+                                            <img src={`https://uninterested-antelope.onrender.com/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
                                             <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>{item.productName}<span className='quantity'></span></p>
                                         </td>
                                         <td className='text-align-center quantity-th'>{item.quantity}</td>
