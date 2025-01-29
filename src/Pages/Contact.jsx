@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import Footer from '../Components/Footer';
 import { useCart } from 'react-use-cart';
+import { url, testUrl } from "../Constants/url"
 import axios from 'axios';
 
 function Contact() {
@@ -49,7 +50,7 @@ function Contact() {
                 about: subject,
                 message: message
             }
-            await axios.post('https://uninterested-antelope.onrender.com/sendMessage', newMessage)
+            await axios.post(`${url}/sendMessage`, newMessage)
                 .then((res) => {
                     if (res.data.message === "Message saved successfully") {
                         setEmailSent(true)

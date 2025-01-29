@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
+import { url, testUrl } from "../Constants/url"
 import axios from 'axios';
 
 function Finances() {
@@ -46,7 +47,7 @@ function Finances() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        axios.get('https://uninterested-antelope.onrender.com/getAllCashflow')
+        axios.get(`${url}/getAllCashflow`)
           .then((res) => {
             setAllCashflow(res.data.payload);
             let income = 0;
@@ -84,7 +85,7 @@ function Finances() {
         amount: newAmount,
         transactionType
       }
-      await axios.post('https://uninterested-antelope.onrender.com/cashflow', cashflowObject)
+      await axios.post(`${url}/cashflow`, cashflowObject)
         .then((res) => {
           setAllCashflow(res.data.payload);
 

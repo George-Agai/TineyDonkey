@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { useCart } from 'react-use-cart';
 import { AiFillDelete } from "react-icons/ai";
+import { url, testUrl } from "../Constants/url"
 import Footer from '../Components/Footer';
 
 function Cart() {
@@ -85,7 +86,7 @@ function Cart() {
                                 return (
                                     <tr key={item.id}>
                                         <td className='' style={{ display: 'flex', alignItems: 'center' }}>
-                                            <img src={`https://uninterested-antelope.onrender.com/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
+                                            <img src={`${url}/Images/${item.image[0]}`} alt='Main image' style={{ width: '70px' }} loading='lazy' />
                                             <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>{item.productName}<span className='quantity'></span></p>
                                         </td>
                                         <td className='text-align-center quantity-th'>{item.quantity}</td>

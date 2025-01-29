@@ -1,4 +1,6 @@
 import { AiFillDelete } from "react-icons/ai";
+import { url, testUrl } from "../Constants/url"
+
 
 function AvailableProduct({ AllProducts }) {
     return (
@@ -17,9 +19,7 @@ function AvailableProduct({ AllProducts }) {
                         : AllProducts.map((data) => (
                             <tr key={data._id}>
                                 <td className='' style={{ display: 'flex', alignItems: 'center' }}>
-                                    <img src={`https://uninterested-antelope.onrender.com/Images/` + data.image[0]} alt='Product' style={{ width: '100px' }} />
-                                    {/* <img src={`http://192.168.0.104:3000/Images/` + data.image[0]} alt='Product' style={{ width: '100px' }} /> */}
-                                    
+                                    <img src={`${url}/Images/` + data.image[0]} alt='Product' style={{ width: '100px' }} />
                                     <p style={{ marginLeft: '15px', color: 'RGB(104, 114, 121)', fontWeight: '500', fontSize: '15px' }} className='font-merriweather'>{data.productName}</p>
                                 </td>
                                 <td className='text-align-center'>{data.price}</td>

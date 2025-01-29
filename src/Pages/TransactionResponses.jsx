@@ -6,6 +6,7 @@ import TransactionState from '../Components/TransactionState'
 import TransactionResponse from '../Components/TransactionResponse'
 import tick from '../TineyDonkeyAssets/tick.png'
 import x from '../TineyDonkeyAssets/x-mark.png'
+import { url, testUrl } from "../Constants/url"
 
 function TransactionResponses() {
     const location = useLocation()
@@ -32,7 +33,7 @@ function TransactionResponses() {
     const checkProductAvailability = async () => {
         console.log("Check product availability function call")
         const idArray = items.map(item => item.id)
-        await axios.post('https://uninterested-antelope.onrender.com/checkProduct', idArray)
+        await axios.post(`${url}/checkProduct`, idArray)
             .then((res) => {
                 console.log("Response for check availability");
                 if (res.data.message === "Found products") {
@@ -96,7 +97,7 @@ function TransactionResponses() {
 
 
     const sendOrderToDatabase = async (order) => {
-            await axios.post('https://uninterested-antelope.onrender.com/saveOrder', order)
+            await axios.post(`${url}/saveOrder`, order)
                 .then((res) => {
                     if (res.data.message === "Sale saved successfully") {
                         setTimeout(() => {

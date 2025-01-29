@@ -690,6 +690,14 @@ textarea {
   height: max-content;
 }
 
+.tile{
+  background-color: white;
+  border: 1px solid rgb(241, 241, 241);
+  box-shadow: 0 0 20px rgba(92, 92, 92, 0.2);
+  border-radius: 10px;
+}
+
+
 .expanded-product-container {
   margin-top: 130px;
   width: 100vw;
@@ -878,6 +886,7 @@ textarea {
   background-color: rgba(255, 254, 223, 0.301);
   transition: 300ms;
 } */
+
 
 
 @media screen and (max-width: 1100px) {

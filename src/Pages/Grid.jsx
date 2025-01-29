@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom"
 import { useCart } from "react-use-cart";
 import { AiFillLock } from "react-icons/ai";
+import { url, testUrl } from "../Constants/url"
 import axios from 'axios';
 
 function Grid({ Page }) {
@@ -9,8 +10,13 @@ function Grid({ Page }) {
     const { addItem, inCart } = useCart()
     const [AllProducts, setAllProducts] = useState(null);
 
+    const countRef = useRef(0);
+
     useEffect(() => {
-        axios.get('https://uninterested-antelope.onrender.com/getProduct')
+        if (countRef.current > 0) return;
+        countRef.current += 1;
+
+        axios.get(`${url}/getProduct`)
             .then((res) => {
                 if (Page === 'Landing') {
                     const productsArray = res.data
@@ -68,7 +74,7 @@ function Grid({ Page }) {
                             </div>
                             : AllProducts.map((data) => (
                                 <div className="card stacked" key={data._id}>
-                                    <img onClick={() => handleProductSelected(data)} src={`https://uninterested-antelope.onrender.com/Images/` + data.image[0]} alt="Teeny" className="card__img" loading="lazy" />
+                                    <img onClick={() => handleProductSelected(data)} src={`${url}/Images/` + data.image[0]} alt="Teeny" className="card__img" loading="lazy" />
                                     <div className="card__content flex-column-align-center">
                                         <h2 className="card__title">{data.productName}</h2>
                                         <p className="card__price">KSh{data.price}.00</p>

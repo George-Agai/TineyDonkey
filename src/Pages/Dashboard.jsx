@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import PendingOrders from '../Components/PendingOrders';
+import DashboardTiles from '../Components/DashboardTiles';
+import { url, testUrl } from "../Constants/url"
 import axios from 'axios';
 
 function Dashboard() {
@@ -43,7 +45,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await axios.get('https://uninterested-antelope.onrender.com/authentication', {
+                await axios.get(`${url}/authentication`, {
                     headers: {
                         'Authorization': `${token}`,
                     },
@@ -53,7 +55,7 @@ function Dashboard() {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('https://uninterested-antelope.onrender.com/getPendingOrders')
+                            axios.get(`${url}/getPendingOrders`)
                                 .then((res) => {
                                     setAllProducts(res.data);
                                     setAuthorized(true)
@@ -74,7 +76,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                axios.get('https://uninterested-antelope.onrender.com/getAllCashflow')
+                axios.get(`${url}/getAllCashflow`)
                     .then((res) => {
                         let income = 0;
                         let expense = 0;
@@ -120,20 +122,6 @@ function Dashboard() {
                             style={{ borderBottom: 'none' }}
                         >
                             <p onClick={() => navigate('/')}>TineyDonkey</p>
-                            <ul>
-                                <li style={{ color: 'grey' }} onClick={() => navigate('/')}>
-                                    Home
-                                </li>
-                                <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>
-                                    Products
-                                </li>
-                                <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>
-                                    Contact
-                                </li>
-                                <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>
-                                    About
-                                </li>
-                            </ul>
                             <div
                                 className="flex-justify-flex-end navbar-icon-div"
                                 style={{ width: '15%', paddingRight: '30px' }}
@@ -152,7 +140,7 @@ function Dashboard() {
                         </section>
                     </nav>
 
-                    <div className="width100 flex-justify-content-space-between dashboard-total-sales-div">
+                    {/* <div className="width100 flex-justify-content-space-between dashboard-total-sales-div">
                         <div
                             style={{
                                 border: '2px solid rgb(231, 230, 230)',
@@ -168,11 +156,13 @@ function Dashboard() {
                             className="cta-button"
                             onClick={() => navigate('/addProductDashboard')}
                         >
-                            Add product
+                            Manage Figurines
                         </button>
-                    </div>
-                    <div className="width100" style={{ marginTop: '100px' }}>
-                        <h3>Pending orders</h3>
+                    </div> */}
+
+                    <DashboardTiles/>
+                    <div className="width100 tile" style={{ marginTop: '70px' }}>
+                        <h3 className='text-align-center' style={{ padding: "30px 0", fontSize: '18px' }}>Pending orders ({AllProducts.length})</h3>
                         <PendingOrders AllProducts={AllProducts} />
                     </div>
                 </>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import Notification from '../Components/Notification';
+import { url, testUrl } from "../Constants/url"
 import axios from 'axios';
 
 function AdminLogin() {
@@ -41,8 +42,7 @@ function AdminLogin() {
                 password: password
             }
 
-            //const response = await axios.post('http://192.168.100.16:3000/login', userLoginObject);
-            const response = await axios.post('https://uninterested-antelope.onrender.com/login', userLoginObject);
+            const response = await axios.post(`${url}/login`, userLoginObject);
 
             if (response) {
                 const loginResponseMessage = response.data.message
@@ -105,10 +105,10 @@ function AdminLogin() {
             <div className='flex-column-align-center login-form-div box-shadow'>
                 <form onSubmit={(e) => handleLogin(e)} className='flex-column-align-center'>
                     <label htmlFor='username'>Username</label>
-                    <input type="text" required='true' id='username' placeholder='Your username' value={username} onChange={(e) => handleUsernameChange(e)} />
+                    <input type="text" required={true} id='username' placeholder='Your username' value={username} onChange={(e) => handleUsernameChange(e)} />
                     {wrongPassword ? <Notification text={notificationText} /> : null}
                     <label htmlFor='password'>Password</label>
-                    <input type="password" required='true' id='passsword' placeholder='Password' value={password} onChange={(e) => handlePasswordChange(e)} />
+                    <input type="password" required={true} id='passsword' placeholder='Password' value={password} onChange={(e) => handlePasswordChange(e)} />
                     <button className='cta-button width100' type='submit'>Login</button>
                 </form>
             </div>

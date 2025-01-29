@@ -4,6 +4,7 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 import { AiFillLock } from "react-icons/ai";
 import { useCart } from 'react-use-cart';
 import Footer from '../Components/Footer';
+import { url, testUrl } from "../Constants/url"
 import axios from 'axios';
 
 function ExpandedProduct() {
@@ -52,7 +53,7 @@ function ExpandedProduct() {
         const idFromQuery = searchParams.get('id');
         const sanitizedId = encodeURIComponent(idFromQuery);
         const fetchData = async () => {
-            await axios.get(`https://uninterested-antelope.onrender.com/fetchProduct?id=${sanitizedId}`)
+            await axios.get(`${url}/fetchProduct?id=${sanitizedId}`)
                 .then((prod) => {
                     setProduct(prod.data)
                 })
@@ -113,7 +114,7 @@ function ExpandedProduct() {
                     </div>
                     <div style={{ overflow: 'hidden' }}>
                         <img
-                            src={`https://uninterested-antelope.onrender.com/Images/${product && product.image[activeThumbnailIndex]}`}
+                            src={`${url}/Images/${product && product.image[activeThumbnailIndex]}`}
                             alt="Main Product"
                             loading='lazy'
                             style={{
@@ -131,7 +132,7 @@ function ExpandedProduct() {
                                 key={index}
                                 loading='lazy'
                                 className='expanded-image-thumbnail'
-                                src={`https://uninterested-antelope.onrender.com/Images/${product && imageName}`}
+                                src={`${url}/Images/${product && imageName}`}
                                 alt={`Thumbnail ${index + 1}`}
                                 style={{
                                     maxWidth: "100px",
