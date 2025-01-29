@@ -939,6 +939,8 @@ textarea {
 
 
 
+
+
 @media screen and (max-width: 700px) {
   .landing-page {
     width: 100vw;
@@ -1058,7 +1060,6 @@ textarea {
   .flex-column-container,
   .contact-us-flex-container,
   .payment-details-form,
-  .dashboard-total-sales-div,
   .add-product-main-container,
   .expanded-flex-container {
     display: flex;
@@ -1145,15 +1146,6 @@ textarea {
     margin-left: -20px;
   }
 
-  .dashboard-total-sales-div button {
-    margin-top: 45px;
-    margin-bottom: -25px;
-  }
-
-  .dashboard-total-sales-div div {
-    width: 70vw;
-  }
-
   .add-figurine-fom-div {
     width: 100%;
     margin-right: 0px;
@@ -1175,7 +1167,7 @@ textarea {
   }
 
   .dashboard-container {
-    margin-top: 115px;
+    margin-top: 110px;
   }
 
   .expanded-product-right-div {

@@ -20,8 +20,6 @@ function Dashboard() {
     const [profit, setProfit] = useState()
     const [authorized, setAuthorized] = useState(false)
     const navigate = useNavigate()
-    // console.log(token)
-    // localStorage.removeItem('token')
 
 
 
@@ -139,27 +137,7 @@ function Dashboard() {
                             </div>
                         </section>
                     </nav>
-
-                    {/* <div className="width100 flex-justify-content-space-between dashboard-total-sales-div">
-                        <div
-                            style={{
-                                border: '2px solid rgb(231, 230, 230)',
-                                padding: '15px 25px',
-                                minWidth: '200px',
-                            }}
-                        >
-                            <h3>Available profit</h3>
-                            <h1>Ksh{profit}</h1>
-                            <a onClick={() => navigate('/finances')}>Manage Finances</a>
-                        </div>
-                        <button
-                            className="cta-button"
-                            onClick={() => navigate('/addProductDashboard')}
-                        >
-                            Manage Figurines
-                        </button>
-                    </div> */}
-
+                    <p>Welcome back🗿✨</p>
                     <DashboardTiles/>
                     <div className="width100 tile" style={{ marginTop: '70px' }}>
                         <h3 className='text-align-center' style={{ padding: "30px 0", fontSize: '18px' }}>Pending orders ({AllProducts.length})</h3>
