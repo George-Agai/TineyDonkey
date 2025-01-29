@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import AvailableProduct from '../Components/AvailableProduct';
 import imageCompression from 'browser-image-compression';
+import { url, testUrl } from "../Constants/url"
 import axios from 'axios';
 
 
@@ -95,14 +96,9 @@ const AddProductDashboard = () => {
             //     }
             // }
 
-            // Make the API call
-            const res = await axios.post('https://uninterested-antelope.onrender.com/uploadProduct', formData, {
+            const res = await axios.post(`${url}/uploadProduct`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
-
-            // const res = await axios.post('http://192.168.0.104:3000/uploadProduct', formData, {
-            //     headers: { 'Content-Type': 'multipart/form-data' },
-            // });
 
             console.log(res);
             if (res.data.message === "Upload successful") {
@@ -124,7 +120,7 @@ const AddProductDashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await axios.get('https://uninterested-antelope.onrender.com/authentication', {
+                await axios.get(`${url}/authentication`, {
                     headers: {
                         'Authorization': `${token}`,
                     },
@@ -134,7 +130,7 @@ const AddProductDashboard = () => {
                             navigate('/admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get('https://uninterested-antelope.onrender.com/getProduct')
+                            axios.get(`${url}/getProduct`)
                                 .then((res) => {
                                     setAllProducts(res.data);
                                 })
@@ -163,12 +159,6 @@ const AddProductDashboard = () => {
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p onClick={() => navigate('/')}>TineyDonkey</p>
-                    <ul>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>Products</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
-                        <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
-                    </ul>
                     <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
                         <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout} />
                     </div>
@@ -194,7 +184,7 @@ const AddProductDashboard = () => {
                 <div id="image-preview"></div>
 
                 <div style={{ overflowY: 'auto' }} className='flex-column-align-center products-scrollbar'>
-                    <h3>All figurines</h3>
+                    <h3>All figurines ({AllProducts && AllProducts.length})</h3>
                     <AvailableProduct AllProducts={AllProducts} />
                 </div>
             </div>

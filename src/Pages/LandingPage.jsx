@@ -37,6 +37,7 @@ function LandingPage() {
   // const handleRedirect = () => {
   //     window.open('https://twitter.com/TineyDonkey', '_blank');
   // };
+  
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>

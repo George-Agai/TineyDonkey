@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
+import { url, testUrl } from "../Constants/url"
 import axios from "axios"
 
 function Footer() {
@@ -18,7 +19,7 @@ function Footer() {
             const emailAddress = {
                 emailAddress: Email
             }
-            await axios.post('https://uninterested-antelope.onrender.com/subscribe', emailAddress)
+            await axios.post(`${url}/subscribe`, emailAddress)
                 .then((res) => {
                     if (res.data.message === "Email address saved successfully") {
                         setEmailSent(true)
