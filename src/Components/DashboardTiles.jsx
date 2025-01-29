@@ -44,7 +44,7 @@ const DashboardTiles = () => {
           <div key={index} style={styles.tileTop}>
             <div style={styles.content}>
               <h3 style={{ fontSize: "14px" }}>{tile.title}</h3>
-              <h1 style={{ marginTop: "0px" }}>{tile.value}</h1>
+              <h1 style={{ marginTop: "5px" }}>{tile.value}</h1>
               {!tile.subValue && <a onClick={tile.linkAction} style={styles.link}>
                 {tile.linkText}
               </a>}
@@ -73,7 +73,7 @@ const styles = {
   container: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "15px",
+    gap: "10px",
     width: "100%",
     justifyContent: "space-between",
     
@@ -84,12 +84,12 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     border: "1.5px solid rgb(231, 230, 230)",
-    padding: "10px 25px",
+    padding: "15px 25px",
     minWidth: "200px",
     flex: "1 1 calc(25% - 15px)", // Makes sure it fits 4 tiles in a row on large screens
-    maxWidth: "calc(50% - 15px)",
+    maxWidth: "calc(100% - 0px)",
     boxSizing: "border-box",
-    marginTop: '20px'
+    marginTop: '5px'
   },
   tileTop:{
     display: "flex",
@@ -105,7 +105,7 @@ const styles = {
     fontSize: "1.8rem",
     backgroundColor: 'rgb(241, 241, 241)',
     borderRadius: 10,
-    padding: 2
+    padding: 4
   },
   subRow: {
     display: "flex",
@@ -126,7 +126,6 @@ const styles = {
     cursor: "pointer",
     textDecoration: "underline",
     fontSize: "15px",
-    // marginRight: '20px'
   },
 };
 
