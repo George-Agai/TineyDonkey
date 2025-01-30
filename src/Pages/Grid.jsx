@@ -63,6 +63,7 @@ function Grid({ Page }) {
         }
         else console.log("Item has been sold")
     }
+
     return (
         <div>
             <main>
@@ -76,8 +77,8 @@ function Grid({ Page }) {
                                 <div className="card stacked" key={data._id}>
                                     <img onClick={() => handleProductSelected(data)} src={`${url}/Images/` + data.image[0]} alt="Teeny" className="card__img" loading="lazy" />
                                     <div className="card__content flex-column-align-center">
-                                        <h2 className="card__title">{data.productName}</h2>
-                                        <p className="card__price">KSh{data.price}.00</p>
+                                        <h2 className="card__title" onClick={() => handleProductSelected(data)}>{data.productName}</h2>
+                                        <p className="card__price" onClick={() => handleProductSelected(data)}>KSh{data.price}.00</p>
                                         <button className={data.status ? 'cta-button' : 'cta-locked-button'} style={{ padding: '15px 20px' }} onClick={() => handleAddToCart(data)}>{data.status ? "Add to cart" : <span className="flex-align-center-justify-center">Sold <AiFillLock /></span>}</button>
                                     </div>
                                 </div>
