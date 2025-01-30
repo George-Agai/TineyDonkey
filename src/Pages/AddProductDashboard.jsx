@@ -40,6 +40,7 @@ const AddProductDashboard = () => {
     const [Price, setPrice] = useState();
     const [token, setToken] = useState(readFromLocalStorage('token'))
     const [imageUploaded, setImageUploaded] = useState(false)
+    const [uploading, setUploading] = useState(false)
 
     const handleUpload = async (e) => {
         e.preventDefault();
@@ -48,6 +49,7 @@ const AddProductDashboard = () => {
         const formData = new FormData();
 
         try {
+            setUploading(true)
             // Compress each selected file
             const compressedFiles = await Promise.all(
                 Array.from(file).map(async (file) => {
@@ -106,7 +108,9 @@ const AddProductDashboard = () => {
                 setName("");
                 setPrice("");
                 setFile("");
+                setUploading(false)
                 setImageUploaded(true);
+                alert("Product uploaded successfully🎉🎊")
                 setTimeout(() => setImageUploaded(false), 3000);
             } else {
                 alert("Upload failed");
@@ -177,7 +181,7 @@ const AddProductDashboard = () => {
                         <label htmlFor='price'>Price *</label>
                         <input placeholder='Amount' type='number' required='true' id='price' value={Price} onChange={e => setPrice(e.target.value)} />
 
-                        <button type='submit' className='cta-button width100'>{imageUploaded ? "Uploaded" : "Upload"}</button>
+                        <button type='submit' className='cta-button width100'>{uploading ? "Uploading..." : imageUploaded ? "Uploaded" : "Upload"}</button>
                     </form>
                 </div>
 
