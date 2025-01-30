@@ -140,7 +140,7 @@ function Dashboard() {
                     <p>Welcome back🗿✨</p>
                     <DashboardTiles/>
                     <div className="width100 tile" style={{ marginTop: '70px' }}>
-                        <h3 className='text-align-center' style={{ padding: "30px 0", fontSize: '18px' }}>Pending orders ({AllProducts.length})</h3>
+                        <h3 className='text-align-center' style={{ padding: "20px 0", fontSize: '17px' }}>Pending orders ({AllProducts.length})</h3>
                         <PendingOrders AllProducts={AllProducts} />
                     </div>
                 </>

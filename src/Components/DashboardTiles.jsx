@@ -25,7 +25,7 @@ const DashboardTiles = () => {
       subValue: "10,000",
       linkText: "Manage Figurines",
       linkAction: () => navigate("/addProductDashboard"),
-      icon: "🛍️",
+      icon: "📊",
     },
     {
       title: "Total Figurines Sold",
@@ -33,7 +33,7 @@ const DashboardTiles = () => {
       subValue: "80,000",
       linkText: "View all",
       linkAction: () => alert("Clicked"),
-      icon: "📊",
+      icon: "🛍️",
     },
   ];
 
