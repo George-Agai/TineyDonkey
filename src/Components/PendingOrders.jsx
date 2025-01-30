@@ -41,10 +41,10 @@ function PendingOrders({ AllProducts }) {
             <table style={{ width: '100%' }}>
                 <thead>
                     <tr style={{ borderTop: '2px solid rgb(231, 230, 230)' }}>
-                        <td className='text-align-right'>No</td>
-                        <td className='text-align-center'>Bought by</td>
+                        <td className='text-align-right quantity-no'>No</td>
+                        <td className='text-align-center'>Buyer</td>
                         <td className='text-align-center quantity-th'>Amount</td>
-                        <td className='text-align-center'>Quantity</td>
+                        <td className='text-align-center'>Qty</td>
                         <td className='text-align-center'>Time</td>
                         <td className='text-align-center'>Status</td>
                     </tr>
@@ -59,7 +59,7 @@ function PendingOrders({ AllProducts }) {
                                 <td className='text-align-center quantity-th'>{data.totalAmount}</td>
                                 <td className='text-align-center'>{data.products.length}</td>
                                 <td className='text-align-center'>{calculateTimeDifference(data.time)}</td>
-                                <td className='text-align-center'>{data.orderStatus === "pending" ? <span style={{ color: 'green' }}>Pending</span> : data.orderStatus === "delivered" ? <span>Delivered</span> : <span style={{ color: 'red' }}>Rejected</span>}</td>
+                                <td className='text-align-center quantity-padding'>{data.orderStatus === "pending" ? <span style={{ color: 'green' }}>Pending</span> : data.orderStatus === "delivered" ? <span>Delivered</span> : <span style={{ color: 'red' }}>Rejected</span>}</td>
                             </tr>
                         ))}
                 </tbody>

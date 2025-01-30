@@ -52,7 +52,7 @@ const AddProductDashboard = () => {
             const compressedFiles = await Promise.all(
                 Array.from(file).map(async (file) => {
                     const options = {
-                        maxSizeMB: 0.2, // Max size in MB
+                        maxSizeMB: 0.1, // Max size in MB
                         // maxWidthOrHeight: 800, // Resize to this width/height (maintains aspect ratio)
                         useWebWorker: true,
                         fileType: 'image/webp', // Convert to webp format
