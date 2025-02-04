@@ -1,10 +1,10 @@
-// import { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import axios from "axios"
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from "axios"
 
-function TransactionResponse({ image, text }) {
-  // const navigate = useNavigate()
-  // const [rejected, setRejected] = useState(false)
+function TransactionResponse({ image, text, orderSent }) {
+  const navigate = useNavigate()
+  const [rejected, setRejected] = useState(false)
 
 //   const handleReject = async()=> {
 //     try {
@@ -35,7 +35,7 @@ function TransactionResponse({ image, text }) {
     <div className="flex-column-align-center" style={{width: '100%'}}>
         <img src={image} alt='spinner' className='response-icon'/>
         <p>{text}</p>
-        {/* {cancelOrder ? 
+        {/* {orderSent ? 
         <div style={{marginTop: '50px'}}>
           <button className="cta-button" onClick={handleReject}>{rejected ? "Order cancelled" : "Cancel order"}</button>
         </div> : null} */}

@@ -2,26 +2,20 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import PendingOrders from '../Components/PendingOrders';
-import DashboardTiles from '../Components/DashboardTiles';
 import { url, testUrl } from "../Constants/url"
 import axios from 'axios';
 
-function Dashboard() {
+function AllPreviousSales() {
     const readFromLocalStorage = (key) => {
         const value = localStorage.getItem(key);
         return JSON.parse(value);
     };
 
     const [scrolling, setScrolling] = useState(false);
-    const [AllPendingOrders, setAllPendingOrders] = useState(null);
-    const [AllDeliveredOrders, setAllDeliveredOrders] = useState(null);
+    const [AllProducts, setAllProducts] = useState(null);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [filter, setFilter] = useState("delivered");
     const [token, setToken] = useState(readFromLocalStorage('token'))
-    const [totalIncome, setTotalIncome] = useState()
-    const [lifetimeIncome, setLifetimeIncome] = useState()
-    const [remainingStockWorth, setRemainingStockWorth] = useState()
-    const [figurinesInStock, setFigurinesInStock] = useState()
-    const [totalExpenses, setTotalExpenses] = useState()
-    const [profit, setProfit] = useState()
     const [authorized, setAuthorized] = useState(false)
     const navigate = useNavigate()
 
@@ -57,23 +51,10 @@ function Dashboard() {
                             navigate('/Admin')
                         }
                         else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get(`${url}/getPendingOrders`)
+                            axios.get(`${url}/getAllPreviousOrders`)
                                 .then((res) => {
-                                    setAllPendingOrders(res.data.pendingOrders.filter(order => order.orderStatus === "pending"));
-                                    
-                                    const deliveredProducts = res.data.pendingOrders
-                                        .filter(order => order.orderStatus === "delivered")
-                                        .reduce((sum, order) => sum + order.products.length, 0);
-
-                                    const totalSalesAmount = res.data.pendingOrders
-                                        .filter(order => order.orderStatus === "delivered")
-                                        .reduce((sum, order) => sum + order.totalAmount, 0);
-
-                                    setAllDeliveredOrders(deliveredProducts);
-                                    setLifetimeIncome(totalSalesAmount)
-                                    setFigurinesInStock(res.data.stockInfo.totalProductsInStock)
-                                    setRemainingStockWorth(res.data.stockInfo.totalRemainingStockWorth)
-
+                                    setAllProducts(res.data);
+                                    setFilteredProducts(res.data.filter(order => order.orderStatus === "delivered"));
                                     setAuthorized(true)
                                     // console.log(res.data)
                                 })
@@ -89,34 +70,11 @@ function Dashboard() {
         fetchData();
     }, [])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                axios.get(`${url}/getAllCashflow`)
-                    .then((res) => {
-                        let income = 0;
-                        let expense = 0;
-
-                        res.data.payload.forEach(item => {
-                            if (item.type === 'Income') {
-                                income += item.amount;
-                            } else if (item.type === 'Expense') {
-                                expense += item.amount;
-                            }
-                        });
-
-                        setTotalIncome(income)
-                        setTotalExpenses(expense)
-                        setProfit(income - expense)
-                    })
-                    .catch(error => console.log(error))
-            }
-            catch (error) {
-                console.error(error);
-            }
-        };
-        fetchData();
-    }, [])
+    const handleFilterChange = (e) => {
+        const selectedStatus = e.target.value;
+        setFilter(selectedStatus);
+        setFilteredProducts(AllProducts.filter(order => order.orderStatus === selectedStatus));
+    };
 
     const handleLogout = () => {
         localStorage.removeItem('token')
@@ -155,19 +113,21 @@ function Dashboard() {
                             </div>
                         </section>
                     </nav>
-                    <p>Welcome back🗿✨</p>
-                    <DashboardTiles
-                        pendingOrders={AllPendingOrders.length}
-                        totalSales={AllDeliveredOrders}
-                        totalAmount={lifetimeIncome}
-                        profit={profit}
-                        figurinesInStock={figurinesInStock}
-                        remainingStockWorth={remainingStockWorth}
-                    />
+
 
                     <div className="width100 tile" style={{ marginTop: '70px', width: '106%', marginLeft: '-11px' }}>
-                        <h3 className='text-align-center' style={{ padding: "20px 0", fontSize: '17px' }}>Pending orders ({AllPendingOrders.length})</h3>
-                        <PendingOrders AllProducts={AllPendingOrders} />
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px" }}>
+                            <h3 style={{ fontSize: "17px" }}>All Orders ({filteredProducts.length})</h3>
+                            <select
+                                value={filter}
+                                onChange={handleFilterChange}
+                                style={{ padding: "10px", fontSize: "14px", cursor: "pointer", borderRadius: "4px", backgroundColor: 'white' }}
+                            >
+                                <option value="delivered">Delivered</option>
+                                <option value="cancelled">Rejected</option>
+                            </select>
+                        </div>
+                        <PendingOrders AllProducts={filteredProducts} />
                     </div>
                 </>
             ) : (
@@ -181,4 +141,4 @@ function Dashboard() {
 
 }
 
-export default Dashboard
+export default AllPreviousSales

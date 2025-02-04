@@ -30,7 +30,6 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
     const handleReject = async()=> {
         try {
             const productIds = data.products.map(product => product._id)
-            console.log('productIds', productIds)
             const saleId = data._id
 
             const requestObject = {
@@ -74,6 +73,7 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
                 <p>Country: {data.country}</p>
                 <p>Town: {data.town}</p>
                 <p>Order notes: {data.orderNotes}</p>
+                <p>Order total: {data.totalAmount}</p>
             </div>
             <div className="flex-column-align-center width100">
                 <span className="flex-justify-content-space-between width100">

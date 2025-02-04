@@ -690,7 +690,7 @@ textarea {
   height: max-content;
 }
 
-.tile{
+.tile {
   background-color: white;
   border: 1px solid rgb(241, 241, 241);
   box-shadow: 0 0 20px rgba(92, 92, 92, 0.2);
@@ -836,15 +836,16 @@ textarea {
 }
 
 .floating-div {
-  position: absolute;
-  top: 70%;
+  position: fixed; /* Keep it visible even when scrolling */
+  bottom: 20px; /* Anchors it near the bottom instead of using top */
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   padding: 20px;
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  width: 80%;
 }
 
 .finances-overview-container {
@@ -861,12 +862,12 @@ textarea {
   border-radius: 7px;
 }
 
-.finances-overview-container p{
+.finances-overview-container p {
   font-size: 13px;
   margin-bottom: -10px;
 }
 
-.finances-overview-container h2{
+.finances-overview-container h2 {
   font-size: 27px;
 }
 
@@ -1095,6 +1096,7 @@ textarea {
   .quantity-no {
     opacity: 0;
   }
+
   .quantity-padding {
     padding-right: 10px;
   }
@@ -1221,10 +1223,20 @@ textarea {
     grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
     margin-top: 20px;
   }
+
   .card__title {
     font-size: 16px;
     margin-top: -5px;
   }
+
+  /* .tile {
+    background-color: white;
+    border: 1px solid rgb(241, 241, 241);
+    box-shadow: 0 0 20px rgba(92, 92, 92, 0.2);
+    border-radius: 10px;
+    width: 104%;
+    margin-left: -3px;
+  } */
 
   /* .main-container .sold-out{
     margin-bottom: 0px;

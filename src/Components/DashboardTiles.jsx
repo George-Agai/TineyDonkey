@@ -1,38 +1,38 @@
 import { useNavigate } from 'react-router-dom';
 
-const DashboardTiles = () => {
+const DashboardTiles = ({ pendingOrders, totalSales, totalAmount, profit, figurinesInStock, remainingStockWorth }) => {
 
   const navigate = useNavigate()
 
   const tiles = [
     {
       title: "Pending Orders",
-      value: 3,
+      value: `${pendingOrders}`,
       linkText: "View all",
       linkAction: () => alert("Clicked"),
       icon: "📦",
     },
     {
       title: "Available Profit",
-      value: `Ksh 1000`,
+      value: `${profit}`,
       linkText: "Manage Finances",
       linkAction: () => navigate("/finances"),
       icon: "💰",
     },
     {
       title: "Figurines In Stock",
-      value: 12,
-      subValue: "10,000",
+      value: `${figurinesInStock}`,
+      subValue: `${remainingStockWorth}`,
       linkText: "Manage Figurines",
       linkAction: () => navigate("/addProductDashboard"),
       icon: "📊",
     },
     {
       title: "Total Figurines Sold",
-      value: 40,
-      subValue: "80,000",
+      value: `${totalSales}`,
+      subValue: `${totalAmount}`,
       linkText: "View all",
-      linkAction: () => alert("Clicked"),
+      linkAction: () => navigate("/allSales"),
       icon: "🛍️",
     },
   ];
