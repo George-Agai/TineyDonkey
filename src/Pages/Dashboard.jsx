@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import PendingOrders from '../Components/PendingOrders';
@@ -25,7 +25,8 @@ function Dashboard() {
     const [authorized, setAuthorized] = useState(false)
     const navigate = useNavigate()
 
-
+    const countRef = useRef(0);
+    const cashflowCount = useRef(0);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -45,6 +46,8 @@ function Dashboard() {
     }, []);
 
     useEffect(() => {
+        if (countRef.current > 0) return;
+        countRef.current += 1;
         const fetchData = async () => {
             try {
                 await axios.get(`${url}/authentication`, {
@@ -60,7 +63,7 @@ function Dashboard() {
                             axios.get(`${url}/getPendingOrders`)
                                 .then((res) => {
                                     setAllPendingOrders(res.data.pendingOrders.filter(order => order.orderStatus === "pending"));
-                                    
+
                                     const deliveredProducts = res.data.pendingOrders
                                         .filter(order => order.orderStatus === "delivered")
                                         .reduce((sum, order) => sum + order.products.length, 0);
@@ -90,6 +93,9 @@ function Dashboard() {
     }, [])
 
     useEffect(() => {
+        if (cashflowCount.current > 0) return;
+        cashflowCount.current += 1;
+        
         const fetchData = async () => {
             try {
                 axios.get(`${url}/getAllCashflow`)
