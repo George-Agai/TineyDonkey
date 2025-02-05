@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import AvailableProduct from '../Components/AvailableProduct';
@@ -10,7 +10,7 @@ import axios from 'axios';
 const AddProductDashboard = () => {
 
     const navigate = useNavigate()
-
+    const countRef = useRef(0);
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 0) {
@@ -54,10 +54,10 @@ const AddProductDashboard = () => {
             const compressedFiles = await Promise.all(
                 Array.from(file).map(async (file) => {
                     const options = {
-                        maxSizeMB: 0.1, // Max size in MB
-                        // maxWidthOrHeight: 800, // Resize to this width/height (maintains aspect ratio)
+                        maxSizeMB: 0.1,
+                        // maxWidthOrHeight: 800,
                         useWebWorker: true,
-                        fileType: 'image/webp', // Convert to webp format
+                        fileType: 'image/webp',
                     };
                     return await imageCompression(file, options);
                 })
@@ -122,6 +122,9 @@ const AddProductDashboard = () => {
 
 
     useEffect(() => {
+        if (countRef.current > 0) return;
+        countRef.current += 1;
+
         const fetchData = async () => {
             try {
                 await axios.get(`${url}/authentication`, {
@@ -164,7 +167,7 @@ const AddProductDashboard = () => {
                 <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
                     <p onClick={() => navigate('/')}>TineyDonkey</p>
                     <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-                        <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout} />
+                        <FaRegUserCircle style={{ color: 'grey', fontSize: '25px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout} />
                     </div>
                 </section>
             </nav>
@@ -188,7 +191,6 @@ const AddProductDashboard = () => {
                 <div id="image-preview"></div>
 
                 <div style={{ overflowY: 'auto' }} className='flex-column-align-center products-scrollbar'>
-                    <h3>All figurines ({AllProducts && AllProducts.length})</h3>
                     <AvailableProduct AllProducts={AllProducts} />
                 </div>
             </div>

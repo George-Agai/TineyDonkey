@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import PendingOrders from '../Components/PendingOrders';
@@ -19,7 +19,7 @@ function AllPreviousSales() {
     const [authorized, setAuthorized] = useState(false)
     const navigate = useNavigate()
 
-
+    const countRef = useRef(0);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -39,6 +39,9 @@ function AllPreviousSales() {
     }, []);
 
     useEffect(() => {
+        if (countRef.current > 0) return;
+        countRef.current += 1;
+        
         const fetchData = async () => {
             try {
                 await axios.get(`${url}/authentication`, {
