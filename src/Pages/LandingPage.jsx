@@ -65,7 +65,7 @@ function LandingPage() {
             {/* <p onClick={handleRedirect} className="sold-out flex-align-center-justify-center">We're sold out, follow on X to get updates on next sale</p> */}
             
             <h1 className="font-merriweather">We sell cool, tiny stuff⚡️</h1>
-            <p>Unleash your creativity with developer-inspired figurines</p>
+            <p>Upgrade the look of your workstation with colorful figurines</p>
             <button className="cta-button" style={{ marginTop: '40px' }} onClick={() => navigate('/products')}>View All Figurines</button>
           </div>
         </div>
@@ -75,7 +75,7 @@ function LandingPage() {
         <div className="banner-div flex-column-align-center">
           <img src={tick} alt='tick' className="banner-icons" />
           <h5>Best Prices</h5>
-          <p className="text-align-center">Prices are undoubtedly the best out here</p>
+          <p className="text-align-center">We undoubtedly have the best prices</p>
         </div>
         <div className="banner-div flex-column-align-center">
           <img src={delivery} alt='delivery' className="banner-icons" />
