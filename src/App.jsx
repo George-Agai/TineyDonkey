@@ -37,7 +37,6 @@ function App() {
           <Route path='/transaction' element={<TransactionResponses />} />
           <Route path='/finances' element={<Finances />} />
           <Route path='/allSales' element={<AllPreviousSales />} />
-          
         </Routes>
       </BrowserRouter>
       </CartProvider>

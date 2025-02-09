@@ -22,6 +22,7 @@ function TransactionResponses() {
     const [unavailableProductsArray, setUnavailableProductsArray] = useState()
     const [somethingWentWrong, setSomethingWentWrong] = useState(false)
     const [sendingOrder, setSendingOrder] = useState(false)
+    const [savedSale, setSavedSale] = useState()
 
 
     const findProductWithFalseStatus = (array) => {
@@ -97,33 +98,35 @@ function TransactionResponses() {
 
 
     const sendOrderToDatabase = async (order) => {
-            await axios.post(`${url}/saveOrder`, order)
-                .then((res) => {
-                    if (res.data.message === "Sale saved successfully") {
-                        setTimeout(() => {
-                            setOrderSuccessful(true)
-                            setSendingOrder(false)
-                            setAvailableFlag(false)
-                            setUnavailableFlag(false)
-                            // emptyCart()
-                        }, 7000)
-                    }
-                    else {
-                        setTimeout(() => {
-                            setSomethingWentWrong(true)
-                            setSendingOrder(false)
-                            setAvailableFlag(false)
-                            setUnavailableFlag(false)
-                        }, 4000)
-                    }
-                })
-                .catch(err => console.log(err))
+        await axios.post(`${url}/saveOrder`, order)
+            .then((res) => {
+                if (res.data.message === "Sale saved successfully") {
+                    setSavedSale(res.data.savedSale)
+                    setTimeout(() => {
+                        setOrderSuccessful(true)
+                        setSendingOrder(false)
+                        setAvailableFlag(false)
+                        setUnavailableFlag(false)
+                        // emptyCart()
+                    }, 7000)
+                }
+                else {
+                    setTimeout(() => {
+                        setSomethingWentWrong(true)
+                        setSendingOrder(false)
+                        setAvailableFlag(false)
+                        setUnavailableFlag(false)
+                    }, 4000)
+                }
+            })
+            .catch(err => console.log(err))
     }
 
 
     const handleProceedWithoutItem = () => {
         if (isEmpty) {
             navigate('/cart')
+            return
         }
         else {
             setSendingOrder(true)
@@ -153,7 +156,7 @@ function TransactionResponses() {
                             : initiatingTransaction ?
                                 <TransactionState text={'Initiating transaction...'} />
                                 : orderSuccessful ?
-                                    <TransactionResponse image={tick} text={'Order placed successfully'} orderSent={true} />
+                                    <TransactionResponse image={tick} text={'Order placed successfully 🎊'} orderSent={orderSuccessful} savedSale={savedSale} />
                                     : somethingWentWrong ?
                                         <TransactionResponse image={x} text={'Oops, something went wrong'} />
                                         : sendingOrder ?
@@ -168,6 +171,10 @@ function TransactionResponses() {
                     </div>
                     : null
                 }
+
+                {/* {orderSuccessful ? <div style={{ marginTop: '50px' }}>
+                    <button className="cta-button" onClick={alert("Clicked")}>{rejected ? "Order cancelled" : "Cancel order"}</button>
+                </div> : null} */}
             </div>
         </div>
     )

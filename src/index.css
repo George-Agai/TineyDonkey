@@ -36,6 +36,20 @@
   align-items: center;
 }
 
+.flex-column-align-justify-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-column-justify-between {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .flex-column-justify-flex-start {
   display: flex;
   flex-direction: column;
@@ -779,11 +793,12 @@ textarea {
 
 .transaction-response-container {
   width: 90vw;
-  height: 80vh;
+  height: 88vh;
 }
 
 .transaction-center-div {
   width: 70%;
+  height: 100%;
   /* border: 1px solid black; */
 }
 
@@ -1227,6 +1242,9 @@ textarea {
   .card__title {
     font-size: 16px;
     margin-top: -5px;
+  }
+  .main-container-content {
+    width: 94%;
   }
 
   /* .tile {

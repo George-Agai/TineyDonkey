@@ -41,7 +41,7 @@ function AllPreviousSales() {
     useEffect(() => {
         if (countRef.current > 0) return;
         countRef.current += 1;
-        
+
         const fetchData = async () => {
             try {
                 await axios.get(`${url}/authentication`, {
@@ -128,6 +128,7 @@ function AllPreviousSales() {
                             >
                                 <option value="delivered">Delivered</option>
                                 <option value="cancelled">Rejected</option>
+                                <option value="deleted">Cancelled</option>
                             </select>
                         </div>
                         <PendingOrders AllProducts={filteredProducts} />
