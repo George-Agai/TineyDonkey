@@ -820,7 +820,7 @@ textarea {
 }
 
 .spinner {
-  width: 130px;
+  width: 120px;
   animation: spin 1.3s linear infinite;
 }
 

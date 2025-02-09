@@ -60,7 +60,7 @@ function TransactionResponse({ savedSale, image, text, orderSent }) {
           <div className='flex-column-align-center' style={{ marginTop: '-70px' }}>
             {orderSent ?
               <AnimatedIcon
-                style={{ width: 180 }}
+                style={{ width: 150 }}
                 animationData={Done}
                 loop={false}
               />
