@@ -166,7 +166,7 @@ function TransactionResponses() {
 
                 {unavailableFlag ?
                     <div className='flex-column-align-center oops-div'>
-                        <button className='cta-button' style={{ marginTop: '50px' }} onClick={handleProceedWithoutItem}>Proceed without item</button>
+                        <button className='cta-button' style={{ marginTop: '-10px' }} onClick={handleProceedWithoutItem}>Proceed without item</button>
                         <button className='cta-button' style={{ marginTop: '15px' }} onClick={() => navigate('/products')}>Continue shopping</button>
                     </div>
                     : null

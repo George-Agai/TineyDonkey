@@ -75,7 +75,7 @@ function LandingPage() {
         <div className="banner-div flex-column-align-center">
           <img src={tick} alt='tick' className="banner-icons" />
           <h5>Best Prices</h5>
-          <p className="text-align-center">We undoubtedly have the best prices</p>
+          <p className="text-align-center">We have undoubtedly the best prices</p>
         </div>
         <div className="banner-div flex-column-align-center">
           <img src={delivery} alt='delivery' className="banner-icons" />
