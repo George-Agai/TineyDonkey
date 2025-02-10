@@ -208,7 +208,7 @@ body {
 .main-container {
   width: 100%;
   height: 110vh;
-  background-image: url('./TineyDonkeyAssets/20231231_184108.jpg');
+  background-image: url('./TineyDonkeyAssets/bg.webp');
   background-size: cover;
   background-position: center;
   display: flex;

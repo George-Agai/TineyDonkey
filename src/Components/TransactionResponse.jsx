@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { IoCloseOutline } from "react-icons/io5";
 import { url, testUrl } from "../Constants/url"
 import AnimatedIcon from '../Components/AnimatedIcon';
-import DeleteIcon from "../TineyDonkeyAssets/delete.json";
-import Done from "../TineyDonkeyAssets/done.json";
+import DeleteIcon from "../TineyDonkeyAssets/Animations/delete.json";
+import Done from "../TineyDonkeyAssets/Animations/done.json";
 import axios from "axios";
 
 function TransactionResponse({ savedSale, image, text, orderSent }) {
