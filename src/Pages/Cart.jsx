@@ -4,6 +4,8 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 import { useCart } from 'react-use-cart';
 import { AiFillDelete } from "react-icons/ai";
 import { url, testUrl } from "../Constants/url"
+import EmptyCart from "../TineyDonkeyAssets/Animations/emptycart.json";
+import AnimatedIcon from '../Components/AnimatedIcon';
 import Footer from '../Components/Footer';
 
 function Cart() {
@@ -69,8 +71,13 @@ function Cart() {
             </div>
 
             {isEmpty ?
-                <div className="transition-div width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
-                    <p>Cart is empty☹️</p>
+                <div className="transition-div width100 flex-column-align-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
+                    <AnimatedIcon
+                        style={{ width: 70 }}
+                        animationData={EmptyCart}
+                        loop={false}
+                    />
+                    <p style={{ fontSize: 17 }}>Cart is empty☹️</p>
                 </div> :
                 <div className='transition-div flex-justify-content-space-around  flex-column-container ' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
                     <table className='cart-table'>
