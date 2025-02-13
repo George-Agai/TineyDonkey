@@ -506,7 +506,8 @@ body {
 .login-form-div form input:focus,
 .finances-main-div input:focus {
   outline: none;
-  font-size: 15px;
+  font-size: 17px;
+  border: 1.2px solid #4ed43c;
 }
 
 .email-container {
@@ -629,26 +630,33 @@ textarea {
 
 .payment-details-form textarea:focus {
   outline: none;
-  border: 1px solid #dbdde0;
+  border: 1.2px solid #4ed43c;
 }
 
 .payment-details-form input,
 .add-product-form input,
 .login-form-div form input,
 .finances-main-div select {
-  height: 30px;
+  height: 38px;
   padding: 5px 10px;
-  font-size: 15px;
-  color: #687279;
+  font-size: 16px;
+  color: #0f0f0f;
   border: 1px solid #dbdde0;
   margin-bottom: 20px;
+}
+
+.payment-details-form input::placeholder,
+.add-product-form input::placeholder,
+.login-form-div form input::placeholder,
+.finances-main-div select::placeholder {
+  color: lightgray;
 }
 
 .finances-main-div input {
   height: 35px;
   padding: 5px 10px;
   font-size: 15px;
-  color: #687279;
+  color: #252627;
   border: 1px solid #dbdde0;
   margin-bottom: 20px;
   width: 20vw;
@@ -886,7 +894,7 @@ textarea {
   font-size: 27px;
 }
 
-/* .main-container .sold-out{
+.main-container .sold-out{
   padding: 15px;
   padding-left: 20px;
   padding-right: 20px;
@@ -901,7 +909,7 @@ textarea {
 .main-container .sold-out:hover{
   background-color: rgba(255, 254, 223, 0.301);
   transition: 300ms;
-} */
+}
 
 
 
@@ -1256,9 +1264,10 @@ textarea {
     margin-left: -3px;
   } */
 
-  /* .main-container .sold-out{
+  .main-container .sold-out{
     margin-bottom: 0px;
     margin-top: -30px;
-    padding: 20px;
-  } */
+    padding: 15px 20px;
+    font-size: 13.5px;
+  }
 }

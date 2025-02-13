@@ -8,9 +8,9 @@ function Checkout() {
     const [scrolling, setScrolling] = useState(false);
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
-    const [town, setTown] = useState()
+    const [town, setTown] = useState('Nairobi')
     const [contact, setContact] = useState()
-    const [country, setCountry] = useState()
+    const [country, setCountry] = useState('Kenya')
     const [orderNotes, setOrderNotes] = useState()
 
     const navigate = useNavigate()
@@ -85,26 +85,26 @@ function Checkout() {
             <div className='flex-align-center-justify-center  flex-column-container' style={{ marginBottom: '80px', marginTop: '50px', width: '100%' }}>
                 <form className='flex-align-center-justify-center payment-details-form' style={{ width: '90%' }} onSubmit={(e) => handlePlaceOrder(e)}>
                     <div className='flex-column-justify-flex-start span'>
-                        <h3>Billing details</h3>
+                        <h3>Customer details</h3>
                         <div className='flex-justify-content-space-between' style={{ width: '100%' }}>
                             <div className='flex-column-justify-flex-start'>
                                 <label htmlFor="name">First name *</label>
-                                <input type="text" id="name" name="FirstName" required="true" onChange={(e) => setFirstName(e.target.value)} value={firstName} />
+                                <input type="text" id="name" name="FirstName" placeholder='John' required="true" onChange={(e) => setFirstName(e.target.value)} value={firstName} />
                             </div>
                             <div className='flex-column-justify-flex-start' style={{ marginLeft: '30px' }}>
                                 <label htmlFor="LastName">Last name *</label>
-                                <input type="text" id="LastName" name="LastName" required="true" onChange={(e) => setLastName(e.target.value)} value={lastName} />
+                                <input type="text" id="LastName" name="LastName" placeholder='Doe' required="true" onChange={(e) => setLastName(e.target.value)} value={lastName} />
                             </div>
                         </div>
-                        <label htmlFor="Country">Country / Region (optional)</label>
-                        <input type="text" id="Country" name="Country" placeholder='Kenya' onChange={(e) => setCountry(e.target.value)} value={country} />
+                        {/* <label htmlFor="Country">Country / Region (optional)</label>
+                        <input type="text" id="Country" name="Country" placeholder='Kenya' onChange={(e) => setCountry(e.target.value)} value={country} /> */}
 
                         <label htmlFor="Town">Town / City *</label>
                         <input type="text" id="Town" name="Town" required="true" placeholder='Nairobi' onChange={(e) => setTown(e.target.value)} value={town} />
 
                         <label htmlFor="Phonenumber">Phone number *</label>
                         <input type="text" id="Phonenumber" name="Phonenumber" required="true" minLength={10} placeholder='0712345678' onChange={(e) => setContact(e.target.value)} value={contact} />
-                        <div className='flex-column-justify-flex-start' style={{ width: '100%' }}>
+                        <div className='flex-column-justify-flex-start' style={{ width: '100%', marginTop: '20px' }}>
                             <h3>Additional information</h3>
                             <label htmlFor="order_comments">Order notes (optional)</label>
                             <textarea onChange={(e) => setOrderNotes(e.target.value)} value={orderNotes} name="orderComments" className="input-text " id="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5" style={{ height: '150px', width: '100%' }}></textarea>

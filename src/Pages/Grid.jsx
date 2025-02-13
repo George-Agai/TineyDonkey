@@ -54,7 +54,7 @@ function Grid({ Page }) {
     }
 
     const handleProductSelected = (data) => {
-        navigate(`/product?id=${data._id}`, { state: { data } })
+        navigate(`/product/${data.slug}`, { state: { data }})
     }
 
     const handleAddToCart = (data) => {

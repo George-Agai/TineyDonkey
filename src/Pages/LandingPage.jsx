@@ -6,6 +6,8 @@ import delivery from '../TineyDonkeyAssets/icon-delivery.svg'
 import warranty from '../TineyDonkeyAssets/icon-warranty.svg'
 import Footer from '../Components/Footer.jsx'
 import Grid from './Grid.jsx'
+import AnimatedIcon from '../Components/AnimatedIcon';
+import ctaDot from "../TineyDonkeyAssets/Animations/cta-dot.json";
 import { useCart } from "react-use-cart";
 
 function LandingPage() {
@@ -34,10 +36,11 @@ function LandingPage() {
     navigate('/products')
   }
 
-  // const handleRedirect = () => {
-  //     window.open('https://twitter.com/TineyDonkey', '_blank');
-  // };
-  
+  const handleRedirect = () => {
+    // window.open('https://twitter.com/TineyDonkey', '_blank');
+    navigate('/products')
+  };
+
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -63,7 +66,16 @@ function LandingPage() {
         <div className=" main-container" loading='lazy'>
           <div className="transition-div flex-column-align-center main-container-content">
             {/* <p onClick={handleRedirect} className="sold-out flex-align-center-justify-center">We're sold out, follow on X to get updates on next sale</p> */}
-            
+
+            <p onClick={handleRedirect} className="sold-out flex-align-center-justify-center">
+              <AnimatedIcon
+                style={{ width: 11, marginRight: "5px", marginTop: "1px" }}
+                animationData={ctaDot}
+                loop={true}
+              />
+              New Figurines Available
+            </p>
+
             <h1 className="font-merriweather">We sell cool, tiny stuff⚡️</h1>
             <p>Upgrade the look of your workstation with colorful figurines</p>
             <button className="cta-button" style={{ marginTop: '40px' }} onClick={() => navigate('/products')}>View All Figurines</button>

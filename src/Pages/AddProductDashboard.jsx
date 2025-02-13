@@ -54,7 +54,7 @@ const AddProductDashboard = () => {
             const compressedFiles = await Promise.all(
                 Array.from(file).map(async (file) => {
                     const options = {
-                        maxSizeMB: 0.1,
+                        maxSizeMB: 0.05,
                         // maxWidthOrHeight: 800,
                         useWebWorker: true,
                         fileType: 'image/webp',
@@ -113,6 +113,7 @@ const AddProductDashboard = () => {
                 alert("Product uploaded successfully🎉🎊")
                 setTimeout(() => setImageUploaded(false), 3000);
             } else {
+                setUploading(false)
                 alert("Upload failed");
             }
         } catch (error) {
