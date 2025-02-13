@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { AiFillLock } from "react-icons/ai";
 import { useCart } from 'react-use-cart';
@@ -10,6 +10,7 @@ import axios from 'axios';
 function ExpandedProduct() {
     const navigate = useNavigate();
     const location = useLocation();
+    const { slug } = useParams();
 
     const [scrolling, setScrolling] = useState(false);
     const [activeThumbnailIndex, setActiveThumbnailIndex] = useState(0);
@@ -48,16 +49,12 @@ function ExpandedProduct() {
 
 
     let index = 1
+
     useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const idFromQuery = searchParams.get('id');
-        const sanitizedId = encodeURIComponent(idFromQuery);
         const fetchData = async () => {
-            await axios.get(`${url}/fetchProduct?id=${sanitizedId}`)
-                .then((prod) => {
-                    setProduct(prod.data)
-                })
-                .catch(err => console.log(err))
+            axios.get(`${url}/fetchProduct/${slug}`)
+                .then((res) => setProduct(res.data))
+                .catch((err) => console.log(err));
         }
         if (product === null || product === undefined) {
             if (index == 1) {
@@ -67,8 +64,11 @@ function ExpandedProduct() {
                 console.log('index more than one')
             }
         }
+    }, [product]);
 
-    }, [location.search, product])
+    if (!product) return <div className="width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
+        <p>Loading...</p>
+    </div>
 
     const handleAddProductToCart = () => {
         if (product) {
