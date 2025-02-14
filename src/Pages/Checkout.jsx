@@ -43,7 +43,10 @@ function Checkout() {
             const fullName = firstName + " " + lastName
             let newContact = contact
             if (newContact.startsWith("07")) {
-                newContact = "254" + newContact.slice(1)
+                newContact = "+254" + newContact.slice(1)
+            }
+            else if (newContact.startsWith("01")) {
+                newContact = "+254" + newContact.slice(1)
             }
             const formData = {
                 boughtBy: fullName,

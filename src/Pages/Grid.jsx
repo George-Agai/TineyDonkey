@@ -22,9 +22,9 @@ function Grid({ Page }) {
                     const productsArray = res.data
                     productsArray.sort((a, b) => {
                         // Objects with status: true come before those with status: false
-                        if (a.status === true && b.status === false) {
+                        if (a.status === "available" && b.status === "sold") {
                             return -1; // a comes before b
-                        } else if (a.status === false && b.status === true) {
+                        } else if (a.status === "sold" && b.status === "available") {
                             return 1; // b comes before a
                         } else {
                             return 0; // no change in order
@@ -54,7 +54,7 @@ function Grid({ Page }) {
     }
 
     const handleProductSelected = (data) => {
-        navigate(`/product/${data.slug}`, { state: { data }})
+        navigate(`/product/${data.slug}`, { state: { data } })
     }
 
     const handleAddToCart = (data) => {
@@ -73,16 +73,22 @@ function Grid({ Page }) {
                             ? <div className="width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
                                 <p>Loading...</p>
                             </div>
-                            : AllProducts.map((data) => (
-                                <div className="card stacked" key={data._id}>
-                                    <img onClick={() => handleProductSelected(data)} src={`${url}/Images/` + data.image[0]} alt="Teeny" className="card__img" loading="lazy" />
-                                    <div className="card__content flex-column-align-center">
-                                        <h2 className="card__title" onClick={() => handleProductSelected(data)}>{data.productName}</h2>
-                                        <p className="card__price" onClick={() => handleProductSelected(data)}>KSh{data.price}.00</p>
-                                        <button className={data.status ? 'cta-button' : 'cta-locked-button'} style={{ padding: '15px 20px' }} onClick={() => handleAddToCart(data)}>{data.status ? "Add to cart" : <span className="flex-align-center-justify-center">Sold <AiFillLock /></span>}</button>
-                                    </div>
+                            :
+                            AllProducts.length == 0
+                                ? <div className="width100 flex-align-center-justify-center" style={{ marginTop: '50px', marginBottom: '100px' }}>
+                                    <p>No products found</p>
                                 </div>
-                            ))}
+                                :
+                                AllProducts.map((data) => (
+                                    <div className="card stacked" key={data._id}>
+                                        <img onClick={() => handleProductSelected(data)} src={`${url}/Images/` + data.image[0]} alt="Teeny" className="card__img" loading="lazy" />
+                                        <div className="card__content flex-column-align-center">
+                                            <h2 className="card__title" onClick={() => handleProductSelected(data)}>{data.productName}</h2>
+                                            <p className="card__price" onClick={() => handleProductSelected(data)}>KSh{data.price}.00</p>
+                                            <button className={data.status === "available" ? 'cta-button' : 'cta-locked-button'} style={{ padding: '15px 20px' }} onClick={() => handleAddToCart(data)}>{data.status === "available" ? "Add to cart" : <span className="flex-align-center-justify-center">Sold <AiFillLock /></span>}</button>
+                                        </div>
+                                    </div>
+                                ))}
                     </div>
 
                 </div>

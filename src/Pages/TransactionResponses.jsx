@@ -26,17 +26,20 @@ function TransactionResponses() {
 
 
     const findProductWithFalseStatus = (array) => {
-        return array.filter(product => !product.status)
+        return array.filter(product => product.status === "sold")
     }
 
     let index = 1
 
     const checkProductAvailability = async () => {
+        if(items.length < 1){
+            alert("No figurines in cart")
+            return
+        }
         console.log("Check product availability function call")
         const idArray = items.map(item => item.id)
         await axios.post(`${url}/checkProduct`, idArray)
             .then((res) => {
-                console.log("Response for check availability");
                 if (res.data.message === "Found products") {
                     index++
                     const productsWithFalseStatus = findProductWithFalseStatus(res.data.productStatusResults)
@@ -68,7 +71,7 @@ function TransactionResponses() {
                             ...formData
                         }
                         sendOrderToDatabase(order)
-                        console.log('order', order)
+                        // console.log('order', order)
                     }
                 }
                 else console.log("No product found");
@@ -122,6 +125,13 @@ function TransactionResponses() {
             .catch(err => console.log(err))
     }
 
+    // const sendOrderToDatabase = async (order) => {
+    //     await axios.post(`${url}/giveaway`, order)
+    //         .then((res) => {
+    //             console.log(res.data)
+    //         })
+    //         .catch(err => console.log(err))
+    // }
 
     const handleProceedWithoutItem = () => {
         if (isEmpty) {

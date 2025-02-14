@@ -14,7 +14,6 @@ function TransactionResponse({ savedSale, image, text, orderSent }) {
   const handleReject = async () => {
     try {
       setTextOnButton("Please wait...")
-      console.log(savedSale)
       const productIds = savedSale.products.map(product => product._id)
       const saleId = savedSale._id
 
