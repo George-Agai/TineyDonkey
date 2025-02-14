@@ -129,6 +129,7 @@ function AllPreviousSales() {
                                 <option value="delivered">Delivered</option>
                                 <option value="cancelled">Rejected</option>
                                 <option value="deleted">Cancelled</option>
+                                <option value="giveaway">Giveaway</option>
                             </select>
                         </div>
                         <PendingOrders AllProducts={filteredProducts} />

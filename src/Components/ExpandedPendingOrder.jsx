@@ -5,7 +5,7 @@ import axios from "axios";
 const ExpandedPendingOrder = ({ data, onClose }) => {
     const [delivered, setDelivered] = useState(false)
     const [rejected, setRejected] = useState(false)
-    const formattedNumber = `+${data.contact}`
+    const formattedNumber = data.contact
 
     const handleDelivered = async () => {
         try {
