@@ -102,7 +102,6 @@ const AddProductDashboard = () => {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 
-            console.log(res);
             if (res.data.message === "Upload successful") {
                 setAllProducts(res.data.data);
                 setName("");
