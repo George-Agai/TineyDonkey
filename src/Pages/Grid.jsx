@@ -39,7 +39,6 @@ function Grid({ Page }) {
             .catch(error => console.log(error))
     }, [])
 
-
     const handleAddItemToCart = (item) => {
         const updatedProducts = {
             id: item._id,
