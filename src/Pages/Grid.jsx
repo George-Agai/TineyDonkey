@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { setProducts, selectAllProducts } from "../redux/slices";
 import { useCart } from "react-use-cart";
 import { AiFillLock } from "react-icons/ai";
 import { url, testUrl } from "../Constants/url"
@@ -7,20 +9,26 @@ import axios from 'axios';
 
 function Grid({ Page }) {
     const navigate = useNavigate()
+    const dispatch = useDispatch();
     const { addItem, inCart } = useCart()
+
     const [AllProducts, setAllProducts] = useState(null);
+
+    const products = useSelector(selectAllProducts);
+    // console.log("All products from redux", products)
 
     const countRef = useRef(0);
 
     useEffect(() => {
-        if (countRef.current > 0) return;
-        countRef.current += 1;
 
-        axios.get(`${url}/getProduct`)
-            .then((res) => {
-                if (Page === 'Landing') {
-                    const productsArray = res.data
-                    productsArray.sort((a, b) => {
+        const sortArray = () => {
+            try {
+                // console.log("Sort array in useeffect called")
+                if (products === null) return;
+
+                if (Page === 'Landing'){
+                    // console.log("Sort array after return")
+                    const sorted = [...products].sort((a, b) => {
                         // Objects with status: true come before those with status: false
                         if (a.status === "available" && b.status === "sold") {
                             return -1; // a comes before b
@@ -30,11 +38,31 @@ function Grid({ Page }) {
                             return 0; // no change in order
                         }
                     });
-                    setAllProducts(productsArray.slice(0, 4));
+                    // console.log("All products before slice", sorted)
+                    setAllProducts(sorted.slice(0, 4));
+                    return;
                 }
-                else {
-                    setAllProducts(res.data);
+                else{
+                    // console.log("Page is not landing, set all products with redux")
+                    setAllProducts(products);
                 }
+                
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+        sortArray()
+    }, [products])
+
+
+    useEffect(() => {
+        if (countRef.current > 0) return;
+        countRef.current += 1;
+
+        axios.get(`${url}/getProduct`)
+            .then((res) => {
+                dispatch(setProducts(res.data));
             })
             .catch(error => console.log(error))
     }, [])
@@ -62,6 +90,8 @@ function Grid({ Page }) {
         }
         else console.log("Item has been sold")
     }
+
+    // console.log("AllProducts -->", AllProducts)
 
     return (
         <div>
