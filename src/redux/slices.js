@@ -46,7 +46,7 @@ const pendingOrdersSlice = createSlice({
     },
     reducers: {
         setPendingOrders: (state, action) => {
-            console.log("<<<Redux pending orders>>>", action.payload)
+            // console.log("<<<Redux pending orders>>>", action.payload)
             state.items = action.payload;
         },
         addPendingOrder: (state, action) => {
