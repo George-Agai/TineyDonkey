@@ -85,6 +85,7 @@ function AllPreviousSales() {
             navigate('/Admin')
         }, 1000)
     }
+    // console.log("AllProducts", AllProducts)
 
     return (
         <div className="transition-div dashboard-container" style={{ paddingBottom: '40px' }}>
