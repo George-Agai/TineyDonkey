@@ -23,6 +23,17 @@ function Dashboard() {
     const [totalExpenses, setTotalExpenses] = useState()
     const [profit, setProfit] = useState()
     const [authorized, setAuthorized] = useState(false)
+    const [AllProducts, setAllProducts] = useState(null);
+
+    const [showAddOrderPopup, setShowAddOrderPopup] = useState(false);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedProducts, setSelectedProducts] = useState([]);
+    const [step, setStep] = useState(1); // step 1 = choose products, step 2 = order details
+    const [orderForm, setOrderForm] = useState({ products: [], boughtBy: "", contact: "" });
+    const [clicked, setClicked] = useState(false);
+
+
     const navigate = useNavigate()
 
     const countRef = useRef(0);
@@ -79,6 +90,12 @@ function Dashboard() {
 
                                     setAuthorized(true)
                                     // console.log(res.data)
+                                    axios.get(`${url}/getProduct`)
+                                        .then((res) => {
+                                            // console.log("Get all prodctss---->", res.data)
+                                            setAllProducts(res.data);
+                                        })
+                                        .catch(error => console.log(error))
                                 })
                                 .catch(error => console.log(error))
                         }
@@ -95,7 +112,7 @@ function Dashboard() {
     useEffect(() => {
         if (cashflowCount.current > 0) return;
         cashflowCount.current += 1;
-        
+
         const fetchData = async () => {
             try {
                 axios.get(`${url}/getAllCashflow`)
@@ -130,6 +147,88 @@ function Dashboard() {
             navigate('/Admin')
         }, 1000)
     }
+
+    useEffect(() => {
+        if (AllProducts) {
+            const available = AllProducts.filter(p => p.status === "available");
+            setFilteredProducts(available);
+        }
+    }, [AllProducts]);
+
+    const toggleProductSelection = (product) => {
+        if (selectedProducts.find(p => p._id === product._id)) {
+            setSelectedProducts(selectedProducts.filter(p => p._id !== product._id));
+        } else {
+            setSelectedProducts([...selectedProducts, product]);
+        }
+    };
+
+    const handleSearch = (e) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+        if (AllProducts) {
+            setFilteredProducts(
+                AllProducts.filter(
+                    (p) => p.status === "available" && p.productName.toLowerCase().includes(query)
+                )
+            );
+        }
+    };
+
+    const handleSaveOrder = async () => {
+        try {
+            if (!orderForm.boughtBy || !orderForm.contact) return;
+            setClicked(true)
+            // build products array
+            const products = selectedProducts.map((item) => {
+                const quantity = 1;
+                const itemTotal = item.price * quantity;
+
+                return {
+                    _id: item._id,
+                    productName: item.productName,
+                    image: item.image,
+                    quantity,
+                    itemTotal,
+                };
+            });
+
+            // calculate totalAmount
+            const totalAmount = products.reduce((sum, item) => sum + item.itemTotal, 0);
+
+            const payload = {
+                products,
+                totalAmount,
+                boughtBy: orderForm.boughtBy,
+                contact: orderForm.contact,
+                town: "Nairobi",
+                country: "Kenya",
+                orderNotes: "empty",
+                orderStatus: "pending",
+            };
+
+            const res = await axios.post(`${url}/saveOrder`, payload);
+            if(res.data.message === 'Sale saved successfully'){
+                alert("Order saved ✅");
+
+                // reset states
+                setShowAddOrderPopup(false);
+                setSelectedProducts([]);
+                setOrderForm({ products: [], boughtBy: "", contact: "" });
+                setStep(1);
+                return;
+            }
+            else alert("Order couldn't save");
+            
+        } catch (err) {
+            console.error("Save order failed:", err);
+            alert("Failed to save order");
+        }
+        finally{
+            setClicked(false)
+        }
+    };
+
 
     return (
         <div className="transition-div dashboard-container" style={{ paddingBottom: '40px' }}>
@@ -172,9 +271,13 @@ function Dashboard() {
                     />
 
                     <div className="width100 tile" style={{ marginTop: '70px', width: '106%', marginLeft: '-11px' }}>
-                        <h3 className='text-align-center' style={{ padding: "20px 0", fontSize: '17px' }}>Pending orders ({AllPendingOrders.length})</h3>
+                        <div className="flex-justify-content-space-between" style={{ padding: "20px" }}>
+                            <h3 style={{ fontSize: '17px' }}>Pending orders ({AllPendingOrders.length})</h3>
+                            <button className="add-order-btn" onClick={() => setShowAddOrderPopup(true)}>+ Add Order</button>
+                        </div>
                         <PendingOrders AllProducts={AllPendingOrders} />
                     </div>
+
                 </>
             ) : (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: "100%" }}>
@@ -182,6 +285,65 @@ function Dashboard() {
                 </div>
 
             )}
+
+
+            {showAddOrderPopup && (
+                <div className="modal-overlay">
+                    <div className="modal-content" style={{ width: "500px" }}>
+                        {step === 1 && (
+                            <>
+                                <h3>Select Products</h3>
+                                <input
+                                    type="text"
+                                    placeholder="Search product name..."
+                                    value={searchQuery}
+                                    onChange={handleSearch}
+                                    style={{ marginBottom: "10px", height: '30px', fontSize: '15px' }}
+                                />
+                                <div className="product-list">
+                                    {filteredProducts.map((product) => (
+                                        <div
+                                            key={product._id}
+                                            className={`product-item ${selectedProducts.find(p => p._id === product._id) ? "selected" : ""}`}
+                                            onClick={() => toggleProductSelection(product)}
+                                        >
+                                            <img src={`${url}/Images/${product.image[0]}`} alt={product.productName} />
+                                            <div>
+                                                <p>{product.productName}</p>
+                                                <span>Ksh {product.price}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="modal-actions">
+                                    <button onClick={() => setShowAddOrderPopup(false)} className="cancel-btn">Cancel</button>
+                                    <button disabled={selectedProducts.length === 0} onClick={() => setStep(2)} className="save-btn">Next</button>
+                                </div>
+                            </>
+                        )}
+
+                        {step === 2 && (
+                            <>
+                                <h3>Order Details</h3>
+                                <label>Products</label>
+                                <input type="text" value={selectedProducts.map(p => p.productName).join(", ")} disabled />
+
+                                <label>Bought By</label>
+                                <input type="text" value={orderForm.boughtBy} onChange={e => setOrderForm({ ...orderForm, boughtBy: e.target.value })} />
+
+                                <label>Contact</label>
+                                <input type="text" value={orderForm.contact} onChange={e => setOrderForm({ ...orderForm, contact: e.target.value })} />
+
+                                <div className="modal-actions">
+                                    <button onClick={() => { setStep(1); setOrderForm({ ...orderForm, boughtBy: "", contact: "" }); }} className="cancel-btn">Back</button>
+                                    <button onClick={handleSaveOrder} className="save-btn">{clicked ? 'Saving.. ' : 'Save'}</button>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 

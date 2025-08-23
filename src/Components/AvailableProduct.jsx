@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { FaShopSlash } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
 import { url, testUrl } from "../Constants/url"
 import axios from "axios";
 
 
-function AvailableProduct({ AllProducts }) {
+function AvailableProduct({ AllProducts, onEdit }) {
 
     const [ListedProducts, setListedProducts] = useState(AllProducts)
 
@@ -14,7 +15,7 @@ function AvailableProduct({ AllProducts }) {
     }, [AllProducts]);
 
     const handleDelete = async (productId) => {
-        if (!window.confirm('Are you sure you want to delete this product?')) return;
+        if (!window.confirm('Are you sure you want to delete this product? Deleting removes all images and product data from the database')) return;
 
         try {
             const response = await axios.delete(`${url}/deleteProduct/${productId}`);
@@ -31,12 +32,12 @@ function AvailableProduct({ AllProducts }) {
     };
 
     const removeItemFromShop = async (productId) => {
-        if (!window.confirm('Are you sure you want remove product from shop?')) return;
+        if (!window.confirm('Are you sure you want remove product from shop? Removing deletes all product images except one.')) return;
 
         try {
             const response = await axios.delete(`${url}/removeFromShop/${productId}`);
             alert(`${response.data.message}`)
-            console.log("Updated product", response.data.product)
+            // console.log("Updated product", response.data.product)
             await axios.get(`${url}/getProduct`)
                 .then((res) => {
                     setListedProducts(res.data);
@@ -69,8 +70,9 @@ function AvailableProduct({ AllProducts }) {
                                 </td>
                                 <td className='text-align-center'>{data.price}</td>
                                 <td className='text-align-center'>{data.status === "available" ? <span style={{ color: '#FF6310' }}>Available</span> : <span style={{ color: 'lightgray' }}>Sold</span>}</td>
-                                <td className='text-align-center'><AiFillDelete id='delete-icon' style={{ color: 'grey', cursor: 'pointer' }} onClick={() => handleDelete(data._id)} /></td>
-                                <td className='text-align-right'><FaShopSlash style={{ color: 'grey', cursor: 'pointer', marginLeft: '10px' }} onClick={() => removeItemFromShop(data._id)} /></td>
+                                <td className='text-align-left'><FaEdit style={{ color: 'grey', cursor: 'pointer', marginLeft: '10px' }} onClick={() => onEdit(data)} /></td>
+                                <td className='text-align-center'><FaShopSlash style={{ color: 'grey', cursor: 'pointer', marginLeft: '10px', marginRight: '10px' }} onClick={() => removeItemFromShop(data._id)} /></td>
+                                <td className='text-align-right'><AiFillDelete id='delete-icon' style={{ color: 'red', cursor: 'pointer', marginRight: '10px' }} onClick={() => handleDelete(data._id)} /></td>                            
                             </tr>
                         ))}
                 </tbody>

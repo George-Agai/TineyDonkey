@@ -41,6 +41,9 @@ const AddProductDashboard = () => {
     const [token, setToken] = useState(readFromLocalStorage('token'))
     const [imageUploaded, setImageUploaded] = useState(false)
     const [uploading, setUploading] = useState(false)
+    const [editingProduct, setEditingProduct] = useState(null);
+    const [editForm, setEditForm] = useState({ productName: "", status: "", slug: "", price: "", image: [] });
+    const [clicked, setClicked] = useState(false);
 
     const handleUpload = async (e) => {
         e.preventDefault();
@@ -160,7 +163,39 @@ const AddProductDashboard = () => {
         }, 1000)
     }
 
+    // open edit modal
+    const handleEdit = (product) => {
+        setEditingProduct(product);
+        setEditForm({
+            productName: product.productName,
+            status: product.status,
+            slug: product.slug,
+            price: product.price,
+            image: product.image
+        });
+    };
 
+    // save edits
+    const saveEdit = async () => {
+        try {
+            setClicked(true)
+            const res = await axios.put(`${url}/editProduct/${editingProduct._id}`, editForm);
+            // console.log("Edit product res-->", res.data)
+            if (res.data.message === "Product updated") {
+                alert("Product updated successfully ✅");
+                setEditingProduct(null);
+                // refresh list
+                const updated = await axios.get(`${url}/getProduct`);
+                setAllProducts(updated.data);
+            }
+        } catch (err) {
+            console.error("Edit failed:", err);
+        } finally{
+            setClicked(false)
+        }
+    };
+
+    // console.log("AllProducts", AllProducts)
     return (
         <div className='dashboard-container transition-div' style={{ paddingBottom: '40px' }}>
             <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
@@ -188,10 +223,42 @@ const AddProductDashboard = () => {
                     </form>
                 </div>
 
+
+                {editingProduct && (
+                    <div className="modal-overlay">
+                        <div className="modal-content">
+                            <h3>Edit Product</h3>
+                            <label>Name</label>
+                            <input type="text" value={editForm.productName} onChange={e => setEditForm({ ...editForm, productName: e.target.value })} />
+
+                            <label>Status</label>
+                            <select value={editForm.status} onChange={e => setEditForm({ ...editForm, status: e.target.value })}>
+                                <option value="available">Available</option>
+                                <option value="sold">Sold</option>
+                            </select>
+
+                            <label>Slug</label>
+                            <input type="text" value={editForm.slug} onChange={e => setEditForm({ ...editForm, slug: e.target.value })} />
+
+                            <label>Image Names</label>
+                            <textarea value={editForm.image.join(", ")} onChange={e => setEditForm({ ...editForm, image: e.target.value.split(",").map(v => v.trim()) })} />
+
+                            <label>Price</label>
+                            <input type="number" value={editForm.price} onChange={e => setEditForm({ ...editForm, price: e.target.value })} />
+
+                            <div className="modal-actions">
+                                <button onClick={() => setEditingProduct(null)} className="cancel-btn">Cancel</button>
+                                <button onClick={saveEdit} className="save-btn">{clicked ? 'Saving.. ' : 'Save'}</button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+
                 <div id="image-preview"></div>
 
                 <div style={{ overflowY: 'auto' }} className='flex-column-align-center products-scrollbar'>
-                    <AvailableProduct AllProducts={AllProducts} />
+                    <AvailableProduct AllProducts={AllProducts} onEdit={handleEdit} />
                 </div>
             </div>
         </div>
