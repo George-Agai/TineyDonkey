@@ -38,9 +38,7 @@ function Products() {
                         <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
                         <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
                     </ul>
-                    {/* <div className='flex-justify-flex-end navbar-icon-div' style={{ width: '15%', paddingRight: '30px' }}>
-                        <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
-                    </div> */}
+                    
                     <div className=' navbar-icon-div'>
                         <span className="flex-align-center-justify-center" onClick={() => navigate('/cart')}>
                             <MdOutlineShoppingBag style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} />
