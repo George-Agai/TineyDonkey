@@ -12,7 +12,7 @@ function Grid({ Page }) {
     const dispatch = useDispatch();
     const { addItem, inCart } = useCart()
 
-    const [AllProducts, setAllProducts] = useState(null);
+    const [AllProducts, setAllProducts] = useState(useSelector(selectAllProducts));
 
     const products = useSelector(selectAllProducts);
     // console.log("All products from redux", products)
@@ -27,7 +27,7 @@ function Grid({ Page }) {
                 if (products === null) return;
 
                 if (Page === 'Landing'){
-                    // console.log("Sort array after return")
+                    // console.log("Sort products array in landing")
                     const sorted = [...products].sort((a, b) => {
                         // Objects with status: true come before those with status: false
                         if (a.status === "available" && b.status === "sold") {
@@ -38,15 +38,10 @@ function Grid({ Page }) {
                             return 0; // no change in order
                         }
                     });
-                    // console.log("All products before slice", sorted)
+                    // console.log("All products in landing before slice", sorted)
                     setAllProducts(sorted.slice(0, 4));
                     return;
                 }
-                else{
-                    // console.log("Page is not landing, set all products with redux")
-                    setAllProducts(products);
-                }
-                
             } catch (e) {
                 console.log(e)
             }
