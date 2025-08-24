@@ -7,7 +7,7 @@ const productSlice = createSlice({
     },
     reducers: {
         setProducts: (state, action) => {
-            console.log("<<<Redux all products>>>", action.payload)
+            // console.log("<<<Redux all products>>>", action.payload)
             state.items = action.payload;
         },
         addProduct: (state, action) => {
