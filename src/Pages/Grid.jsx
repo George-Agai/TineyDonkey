@@ -31,11 +31,11 @@ function Grid({ Page }) {
                     const sorted = [...products].sort((a, b) => {
                         // Objects with status: true come before those with status: false
                         if (a.status === "available" && b.status === "sold") {
-                            return -1; // a comes before b
+                            return -1;
                         } else if (a.status === "sold" && b.status === "available") {
-                            return 1; // b comes before a
+                            return 1;
                         } else {
-                            return 0; // no change in order
+                            return 0;
                         }
                     });
                     // console.log("All products in landing before slice", sorted)
