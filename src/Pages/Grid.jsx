@@ -57,6 +57,7 @@ function Grid({ Page }) {
 
         axios.get(`${url}/getProduct`)
             .then((res) => {
+                setAllProducts(res.data)
                 dispatch(setProducts(res.data));
             })
             .catch(error => console.log(error))
