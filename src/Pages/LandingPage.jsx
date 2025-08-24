@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { MdOutlineShoppingBag } from "react-icons/md";
-import tick from '../TineyDonkeyAssets/icon-quality.svg'
-import delivery from '../TineyDonkeyAssets/icon-delivery.svg'
-import warranty from '../TineyDonkeyAssets/icon-warranty.svg'
+import tick from '../TineyDonkeyAssets/icon-quality.webp'
+import delivery from '../TineyDonkeyAssets/icon-delivery.webp'
+import warranty from '../TineyDonkeyAssets/icon-warranty.webp'
 import Footer from '../Components/Footer.jsx'
 import Grid from './Grid.jsx'
 import AnimatedIcon from '../Components/AnimatedIcon';
@@ -90,7 +90,7 @@ function LandingPage() {
           <p className="text-align-center">We have undoubtedly the best prices</p>
         </div>
         <div className="banner-div flex-column-align-center">
-          <img src={delivery} alt='delivery' className="banner-icons" />
+          <img src={delivery} alt='delivery' className="banner-icons" style={{width: '90px', marginBottom: '-20px'}}/>
           <h5>Free Delivery</h5>
           <p className="text-align-center">Free delivery within Nairobi CBD</p>
         </div>

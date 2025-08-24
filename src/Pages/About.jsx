@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { MdOutlineShoppingBag } from "react-icons/md";
-import TineyDonkey from '../TineyDonkeyAssets/20231220_133614.jpg'
+import TineyDonkey from '../TineyDonkeyAssets/about.webp'
 import Footer from '../Components/Footer';
 import { useCart } from 'react-use-cart';
 
@@ -54,7 +54,7 @@ function About() {
                 <img src={TineyDonkey} alt='TineyDonkey' style={{ height: 'auto' }} className='about-image' />
                 <div className='flex-column-align-center'>
                     <h1 className='font-merriweather' style={{ color: 'RGB(17, 21, 24)', textAlign: 'center' }}>About TineyDonkey</h1>
-                    <p style={{ color: '#687279', fontSize: '16px', lineHeight: '26.4px' }}>Welcome to TineyDonkey, where creativity meets code! We’re not just selling figurines; we’re crafting companions for your workspace, miniature muses that turn your desk into a beautiful colorful space.<br /><br />Each figurine tells a story – a pixelated tale of dedication, passion, and the thrill of problem-solving.  So, dive into our collection, embrace the pixelated magic, and let your workstation become a haven where imagination and innovation collide. Your space, your story – told in every intricately designed figurine we offer. Welcome to a desk adorned with inspiration!</p>
+                    <p style={{ color: '#687279', fontSize: '16px', lineHeight: '26.4px' }}>Welcome to TineyDonkey – where creativity brightens your space! We have vibrant, eye-catching figurines that bring personality to your desk, floating shelves or even your home décor. Whether it’s adding charm to your workstation, sparking life into your video backgrounds, or simply giving your room a pop of color, our figurines are made to inspire and uplift.<br /><br />Each piece carries its own story – crafted with passion, creativity, and a touch of playfulness. Explore our collection and let your workspace or living area transform into a place where aesthetics meet inspiration.</p>
                     <button className='cta-button' style={{ marginTop: '30px' }}><a href='tel:+254792271915' style={{ textDecoration: 'none', color: 'white' }}>Contact Us</a></button>
                 </div>
             </div>

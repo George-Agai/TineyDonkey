@@ -274,7 +274,8 @@ body {
 }
 
 .banner-icons {
-  width: 50px;
+  width: 70px;
+  /* border: 1px solid black; */
 }
 
 .banner h5 {
