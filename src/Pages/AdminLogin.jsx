@@ -43,7 +43,7 @@ function AdminLogin() {
                 password: password
             }
 
-            const response = await axios.post(`${url}/login`, userLoginObject);
+            const response = await publicAPI.post(`/login`, userLoginObject);
 
             if (response) {
                 const loginResponseMessage = response.data.message
