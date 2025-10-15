@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import PendingOrders from '../Components/PendingOrders';
 import DashboardTiles from '../Components/DashboardTiles';
-import { url, testUrl } from "../Constants/url"
-import axios from 'axios';
+import { url } from "../Constants/url"
+import { authAPI, publicAPI } from '../Context/AxiosProvider';
 
 function Dashboard() {
     const readFromLocalStorage = (key) => {
@@ -61,44 +61,31 @@ function Dashboard() {
         countRef.current += 1;
         const fetchData = async () => {
             try {
-                await axios.get(`${url}/authentication`, {
-                    headers: {
-                        'Authorization': `${token}`,
-                    },
-                })
-                    .then((tokenAuthenticationPayload) => {
-                        if (tokenAuthenticationPayload.data.message === 'Access denied. No token provided' || tokenAuthenticationPayload.data.message === 'Invalid token') {
-                            navigate('/Admin')
-                        }
-                        else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get(`${url}/getPendingOrders`)
-                                .then((res) => {
-                                    setAllPendingOrders(res.data.pendingOrders.filter(order => order.orderStatus === "pending"));
+                await authAPI.get(`/getPendingOrders`)
+                    .then((res) => {
+                        setAllPendingOrders(res.data.pendingOrders.filter(order => order.orderStatus === "pending"));
 
-                                    const deliveredProducts = res.data.pendingOrders
-                                        .filter(order => order.orderStatus === "delivered")
-                                        .reduce((sum, order) => sum + order.products.length, 0);
+                        const deliveredProducts = res.data.pendingOrders
+                            .filter(order => order.orderStatus === "delivered")
+                            .reduce((sum, order) => sum + order.products.length, 0);
 
-                                    const totalSalesAmount = res.data.pendingOrders
-                                        .filter(order => order.orderStatus === "delivered")
-                                        .reduce((sum, order) => sum + order.totalAmount, 0);
+                        const totalSalesAmount = res.data.pendingOrders
+                            .filter(order => order.orderStatus === "delivered")
+                            .reduce((sum, order) => sum + order.totalAmount, 0);
 
-                                    setAllDeliveredOrders(deliveredProducts);
-                                    setLifetimeIncome(totalSalesAmount)
-                                    setFigurinesInStock(res.data.stockInfo.totalProductsInStock)
-                                    setRemainingStockWorth(res.data.stockInfo.totalRemainingStockWorth)
+                        setAllDeliveredOrders(deliveredProducts);
+                        setLifetimeIncome(totalSalesAmount)
+                        setFigurinesInStock(res.data.stockInfo.totalProductsInStock)
+                        setRemainingStockWorth(res.data.stockInfo.totalRemainingStockWorth)
 
-                                    setAuthorized(true)
-                                    // console.log(res.data)
-                                    axios.get(`${url}/getProduct`)
-                                        .then((res) => {
-                                            // console.log("Get all prodctss---->", res.data)
-                                            setAllProducts(res.data);
-                                        })
-                                        .catch(error => console.log(error))
-                                })
-                                .catch(error => console.log(error))
-                        }
+                        setAuthorized(true)
+                        // console.log(res.data)
+                        publicAPI.get(`/getProduct`)
+                            .then((res) => {
+                                // console.log("Get all prodctss---->", res.data)
+                                setAllProducts(res.data);
+                            })
+                            .catch(error => console.log(error))
                     })
                     .catch(error => console.log(error))
             }
@@ -115,7 +102,7 @@ function Dashboard() {
 
         const fetchData = async () => {
             try {
-                axios.get(`${url}/getAllCashflow`)
+                authAPI.get(`/getAllCashflow`)
                     .then((res) => {
                         let income = 0;
                         let expense = 0;
@@ -142,9 +129,9 @@ function Dashboard() {
     }, [])
 
     const handleLogout = () => {
-        localStorage.removeItem('token')
+        localStorage.removeItem('TineyDonkeyToken')
         setTimeout(() => {
-            navigate('/Admin')
+            navigate('/Admin', {replace: true})
         }, 1000)
     }
 
@@ -207,8 +194,8 @@ function Dashboard() {
                 orderStatus: "pending",
             };
 
-            const res = await axios.post(`${url}/saveOrder`, payload);
-            if(res.data.message === 'Sale saved successfully'){
+            const res = await publicAPI.post(`/saveOrder`, payload);
+            if (res.data.message === 'Sale saved successfully') {
                 alert("Order saved ✅");
 
                 // reset states
@@ -219,12 +206,12 @@ function Dashboard() {
                 return;
             }
             else alert("Order couldn't save");
-            
+
         } catch (err) {
             console.error("Save order failed:", err);
             alert("Failed to save order");
         }
-        finally{
+        finally {
             setClicked(false)
         }
     };

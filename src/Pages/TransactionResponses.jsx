@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
-import axios from 'axios'
 import TransactionState from '../Components/TransactionState'
 import TransactionResponse from '../Components/TransactionResponse'
 import tick from '../TineyDonkeyAssets/tick.png'
 import x from '../TineyDonkeyAssets/x-mark.png'
-import { url, testUrl } from "../Constants/url"
+import { publicAPI } from '../Context/AxiosProvider'
 
 function TransactionResponses() {
     const location = useLocation()
@@ -38,7 +37,7 @@ function TransactionResponses() {
         }
         console.log("Check product availability function call")
         const idArray = items.map(item => item.id)
-        await axios.post(`${url}/checkProduct`, idArray)
+        await publicAPI.post(`/checkProduct`, idArray)
             .then((res) => {
                 if (res.data.message === "Found products") {
                     index++
@@ -101,7 +100,7 @@ function TransactionResponses() {
 
 
     const sendOrderToDatabase = async (order) => {
-        await axios.post(`${url}/saveOrder`, order)
+        await publicAPI.post(`/saveOrder`, order)
             .then((res) => {
                 if (res.data.message === "Sale saved successfully") {
                     setSavedSale(res.data.savedSale)
@@ -126,7 +125,7 @@ function TransactionResponses() {
     }
 
     // const sendOrderToDatabase = async (order) => {
-    //     await axios.post(`${url}/giveaway`, order)
+    //     await publicAPI.post(`/giveaway`, order)
     //         .then((res) => {
     //             console.log(res.data)
     //         })

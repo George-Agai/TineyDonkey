@@ -4,8 +4,8 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 import { AiFillLock } from "react-icons/ai";
 import { useCart } from 'react-use-cart';
 import Footer from '../Components/Footer';
-import { url, testUrl } from "../Constants/url"
-import axios from 'axios';
+import { url } from "../Constants/url"
+import { publicAPI } from '../Context/AxiosProvider';
 
 function ExpandedProduct() {
     const navigate = useNavigate();
@@ -52,7 +52,7 @@ function ExpandedProduct() {
 
     useEffect(() => {
         const fetchData = async () => {
-            axios.get(`${url}/fetchProduct/${slug}`)
+            publicAPI.get(`/fetchProduct/${slug}`)
                 .then((res) => setProduct(res.data))
                 .catch((err) => console.log(err));
         }

@@ -5,6 +5,7 @@ import AvailableProduct from '../Components/AvailableProduct';
 import imageCompression from 'browser-image-compression';
 import { url, testUrl } from "../Constants/url"
 import axios from 'axios';
+import { authAPI } from '../Context/AxiosProvider';
 
 
 const AddProductDashboard = () => {
@@ -44,6 +45,7 @@ const AddProductDashboard = () => {
     const [editingProduct, setEditingProduct] = useState(null);
     const [editForm, setEditForm] = useState({ productName: "", status: "", slug: "", price: "", image: [] });
     const [clicked, setClicked] = useState(false);
+    const [authorized, setAuthorized] = useState(false)
 
     const handleUpload = async (e) => {
         e.preventDefault();
@@ -74,34 +76,7 @@ const AddProductDashboard = () => {
             formData.append('productName', Name);
             formData.append('price', priceInteger);
 
-            // Log FormData contents
-            // for (const [key, value] of formData.entries()) {
-            //     if (key === 'image' && value instanceof File) {
-            //         console.log(`Key: ${key}`);
-            //         console.log(`File Name: ${value.name}`);
-            //         console.log(`File Type: ${value.type}`);
-            //         console.log(`File Size: ${value.size / 1024} KB`); // Convert size to KB
-            //     } else {
-            //         console.log(`Key: ${key}, Value: ${value}`);
-            //     }
-            // }
-
-            // Check the image format and sizes
-            // for (let i = 0; i < file.length; i++) {
-            //     const image = file[i];
-            //     const validFormats = ['image/jpeg', 'image/png', 'image/gif']; // Allowed formats
-            //     const maxSize = 7 * 1024 * 1024; // 2 MB in bytes
-
-            //     if (!validFormats.includes(image.type)) {
-            //         console.error(`Invalid file format: ${image.name}`);
-            //     }
-
-            //     if (image.size > maxSize) {
-            //         console.error(`File too large: ${image.name}, Size: ${image.size / 1024} KB`);
-            //     }
-            // }
-
-            const res = await axios.post(`${url}/uploadProduct`, formData, {
+            const res = await authAPI.post(`/uploadProduct`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 
@@ -130,22 +105,14 @@ const AddProductDashboard = () => {
 
         const fetchData = async () => {
             try {
-                await axios.get(`${url}/authentication`, {
-                    headers: {
-                        'Authorization': `${token}`,
-                    },
-                })
-                    .then((tokenAuthenticationPayload) => {
-                        if (tokenAuthenticationPayload.data.message === 'Access denied. No token provided' || tokenAuthenticationPayload.data.message === 'Invalid token') {
-                            navigate('/admin')
-                        }
-                        else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get(`${url}/getProduct`)
-                                .then((res) => {
-                                    setAllProducts(res.data);
-                                })
-                                .catch(error => console.log(error))
-                        }
+                await authAPI.get(`/authentication`)
+                    .then(() => {
+                        authAPI.get(`/getProduct`)
+                            .then((res) => {
+                                setAuthorized(true)
+                                setAllProducts(res.data);
+                            })
+                            .catch(error => console.log(error))
                     })
                     .catch(error => console.log(error))
             }
@@ -157,9 +124,9 @@ const AddProductDashboard = () => {
     }, [])
 
     const handleLogout = () => {
-        localStorage.removeItem('token')
+        localStorage.removeItem('TineyDonkeyToken')
         setTimeout(() => {
-            navigate('/admin')
+            navigate('/Admin', {replace: true})
         }, 1000)
     }
 
@@ -190,7 +157,7 @@ const AddProductDashboard = () => {
             }
         } catch (err) {
             console.error("Edit failed:", err);
-        } finally{
+        } finally {
             setClicked(false)
         }
     };
@@ -198,69 +165,78 @@ const AddProductDashboard = () => {
     // console.log("AllProducts", AllProducts)
     return (
         <div className='dashboard-container transition-div' style={{ paddingBottom: '40px' }}>
-            <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
-                <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
-                    <p onClick={() => navigate('/')}>TineyDonkey</p>
-                    <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-                        <FaRegUserCircle style={{ color: 'grey', fontSize: '25px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout} />
-                    </div>
-                </section>
-            </nav>
-            <div className='width100 flex-justify-content-space-between add-product-main-container' style={{ display: 'flex' }}>
-                <div style={{ border: '2px solid rgb(231, 230, 230)' }} className='flex-align-center-justify-center add-figurine-fom-div'>
-                    <form onSubmit={handleUpload} className=' add-product-form'>
-                        <h3>Add a figurine</h3>
-                        <label htmlFor='image'>Image *</label>
-                        <input type="file" id='image' required='true' onChange={e => setFile(e.target.files)} multiple />
-
-                        <label htmlFor='name'>Name *</label>
-                        <input placeholder='Name' type='text' required='true' id='name' value={Name} onChange={e => setName(e.target.value)} />
-
-                        <label htmlFor='price'>Price *</label>
-                        <input placeholder='Amount' type='number' required='true' id='price' value={Price} onChange={e => setPrice(e.target.value)} />
-
-                        <button type='submit' className='cta-button width100'>{uploading ? "Uploading..." : imageUploaded ? "Uploaded" : "Upload"}</button>
-                    </form>
-                </div>
-
-
-                {editingProduct && (
-                    <div className="modal-overlay">
-                        <div className="modal-content">
-                            <h3>Edit Product</h3>
-                            <label>Name</label>
-                            <input type="text" value={editForm.productName} onChange={e => setEditForm({ ...editForm, productName: e.target.value })} />
-
-                            <label>Status</label>
-                            <select value={editForm.status} onChange={e => setEditForm({ ...editForm, status: e.target.value })}>
-                                <option value="available">Available</option>
-                                <option value="sold">Sold</option>
-                            </select>
-
-                            <label>Slug</label>
-                            <input type="text" value={editForm.slug} onChange={e => setEditForm({ ...editForm, slug: e.target.value })} />
-
-                            <label>Image Names</label>
-                            <textarea value={editForm.image.join(", ")} onChange={e => setEditForm({ ...editForm, image: e.target.value.split(",").map(v => v.trim()) })} />
-
-                            <label>Price</label>
-                            <input type="number" value={editForm.price} onChange={e => setEditForm({ ...editForm, price: e.target.value })} />
-
-                            <div className="modal-actions">
-                                <button onClick={() => setEditingProduct(null)} className="cancel-btn">Cancel</button>
-                                <button onClick={saveEdit} className="save-btn">{clicked ? 'Saving.. ' : 'Save'}</button>
+            {authorized ? (
+                <>
+                    <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
+                        <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
+                            <p onClick={() => navigate('/')}>TineyDonkey</p>
+                            <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
+                                <FaRegUserCircle style={{ color: 'grey', fontSize: '25px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout} />
                             </div>
+                        </section>
+                    </nav>
+                    <div className='width100 flex-justify-content-space-between add-product-main-container' style={{ display: 'flex' }}>
+                        <div style={{ border: '2px solid rgb(231, 230, 230)' }} className='flex-align-center-justify-center add-figurine-fom-div'>
+                            <form onSubmit={handleUpload} className=' add-product-form'>
+                                <h3>Add a figurine</h3>
+                                <label htmlFor='image'>Image *</label>
+                                <input type="file" id='image' required='true' onChange={e => setFile(e.target.files)} multiple />
+
+                                <label htmlFor='name'>Name *</label>
+                                <input placeholder='Name' type='text' required='true' id='name' value={Name} onChange={e => setName(e.target.value)} />
+
+                                <label htmlFor='price'>Price *</label>
+                                <input placeholder='Amount' type='number' required='true' id='price' value={Price} onChange={e => setPrice(e.target.value)} />
+
+                                <button type='submit' className='cta-button width100'>{uploading ? "Uploading..." : imageUploaded ? "Uploaded" : "Upload"}</button>
+                            </form>
+                        </div>
+
+
+                        {editingProduct && (
+                            <div className="modal-overlay">
+                                <div className="modal-content">
+                                    <h3>Edit Product</h3>
+                                    <label>Name</label>
+                                    <input type="text" value={editForm.productName} onChange={e => setEditForm({ ...editForm, productName: e.target.value })} />
+
+                                    <label>Status</label>
+                                    <select value={editForm.status} onChange={e => setEditForm({ ...editForm, status: e.target.value })}>
+                                        <option value="available">Available</option>
+                                        <option value="sold">Sold</option>
+                                    </select>
+
+                                    <label>Slug</label>
+                                    <input type="text" value={editForm.slug} onChange={e => setEditForm({ ...editForm, slug: e.target.value })} />
+
+                                    <label>Image Names</label>
+                                    <textarea value={editForm.image.join(", ")} onChange={e => setEditForm({ ...editForm, image: e.target.value.split(",").map(v => v.trim()) })} />
+
+                                    <label>Price</label>
+                                    <input type="number" value={editForm.price} onChange={e => setEditForm({ ...editForm, price: e.target.value })} />
+
+                                    <div className="modal-actions">
+                                        <button onClick={() => setEditingProduct(null)} className="cancel-btn">Cancel</button>
+                                        <button onClick={saveEdit} className="save-btn">{clicked ? 'Saving.. ' : 'Save'}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+
+                        <div id="image-preview"></div>
+
+                        <div style={{ overflowY: 'auto' }} className='flex-column-align-center products-scrollbar'>
+                            <AvailableProduct AllProducts={AllProducts} onEdit={handleEdit} />
                         </div>
                     </div>
-                )}
-
-
-                <div id="image-preview"></div>
-
-                <div style={{ overflowY: 'auto' }} className='flex-column-align-center products-scrollbar'>
-                    <AvailableProduct AllProducts={AllProducts} onEdit={handleEdit} />
+                </>
+            ) : (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: "100%" }}>
+                    <h3>Loading...</h3>
                 </div>
-            </div>
+
+            )}
         </div>
     );
 };

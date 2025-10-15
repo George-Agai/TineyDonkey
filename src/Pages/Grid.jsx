@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProducts, selectAllProducts } from "../redux/slices";
 import { useCart } from "react-use-cart";
 import { AiFillLock } from "react-icons/ai";
-import { url, testUrl } from "../Constants/url"
-import axios from 'axios';
+import { url } from "../Constants/url"
+import { publicAPI } from "../Context/AxiosProvider";
 
 function Grid({ Page }) {
     const navigate = useNavigate()
@@ -55,7 +55,7 @@ function Grid({ Page }) {
         if (countRef.current > 0) return;
         countRef.current += 1;
 
-        axios.get(`${url}/getProduct`)
+        publicAPI.get(`/getProduct`)
             .then((res) => {
                 setAllProducts(res.data)
                 dispatch(setProducts(res.data));

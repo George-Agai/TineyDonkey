@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IoCloseOutline } from "react-icons/io5";
-import { url, testUrl } from "../Constants/url"
 import AnimatedIcon from '../Components/AnimatedIcon';
 import DeleteIcon from "../TineyDonkeyAssets/Animations/delete.json";
 import Done from "../TineyDonkeyAssets/Animations/done.json";
-import axios from "axios";
+import { publicAPI } from '../Context/AxiosProvider';
 
 function TransactionResponse({ savedSale, image, text, orderSent }) {
   const navigate = useNavigate()
@@ -21,7 +20,7 @@ function TransactionResponse({ savedSale, image, text, orderSent }) {
           saleId,
           productIds
       }
-      await axios.post(`${url}/cancelOrder`, requestObject)
+      await publicAPI.post(`/cancelOrder`, requestObject)
           .then((res) => {
               if (res.data.message == 'Deleted successfully') {
                   setTimeout(() => {
@@ -29,7 +28,7 @@ function TransactionResponse({ savedSale, image, text, orderSent }) {
                   }, 2000);
                   setTimeout(() => {
                       setTextOnButton("Cancel order")
-                      navigate('/cart')
+                      navigate('/cart', { replace: true })
                   }, 3000);
               }
               else if (res.data.message == 'Update failed') {
@@ -53,7 +52,7 @@ function TransactionResponse({ savedSale, image, text, orderSent }) {
                 cursor: 'pointer',
                 marginTop: '20px'
               }}
-              onClick={() => navigate('/cart')}
+              onClick={() => navigate('/cart', { replace: true })}
             />
           </div>
           <div className='flex-column-align-center' style={{ marginTop: '-70px' }}>

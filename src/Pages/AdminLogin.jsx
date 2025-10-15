@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import Notification from '../Components/Notification';
-import { url, testUrl } from "../Constants/url"
+import { publicAPI } from '../Context/AxiosProvider';
 import axios from 'axios';
+import { url } from '../Constants/url';
 
 function AdminLogin() {
     const [scrolling, setScrolling] = useState(false);
@@ -50,7 +51,7 @@ function AdminLogin() {
                 const token = response.data.token
 
                 if (token) {
-                    saveToLocalStorage('token', token)
+                    saveToLocalStorage('TineyDonkeyToken', token)
                 }
 
                 if (loginResponseMessage === "Auth successful") {
