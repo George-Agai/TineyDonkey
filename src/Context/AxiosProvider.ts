@@ -12,7 +12,6 @@ export const authAPI = axios.create({
 authAPI.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const stored = localStorage.getItem("TineyDonkeyToken");
-
     if (stored) {
       try {
         console.error("Token found");
