@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
-import { url, testUrl } from "../Constants/url"
-import axios from "axios"
+import { publicAPI } from "../Context/AxiosProvider"
 
 function Footer() {
 
@@ -19,7 +18,7 @@ function Footer() {
             const emailAddress = {
                 emailAddress: Email
             }
-            await axios.post(`${url}/subscribe`, emailAddress)
+            await publicAPI.post(`/subscribe`, emailAddress)
                 .then((res) => {
                     if (res.data.message === "Email address saved successfully") {
                         setEmailSent(true)

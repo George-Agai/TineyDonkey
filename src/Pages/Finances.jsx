@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
-import { url, testUrl } from "../Constants/url"
-import axios from 'axios';
+import { authAPI } from '../Context/AxiosProvider';
 
 function Finances() {
   const navigate = useNavigate()
@@ -14,6 +13,7 @@ function Finances() {
   const [totalIncome, setTotalIncome] = useState()
   const [totalExpenses, setTotalExpenses] = useState()
   const [profit, setProfit] = useState()
+  const [authorized, setAuthorized] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,9 +33,9 @@ function Finances() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
+    localStorage.removeItem('TineyDonkeyToken')
     setTimeout(() => {
-      navigate('/Admin')
+      navigate('/Admin', { replace: true })
     }, 1000)
   }
 
@@ -47,8 +47,9 @@ function Finances() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        axios.get(`${url}/getAllCashflow`)
+        authAPI.get(`/getAllCashflow`)
           .then((res) => {
+            setAuthorized(true)
             setAllCashflow(res.data.payload);
             let income = 0;
             let expense = 0;
@@ -85,7 +86,7 @@ function Finances() {
         amount: newAmount,
         transactionType
       }
-      await axios.post(`${url}/cashflow`, cashflowObject)
+      await authAPI.post(`/cashflow`, cashflowObject)
         .then((res) => {
           setAllCashflow(res.data.payload);
 
@@ -129,84 +130,92 @@ function Finances() {
   }
   return (
     <div className='transition-div dashboard-container' style={{ paddingBottom: '40px' }}>
-      <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
-        <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
-          <p onClick={() => navigate('/')}>TineyDonkey</p>
-          <ul>
-            <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
-            <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>Products</li>
-            <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
-            <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
-          </ul>
-          <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
-            <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout} />
-          </div>
-        </section>
-      </nav>
+      {authorized ? (
+        <>
+          <nav className={`navbar ${scrolling ? 'scrolled' : 'scrolled'}`} style={{ border: 'none' }}>
+            <section className="flex-justify-content-space-between" style={{ borderBottom: 'none' }}>
+              <p onClick={() => navigate('/')}>TineyDonkey</p>
+              <ul>
+                <li style={{ color: 'grey' }} onClick={() => navigate('/')}>Home</li>
+                <li style={{ color: 'grey' }} onClick={() => navigate('/products')}>Products</li>
+                <li style={{ color: 'grey' }} onClick={() => navigate('/contact')}>Contact</li>
+                <li style={{ color: 'grey' }} onClick={() => navigate('/about')}>About</li>
+              </ul>
+              <div className='flex-justify-flex-end navbar-icon-div' style={{ widthead: '15%', paddingRight: '30px' }}>
+                <FaRegUserCircle style={{ color: 'grey', fontSize: '20px', float: 'right', cursor: 'pointer', marginLeft: '30px' }} onClick={handleLogout} />
+              </div>
+            </section>
+          </nav>
 
-      <div className='finances-main-div'>
-        <div>
-          <select id="transactionType" value={transactionType} onChange={handleTransactionTypeChange}>
-            <option value="Expense">Expense</option>
-            <option value="Income">Income</option>
-          </select>
-        </div>
+          <div className='finances-main-div'>
+            <div>
+              <select id="transactionType" value={transactionType} onChange={handleTransactionTypeChange}>
+                <option value="Expense">Expense</option>
+                <option value="Income">Income</option>
+              </select>
+            </div>
 
-        <div className='flex-justify-content-space-between' style={{ width: '70%' }}>
-          <div className='flex-column-justify-flex-start'>
-            <label htmlFor="Description">Description *</label>
-            <input type="text" id="Description" placeholder="Description" required={true} onChange={(e) => setDescription(e.target.value)} value={description} />
-          </div>
-          <div className='flex-column-justify-flex-start' style={{ marginLeft: '30px' }}>
-            <label htmlFor="Amount">Amount *</label>
-            <input type="text" id="Amount" placeholder="Amount" required={true} onChange={(e) => setAmount(e.target.value)} value={amount} />
-          </div>
-          <button className='cta-button' onClick={(e) => handleSave(e)}>Save</button>
-        </div>
+            <div className='flex-justify-content-space-between' style={{ width: '70%' }}>
+              <div className='flex-column-justify-flex-start'>
+                <label htmlFor="Description">Description *</label>
+                <input type="text" id="Description" placeholder="Description" required={true} onChange={(e) => setDescription(e.target.value)} value={description} />
+              </div>
+              <div className='flex-column-justify-flex-start' style={{ marginLeft: '30px' }}>
+                <label htmlFor="Amount">Amount *</label>
+                <input type="text" id="Amount" placeholder="Amount" required={true} onChange={(e) => setAmount(e.target.value)} value={amount} />
+              </div>
+              <button className='cta-button' onClick={(e) => handleSave(e)}>Save</button>
+            </div>
 
-        <div className='flex-align-flex-start finances-overview-container'>
-          <div>
-            <p>Total sales</p>
-            <h2>{totalIncome}</h2>
-          </div>
-          <div>
-            <p>Expenses</p>
-            <h2>{totalExpenses}</h2>
-          </div>
-          <div>
-            <p>Profit</p>
-            <h2>{profit}</h2>
-          </div>
-        </div>
+            <div className='flex-align-flex-start finances-overview-container'>
+              <div>
+                <p>Total sales</p>
+                <h2>{totalIncome}</h2>
+              </div>
+              <div>
+                <p>Expenses</p>
+                <h2>{totalExpenses}</h2>
+              </div>
+              <div>
+                <p>Profit</p>
+                <h2>{profit}</h2>
+              </div>
+            </div>
 
-        <div style={{ width: '100%' }} className="available-product-div">
-          <h3>Statement</h3>
-          <table style={{ width: '100%' }}>
-            <thead>
-              <tr style={{ borderTop: '2px solid rgb(231, 230, 230)' }}>
-                <td className='text-align-left'>No</td>
-                <td className='text-align-center'>Description</td>
-                <td className='text-align-center quantity-th'>Amount</td>
-                <td className='text-align-center'>Date</td>
-                <td className='text-align-center'>Type</td>
-              </tr>
-            </thead>
-            <tbody>
-              {AllCashflow == null
-                ? "Please wait..."
-                : AllCashflow.length == 0 ? "No transactions" : AllCashflow.map((data, index) => (
-                  <tr key={data._id}>
-                    <td className='text-align-left'>{index + 1}</td>
-                    <td className='text-align-center'>{data.description}</td>
-                    <td className='text-align-center quantity-th'>{data.amount}</td>
-                    <td className='text-align-center'>{formatDate(data.time)}</td>
-                    <td className='text-align-center'>{data.type}</td>
+            <div style={{ width: '100%' }} className="available-product-div">
+              <h3>Statement</h3>
+              <table style={{ width: '100%' }}>
+                <thead>
+                  <tr style={{ borderTop: '2px solid rgb(231, 230, 230)' }}>
+                    <td className='text-align-left'>No</td>
+                    <td className='text-align-center'>Description</td>
+                    <td className='text-align-center quantity-th'>Amount</td>
+                    <td className='text-align-center'>Date</td>
+                    <td className='text-align-center'>Type</td>
                   </tr>
-                ))}
-            </tbody>
-          </table>
+                </thead>
+                <tbody>
+                  {AllCashflow == null
+                    ? "Please wait..."
+                    : AllCashflow.length == 0 ? "No transactions" : AllCashflow.map((data, index) => (
+                      <tr key={data._id}>
+                        <td className='text-align-left'>{index + 1}</td>
+                        <td className='text-align-center'>{data.description}</td>
+                        <td className='text-align-center quantity-th'>{data.amount}</td>
+                        <td className='text-align-center'>{formatDate(data.time)}</td>
+                        <td className='text-align-center'>{data.type}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>   </>
+      ) : (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: "100%" }}>
+          <h3>Loading...</h3>
         </div>
-      </div>
+
+      )}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { url, testUrl } from "../Constants/url"
-import axios from "axios";
+import { authAPI } from '../Context/AxiosProvider';
 
 const ExpandedPendingOrder = ({ data, onClose }) => {
     const [delivered, setDelivered] = useState(false)
@@ -10,7 +10,7 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
     const handleDelivered = async () => {
         try {
             const saleId = data._id
-            await axios.post(`${url}/orderDelivered?id=${saleId}`)
+            await authAPI.post(`/orderDelivered?id=${saleId}`)
                 .then((res) => {
                     if (res.data.message == 'success') {
                         setDelivered(true)
@@ -36,7 +36,7 @@ const ExpandedPendingOrder = ({ data, onClose }) => {
                 saleId,
                 productIds
             }
-            await axios.post(`${url}/rejectOrder`, requestObject)
+            await authAPI.post(`/rejectOrder`, requestObject)
                 .then((res) => {
                     if (res.data.message == 'success') {
                         setRejected(true)

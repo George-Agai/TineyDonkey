@@ -2,8 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import PendingOrders from '../Components/PendingOrders';
-import { url, testUrl } from "../Constants/url"
-import axios from 'axios';
+import { authAPI } from '../Context/AxiosProvider';
 
 function AllPreviousSales() {
     const readFromLocalStorage = (key) => {
@@ -44,25 +43,12 @@ function AllPreviousSales() {
 
         const fetchData = async () => {
             try {
-                await axios.get(`${url}/authentication`, {
-                    headers: {
-                        'Authorization': `${token}`,
-                    },
-                })
-                    .then((tokenAuthenticationPayload) => {
-                        if (tokenAuthenticationPayload.data.message === 'Access denied. No token provided' || tokenAuthenticationPayload.data.message === 'Invalid token') {
-                            navigate('/Admin')
-                        }
-                        else if (tokenAuthenticationPayload.data.message === 'Access granted') {
-                            axios.get(`${url}/getAllPreviousOrders`)
-                                .then((res) => {
-                                    setAllProducts(res.data);
-                                    setFilteredProducts(res.data.filter(order => order.orderStatus === "delivered"));
-                                    setAuthorized(true)
-                                    // console.log(res.data)
-                                })
-                                .catch(error => console.log(error))
-                        }
+                await authAPI.get(`/getAllPreviousOrders`)
+                    .then((res) => {
+                        setAllProducts(res.data);
+                        setFilteredProducts(res.data.filter(order => order.orderStatus === "delivered"));
+                        setAuthorized(true)
+                        // console.log(res.data)
                     })
                     .catch(error => console.log(error))
             }
@@ -80,9 +66,9 @@ function AllPreviousSales() {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('token')
+        localStorage.removeItem('TineyDonkeyToken')
         setTimeout(() => {
-            navigate('/Admin')
+            navigate('/Admin', {replace: true})
         }, 1000)
     }
     // console.log("AllProducts", AllProducts)
