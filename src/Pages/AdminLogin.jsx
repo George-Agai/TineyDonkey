@@ -44,6 +44,7 @@ function AdminLogin() {
             }
 
             const response = await publicAPI.post(`/login`, userLoginObject);
+            // console.log("login res", response)
 
             if (response) {
                 const loginResponseMessage = response.data.message
